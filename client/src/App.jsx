@@ -1,7 +1,10 @@
+import React from "react"
+import MiniNav from "./components/home/MiniNav"
+
 function App() {
   return (
-    <div className="text-3xl font-mono underline">
-      MyTestCompare
+    <div className="font-Roboto">
+      <MiniNav />
     </div>
   )
 }
