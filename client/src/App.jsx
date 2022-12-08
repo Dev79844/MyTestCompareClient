@@ -6,6 +6,7 @@ import DiscountStrip from "./components/home/DiscountStrip"
 import Main from "./components/home/Main"
 import LabPartner from "./components/home/LabPartner"
 import Concern from "./components/home/Concern"
+import Features from "./components/home/Features"
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Main />
       <LabPartner />
       <Concern />
+      <Features />
     </div>
   )
 }
