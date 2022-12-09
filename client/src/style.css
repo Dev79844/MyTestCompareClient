@@ -1,0 +1,27 @@
+.loop-animation {
+  animation: looopartner 3s infinite linear alternate-reverse;
+}
+
+@keyframes looopartner {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(-180px);
+  }
+}
+
+/* for concern.jsx image */
+.img-overlay::after {
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  top: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.301) 37.63%,
+    rgba(0, 0, 0, 0) 85.27%
+  );
+  border-radius: 16px;
+}
