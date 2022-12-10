@@ -100,9 +100,9 @@ export default function Concern() {
   })
 
   return (
-    <div className="my-14">
+    <div className="my-14 xl:mb-16">
       <h1 className="font-medium text-3xl text-center">Tests by Concerns</h1>
-      <div className="flex justify-center mt-7 flex-wrap gap-7">
+      <div className="flex justify-center mt-7 flex-wrap gap-7 xl:grid xl:grid-cols-3 xl:place-items-center xl:w-fit xl:mx-auto">
         {concernArr}
       </div>
     </div>

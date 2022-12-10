@@ -23,7 +23,7 @@ export default function Testimonial() {
     return (
       <div
         key={testimonial.id}
-        className={"bg-white w-[90%] py-8 px-8 drop-shadow-md rounded-2xl "}
+        className={"bg-white w-[90%] py-8 px-8 drop-shadow-md rounded-2xl xs:w-4/5  sm:w-[65%]"}
       >
         <svg
           aria-hidden="true"
@@ -43,13 +43,13 @@ export default function Testimonial() {
   })
 
   return (
-    <div className="mt-8 pb-8">
-      <h1 className="font-medium text-2xl text-center px-4">
+    <div className="mt-14 pb-8">
+      <h1 className="font-medium text-2xl md:text-3xl text-center px-4">
         What out customers has to say about us
       </h1>
 
-      <div className="flex justify-center items-center mt-8 relative">
-        <div>
+      <div className="flex justify-center items-center mt-8 relative xs:px-6 sm:p-10 md:px-5 lg:px-8 md:mt-0">
+        <div className="md:hidden">
           <Icon
             icon="bi:chevron-left"
             className="text-4xl cursor-pointer"
@@ -62,10 +62,13 @@ export default function Testimonial() {
           />
         </div>
         {/* All Testimonials */}
-        <div className="relative flex justify-center">
+        <div className="relative flex justify-center md:hidden">
           {testimonialsList[current]}
         </div>
-        <div>
+        <div className="hidden md:flex md:gap-4 lg:gap-8 lg:w-[90%] lg:mx-auto">
+          {testimonialsList}
+        </div>
+        <div className="md:hidden">
           <Icon
             icon="bi:chevron-right"
             className="text-4xl cursor-pointer "
