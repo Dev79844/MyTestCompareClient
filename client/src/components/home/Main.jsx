@@ -1,5 +1,6 @@
 import React from "react"
 import {Icon} from "@iconify/react"
+import "../../style.css"
 
 export default function Main() {
   const credebility = [
@@ -31,7 +32,7 @@ export default function Main() {
   })
 
   return (
-    <div className="bg-[#FCAB41] pt-8">
+    <div className=" mainBg  pt-8 ">
       <h1 className="text-white font-bold text-4xl w-[70%]  m-auto text-center ">
         Book Any Test at Best Price
       </h1>
@@ -66,8 +67,13 @@ export default function Main() {
 
         {/* Book Now */}
         <div className="flex justify-center">
-          <button className="bg-secondary text-white font-bold py-1 px-4 rounded-md w-1/2 text-xl">
+          <button className="bg-secondary text-white font-bold flex justify-center items-center py-1 px-4 rounded-md w-3/5 text-xl  group">
             Book Now
+            <Icon
+              icon="material-symbols:arrow-right-alt"
+              color="white"
+              className="text-2xl ml-3 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
+            />
           </button>
         </div>
       </div>

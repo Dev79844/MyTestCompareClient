@@ -1,3 +1,16 @@
+/* Main.jsx */
+.mainBg {
+  background: linear-gradient(
+      rgba(252,171,65,0.68),
+      rgba(252, 171, 65, 0.68)
+    ),
+    url("images/home/mainBg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+/* For lab partner */
 .loop-animation {
   animation: looopartner 3s infinite linear alternate-reverse;
 }

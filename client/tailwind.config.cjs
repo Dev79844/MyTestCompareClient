@@ -12,6 +12,9 @@ module.exports = {
         primary: "#E97F0E",
         background: "#F3F3F3",
       },
+      backgroundImage: {
+        'mainBg': "url('images/home/mainBg.jpg')",
+      },
       fontFamily: {
         Roboto: ["Roboto", "sans-serif"],
       },
