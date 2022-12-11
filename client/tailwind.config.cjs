@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
-const defaultTheme = require("tailwindcss/defaultTheme");
+const defaultTheme = require("tailwindcss/defaultTheme")
 
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
@@ -20,10 +20,18 @@ module.exports = {
         background: "#F3F3F3",
       },
       backgroundImage: {
-        'mainBg': "url('images/home/mainBg.jpg')",
+        mainBg: "url('images/home/mainBg.jpg')",
       },
       fontFamily: {
         Roboto: ["Roboto", "sans-serif"],
+      },
+      gridTemplateColumns: {
+        summary: "1fr 2fr",
+        priceSummary: "1fr 2fr 1fr",
+        testPrices: "2fr 80px",
+      },
+      boxShadow: {
+        summary: "0px 4px 22px rgba(0, 0, 0, 0.14)",
       },
     },
   },
