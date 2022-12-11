@@ -15,9 +15,11 @@ module.exports = {
           dark: "#028158",
           DEFAULT: "#01b37a",
           mid: "#00AB74",
+          withOpacity: "rgba(1, 179, 122, 0.13)",
         },
         primary: "#E97F0E",
         background: "#F3F3F3",
+        red: "#F03A47",
       },
       backgroundImage: {
         mainBg: "url('images/home/mainBg.jpg')",
@@ -29,6 +31,10 @@ module.exports = {
         summary: "1fr 2fr",
         priceSummary: "1fr 2fr 1fr",
         testPrices: "2fr 80px",
+        chooseLab: "2fr 1fr 1fr",
+        chooseLab2: "25% 75%",
+        chooseLab4: "40% 15% 15% 15%",
+        chooseLab5: "40% 15% 15% 15% 15%",
       },
       boxShadow: {
         summary: "0px 4px 22px rgba(0, 0, 0, 0.14)",

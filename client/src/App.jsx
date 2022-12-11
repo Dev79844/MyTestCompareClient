@@ -9,7 +9,8 @@ function App() {
     <div className="font-Roboto bg-background">
       {/* <HomePage /> */}
       {/* <Summary /> */}
-      <Success/>
+      {/* <Success /> */}
+      <ChooseLab/>
     </div>
   )
 }
