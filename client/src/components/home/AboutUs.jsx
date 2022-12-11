@@ -2,7 +2,7 @@ import React from "react"
 
 export default function AboutUs() {
   return (
-    <div className="px-3 my-12 ">
+    <div className="px-3 mt-12 my-20">
       <div className="md:flex md:px-5">
         <img src="images/home/aboutus.svg" alt="discount image"  className="sm:w-4/5 sm:mx-auto md:w-3/4 lg:w-3/5 "/>
         <div className="mt-8 md:mx-5 lg:mx-10">

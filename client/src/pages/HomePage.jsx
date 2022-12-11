@@ -1,7 +1,7 @@
 import React from 'react'
-import MiniNav from '../components/home/MiniNav'
-import Nav from '../components/home/Nav'
-import DiscountStrip from '../components/home/DiscountStrip'
+import MiniNav from '../components/MiniNav'
+import Nav from '../components/Nav'
+import DiscountStrip from '../components/DiscountStrip'
 import Main from '../components/home/Main'
 import LabPartner from '../components/home/LabPartner'
 import Concern from '../components/home/Concern'
@@ -12,7 +12,7 @@ import Footer from '../components/Footer'
 
 const HomePage = () => {
   return (
-    <div className="font-Roboto bg-background">
+    <div>
       <MiniNav />
       <Nav />
       <DiscountStrip />
