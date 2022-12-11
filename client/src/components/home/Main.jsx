@@ -32,7 +32,10 @@ export default function Main() {
   })
 
   return (
-    <div className=" mainBg  pt-8 ">
+    <div className=" mainBg  pt-8 lg:relative">
+      <div className="hidden lg:block lg:absolute lg:w-36 lg:right-16 lg:top-24">
+        <img src="images/home/bestPrice.png" alt="Our Promise, Best Price"/>
+      </div>
       <h1 className="text-white font-bold text-4xl w-[70%]  m-auto text-center lg:text-6xl lg:w-full ">
         Book Any Test at Best Price
       </h1>
