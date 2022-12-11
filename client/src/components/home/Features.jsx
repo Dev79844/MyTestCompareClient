@@ -64,10 +64,10 @@ export default function Features() {
     })
 
   return (
-    <div className="bg-primary py-8 text-white">
+    <div className="bg-primary py-12 text-white">
       <h1 className="font-bold text-3xl text-center">Why My Test Labs ?</h1>
 
-      <div className="flex px-3 gap-6 mt-10 justify-center flex-wrap">
+      <div className="flex px-3 gap-6 mt-10 justify-center flex-wrap md:w-4/5 md:mx-auto lg:w-3/5 lg:mb-8">
         {featureArr}
       </div>
     </div>

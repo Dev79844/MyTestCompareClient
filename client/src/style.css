@@ -1,13 +1,35 @@
+/* Main.jsx */
+.mainBg {
+  background: linear-gradient(
+      rgba(252, 171, 65, 0.68),
+      rgba(252, 171, 65, 0.68)
+    ),
+    url("images/home/mainBg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: right;
+}
+
+@media (min-width:1024px) {
+  .mainBg{
+    background-position: right center;
+  }
+}
+
+/* For lab partner */
 .loop-animation {
-  animation: looopartner 3s infinite linear alternate-reverse;
+  animation: looopartner 20s infinite linear;
 }
 
 @keyframes looopartner {
   0% {
     transform: translateX(0px);
   }
+  50% {
+    transform: translateX(-500px);
+  }
   100% {
-    transform: translateX(-180px);
+    transform: translateX(0px);
   }
 }
 
