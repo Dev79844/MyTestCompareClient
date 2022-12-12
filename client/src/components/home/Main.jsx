@@ -1,6 +1,7 @@
 import React from "react"
 import {Icon} from "@iconify/react"
 import "../../style.css"
+import { Link } from "react-router-dom"
 
 export default function Main() {
   const credebility = [
@@ -69,16 +70,18 @@ export default function Main() {
         </div>
 
         {/* Book Now */}
-        <div className="flex justify-center">
-          <button className="bg-secondary text-white font-bold flex justify-center items-center py-1 px-4 rounded-md w-3/5 lg:w-1/2 text-xl  group">
-            Book Now
-            <Icon
-              icon="material-symbols:arrow-right-alt"
-              color="white"
-              className="text-2xl ml-3 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
-            />
-          </button>
-        </div>
+        <Link to="/chooseLab">
+          <div className="flex justify-center">
+              <button className="bg-secondary text-white font-bold flex justify-center items-center py-1 px-4 rounded-md w-3/5 lg:w-1/2 text-xl  group">
+                Book Now
+                <Icon
+                  icon="material-symbols:arrow-right-alt"
+                  color="white"
+                  className="text-2xl ml-3 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
+                />
+              </button>
+          </div>
+        </Link>
       </div>
 
       {/* Credibility */}

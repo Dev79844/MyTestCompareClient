@@ -1,9 +1,13 @@
 import {Icon} from "@iconify/react"
 import React from "react"
+import { Link, useNavigate } from "react-router-dom"
 import lab from "../../data/lab"
 import labLargeScreen from "../../data/labLargeScreen"
 
 export default function Lab() {
+
+  const navigate = useNavigate();
+
   const labs = lab.map((lab, index) => {
     return (
       <div
@@ -43,11 +47,11 @@ export default function Lab() {
         <div className="pt-[2.5rem] sm:pt-0 sm:self-center">
           <p>{lab.price}</p>
         </div>
-        <div className=" hidden sm:block sm:self-center">
-          <button className="text-white  bg-primary rounded  px-4 py-1 mt-2">
-            Select Lab
-          </button>
-        </div>
+          <div className=" hidden sm:block sm:self-center">
+              <button className="text-white  bg-primary rounded  px-4 py-1 mt-2" onClick={() => navigate("/afterLab")}>
+                Select Lab
+              </button>
+          </div>
       </div>
     )
   })

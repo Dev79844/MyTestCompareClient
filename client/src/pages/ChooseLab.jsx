@@ -6,6 +6,7 @@ import MiniNav from "../components/MiniNav"
 import Nav from "../components/Nav"
 import DiscountStrip from "../components/DiscountStrip"
 import Footer from "../components/Footer"
+import tests from "../data/tests"
 
 const ChooseLab = () => {
   const certificates = ["NABL", "ISO", "CAP", "ICMR", "ISO", "NABH"]
@@ -19,6 +20,10 @@ const ChooseLab = () => {
       </div>
     )
   })
+
+  const selectTests = tests.map((entry)=> (
+    <SelectedTest text={entry.test} />
+  ))
 
   return (
     <div>
@@ -120,7 +125,7 @@ const ChooseLab = () => {
                 </p>
               </div>
               <div>
-                <SelectedTest />
+                {selectTests}
               </div>
             </div>
             <div className="">
@@ -160,7 +165,7 @@ const ChooseLab = () => {
               Labs offering the selected tests
             </p>
             <div>
-              <SelectedTest />
+              <SelectedTest text={"ehfuiwkk"} />
             </div>
           </div>
           <div className="mt-4 px-4">

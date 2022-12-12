@@ -4,16 +4,36 @@ import App from './App'
 import './index.css'
 import {createBrowserRouter, RouterProvider, Route} from "react-router-dom"
 import HomePage from './pages/HomePage'
+import ChooseLab from "./pages/ChooseLab"
+import AfterLab from './pages/AfterLab'
+import Summary from './pages/Summary'
+import Success from './pages/Success'
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <HomePage />
-//   }
-// ])
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <HomePage />
+  },
+  {
+    path:"/chooseLab",
+    element:<ChooseLab />
+  },
+  {
+    path:"/afterLab",
+    element:<AfterLab />
+  },
+  {
+    path:"/booking",
+    element:<Summary />
+  },
+  {
+    path: "/confirmed",
+    element: <Success />
+  }
+])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 )

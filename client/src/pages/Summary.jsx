@@ -1,5 +1,6 @@
 import React from "react"
 import {Icon} from "@iconify/react"
+import { Link } from "react-router-dom"
 
 import DiscountStrip from "../components/DiscountStrip"
 import MiniNav from "../components/MiniNav"
@@ -46,11 +47,13 @@ export default function Summary() {
                 <h1 className="col-span-2 font-bold text-xl">Total</h1>
                 <h1 className="justify-self-end font-bold text-lg lg:text-xl">₹ 720</h1>
               </div>
-              <div className="flex justify-center pb-7">
-                <button className="text-white bg-secondary px-4 py-2 font-bold text-xl rounded-2xl">
-                  Confirm Booking
-                </button>
-              </div>
+              <Link to="/confirmed">
+                <div className="flex justify-center pb-7">
+                  <button className="text-white bg-secondary px-4 py-2 font-bold text-xl rounded-2xl">
+                    Confirm Booking
+                  </button>
+                </div>
+              </Link>
             </div>
           </div>
         </div>
