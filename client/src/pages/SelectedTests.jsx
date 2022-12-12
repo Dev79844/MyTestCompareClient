@@ -7,8 +7,12 @@ import DiscountStrip from "../components/DiscountStrip"
 import SelectedTest from "../components/chooseLab/SelectedTest"
 import IndividualSelectedTest from "../components/SelectedTests/IndividualSelectedTest"
 import Footer from "../components/Footer"
+import SelectDate from "../components/SelectedTests/SelectDate"
 
 export default function SelectedTests() {
+
+  const [value, onChange] = React.useState(new Date());
+
   return (
     <div className="font-Roboto bg-background">
       <MiniNav />
@@ -95,7 +99,9 @@ export default function SelectedTests() {
             {/* Date and Time Container */}
             <div className="md:flex">
               {/* Date Container */}
-              <div>Date</div>
+              <div>
+                <SelectDate/>
+              </div>
               {/* Time Container */}
               <div>Time</div>
             </div>
