@@ -12,7 +12,7 @@ import Footer from '../components/Footer'
 
 const HomePage = () => {
   return (
-    <div>
+    <div className="font-Roboto bg-background">
       <MiniNav />
       <Nav />
       <DiscountStrip />

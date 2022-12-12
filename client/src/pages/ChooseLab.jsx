@@ -21,12 +21,12 @@ const ChooseLab = () => {
     )
   })
 
-  const selectTests = tests.map((entry)=> (
-    <SelectedTest text={entry.test} />
-  ))
+  // const selectTests = tests.map((entry)=> (
+  //   <SelectedTest text={entry.test} />
+  // ))
 
   return (
-    <div>
+    <div className="font-Roboto bg-background">
       <MiniNav />
       <Nav />
       <DiscountStrip />
@@ -125,7 +125,7 @@ const ChooseLab = () => {
                 </p>
               </div>
               <div>
-                {selectTests}
+                <SelectedTest/>
               </div>
             </div>
             <div className="">
@@ -165,7 +165,7 @@ const ChooseLab = () => {
               Labs offering the selected tests
             </p>
             <div>
-              <SelectedTest text={"ehfuiwkk"} />
+              <SelectedTest />
             </div>
           </div>
           <div className="mt-4 px-4">

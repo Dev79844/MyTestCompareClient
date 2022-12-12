@@ -5,7 +5,7 @@ import './index.css'
 import {createBrowserRouter, RouterProvider, Route} from "react-router-dom"
 import HomePage from './pages/HomePage'
 import ChooseLab from "./pages/ChooseLab"
-import AfterLab from './pages/AfterLab'
+import SelectedTests from './pages/SelectedTests'
 import Summary from './pages/Summary'
 import Success from './pages/Success'
 
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
   },
   {
     path:"/afterLab",
-    element:<AfterLab />
+    element:<SelectedTests />
   },
   {
     path:"/booking",

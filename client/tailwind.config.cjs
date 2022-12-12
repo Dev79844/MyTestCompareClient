@@ -7,6 +7,7 @@ module.exports = {
   theme: {
     screens: {
       xs: "480px",
+      lgGrid: "1140px",
       ...defaultTheme.screens,
     },
     extend: {
@@ -20,6 +21,7 @@ module.exports = {
         primary: "#E97F0E",
         background: "#F3F3F3",
         red: "#F03A47",
+        borderGray: "rgba(34, 36, 46, 0.31)",
       },
       backgroundImage: {
         mainBg: "url('images/home/mainBg.jpg')",
@@ -35,6 +37,7 @@ module.exports = {
         chooseLab2: "25% 75%",
         chooseLab4: "40% 15% 15% 15%",
         chooseLab5: "40% 15% 15% 15% 15%",
+        selectedLab2: "2fr 1fr",
       },
       boxShadow: {
         summary: "0px 4px 22px rgba(0, 0, 0, 0.14)",
