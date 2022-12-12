@@ -11,7 +11,7 @@ import Footer from "../components/Footer"
 
 export default function Summary() {
   return (
-    <div>
+    <div className="font-Roboto bg-background">
       <MiniNav />
       <Nav />
       <DiscountStrip />
@@ -25,7 +25,7 @@ export default function Summary() {
           />
           <h1 className="font-bold text-2xl sm:text-3xl">Booking Summary</h1>
         </div>
-        <div className="py-8 lg:flex lg:bg-white lg:mx-12 lg:mt-8 lg:rounded-3xl lg:gap-7 lg:pt-18 md:relative md:z-10 " >
+        <div className="py-8 lg:flex lg:bg-white lg:mx-12 lg:mt-8 lg:rounded-3xl lg:gap-7 lg:pt-18 md:relative md:z-10 ">
           <LabDetails />
           <div className="lg:w-full">
             <div className="shadow-summary bg-white m-4 rounded-2xl xs:mx-8 sm:w-3/4 md:w-3/5 sm:mx-auto lg:w-4/5 xl:w-3/4">
@@ -45,7 +45,9 @@ export default function Summary() {
                 </h1>
                 <h1 className="justify-self-end font-medium sm:text-xl">20%</h1>
                 <h1 className="col-span-2 font-bold text-xl">Total</h1>
-                <h1 className="justify-self-end font-bold text-lg lg:text-xl">₹ 720</h1>
+                <h1 className="justify-self-end font-bold text-lg lg:text-xl">
+                  ₹ 720
+                </h1>
               </div>
               <Link to="/confirmed">
                 <div className="flex justify-center pb-7">
@@ -57,8 +59,8 @@ export default function Summary() {
             </div>
           </div>
         </div>
-          </div>
-          <Footer/>
+      </div>
+      <Footer />
     </div>
   )
 }

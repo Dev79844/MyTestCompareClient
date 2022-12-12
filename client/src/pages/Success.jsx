@@ -10,7 +10,7 @@ import Footer from "../components/Footer"
 
 export default function Success() {
   return (
-    <div>
+    <div className="font-Roboto bg-background">
       <MiniNav />
       <Nav />
       <DiscountStrip />
@@ -22,7 +22,9 @@ export default function Success() {
         >
           <h1 className="font-bold text-xl sm:text-3xl">Booking Status</h1>
           <div className="flex items-center">
-            <h1 className="font-medium text-lg lg:text-2xl">Track your order</h1>
+            <h1 className="font-medium text-lg lg:text-2xl">
+              Track your order
+            </h1>
             <Icon
               icon="carbon:chevron-right"
               color="black"
@@ -42,12 +44,14 @@ export default function Success() {
                 alt="booked icon"
                 className="w-[20%] lg:w-[15%] xl:w-[10%]"
               />
-              <h1 className="font-[900] text-2xl lg:text-3xl  xl:text-4xl">Successfully Booked!</h1>
+              <h1 className="font-[900] text-2xl lg:text-3xl  xl:text-4xl">
+                Successfully Booked!
+              </h1>
             </div>
           </div>
         </div>
-          </div>
-          <Footer/>
+      </div>
+      <Footer />
     </div>
   )
 }
