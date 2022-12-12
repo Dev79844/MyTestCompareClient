@@ -12,7 +12,7 @@ export default function Footer() {
         />
         <h1 className="font-bold mt-3 text-2xl md:text-3xl xl:text-4xl"> MyTest Compare</h1>
       </div>
-      <div className="mt-4 sm:flex relative before:bg-white sm:before:absolute before:h-[90%] before:w-1 before:top-0 sm:before:left-[-20%] lg:before:left-[-40%] xl:before:left-[-50%]">
+      <div className="mt-4 sm:flex relative before:bg-white sm:before:absolute before:h-[90%] before:w-[2px] before:top-0 sm:before:left-[-20%] lg:before:left-[-40%] xl:before:left-[-50%]">
         <div>
           <h3 className="font-medium text-xl mb-2">Quick Links</h3>
         </div>
