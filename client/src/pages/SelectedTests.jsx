@@ -10,6 +10,7 @@ import Footer from "../components/Footer"
 import Calendar from "react-calendar"
 import "react-calendar/dist/Calendar.css"
 import time from "../data/time"
+import {Link} from "react-router-dom"
 
 export default function SelectedTests() {
   const [value, onChange] = React.useState(new Date())
@@ -83,7 +84,7 @@ export default function SelectedTests() {
               <h1 className="font-medium text-lg">1. Name:</h1>
               <input
                 type="text"
-                className="bg-transparent border border-secondary px-2 py-1"
+                className="bg-transparent border border-secondary px-2 py-1 rounded"
                 placeholder="Patient Name"
               />
             </div>
@@ -91,7 +92,7 @@ export default function SelectedTests() {
               <h1 className="font-medium text-lg ">2. Address:</h1>
               <input
                 type="text"
-                className="bg-transparent border border-secondary px-2 py-1"
+                className="bg-transparent border border-secondary px-2 py-1 rounded"
                 placeholder="Address"
               />
             </div>
@@ -215,6 +216,10 @@ export default function SelectedTests() {
                     <h1 className="font-medium text-base">Discount (20%)</h1>
                     <h1 className="font-medium text-base">₹180</h1>
                   </div>
+                  <div className="flex gap-1 justify-between">
+                    <input type="text" placeholder="Apply Coupon" className="font-medium text-base border-[1px] rounded border-borderGray placeholder:font-light px-1" />
+                    <button className="font-medium text-base bg-primary text-white px-2 rounded">Apply</button>
+                  </div>
                 </div>
                 {/* Discount div end */}
 
@@ -227,11 +232,14 @@ export default function SelectedTests() {
                 </div>
                 {/* Total Price END */}
               </div>
+                <Link to="/booking">
               <div className="flex justify-center mx-3 my-4">
-                <button className="bg-secondary text-white font-medium text-xl px-2 rounded-lg py-1 w-full">
-                  Continue
-                </button>
+              
+                  <button className="bg-secondary text-white font-medium text-xl px-2 rounded-lg py-1 w-full">
+                    Continue
+                  </button>
               </div>
+                </Link>
             </div>
             {/* End Booking Summary */}
 

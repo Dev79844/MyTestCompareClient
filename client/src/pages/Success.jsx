@@ -34,7 +34,7 @@ export default function Success() {
           </div>
         </div>
 
-        <div className="py-8 lg:flex lg:bg-white lg:mx-12 lg:mt-10 lg:rounded-3xl lg:gap-7 lg:pt-18 md:relative md:z-10 ">
+        <div className="py-8 lg:flex lg:bg-white lg:mx-12 lg:mt-10 lg:rounded-3xl lg:gap-7 lg:pt-18 md:relative md:z-1 ">
           <LabDetails />
           <div className=" m-4 rounded-2xl xs:mx-8 sm:w-3/4 md:w-3/5 sm:mx-auto lg:w-4/5 xl:w-3/4 lg:pr-7 xl:px-10">
             <TestSummary />
