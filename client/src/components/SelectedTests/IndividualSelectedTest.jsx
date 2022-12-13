@@ -4,9 +4,9 @@ import {Icon} from "@iconify/react"
 import selectedTestData from "../../data/selectedTestData"
 
 export default function IndividualSelectedTest() {
-  const selectedTestArr = selectedTestData.map((item) => {
+  const selectedTestArr = selectedTestData.map((item,index) => {
     return (
-      <div className="border-borderGray rounded border-[1px] pt-3  ">
+      <div key={index*2} className="border-borderGray rounded border-[1px] pt-3  ">
         <div className="px-4">
           <div className="flex justify-between">
             <h1 className="font-bold text-xl">{item.name}</h1>

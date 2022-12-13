@@ -4,42 +4,55 @@ import "../../style.css"
 export default function LabPartner() {
   const partners = [
     {
+      id:0,
       src: 1,
     },
     {
+      id:1,
       src: 2,
     },
     {
+      id:2,
       src: 3,
     },
     {
+      id:3,
       src: 1,
     },
     {
+      id:4,
       src: 2,
     },
     {
+      id:5,
       src: 3,
     },
     {
+      id:6,
       src: 1,
     },
     {
+      id:7,
       src: 2,
     },
     {
+      id:8,
       src: 3,
     },
     {
+      id:9,
       src: 1,
     },
     {
+      id:10,
       src: 2,
     },
     {
+      id:11,
       src: 3,
     },
     {
+      id:12,
       src: 1,
     },
   ]
@@ -47,6 +60,7 @@ export default function LabPartner() {
   const partnerArr = partners.map((partner) => {
     return (
       <img
+        key={partner.id}
         src={`images/home/labpartner/${partner.src}.png`}
         alt="1mg"
         className="loop-animation"

@@ -1,12 +1,11 @@
 import {Icon} from "@iconify/react"
 import React from "react"
-import { Link, useNavigate } from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import lab from "../../data/lab"
 import labLargeScreen from "../../data/labLargeScreen"
 
 export default function Lab() {
-
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   const labs = lab.map((lab, index) => {
     return (
@@ -40,18 +39,29 @@ export default function Lab() {
               Processing time: {lab.processingTime}
             </p>
           </div>
-          <button className="text-white sm:hidden bg-primary rounded  px-4 py-1 mt-2">
-            Select Lab
-          </button>
+          <div className="flex items-center gap-1">
+            <Icon icon={"game-icons:path-distance"} color={"#E97F0E"} />
+            <p className="text-[0.85rem]">Distance: {lab.distance}</p>
+          </div>
+          <Link to="/afterLab">
+            <button className="text-white sm:hidden bg-primary rounded  px-4 py-1 mt-2">
+              Select Lab
+            </button>
+          </Link>
         </div>
         <div className="pt-[2.5rem] sm:pt-0 sm:self-center">
           <p>{lab.price}</p>
         </div>
-          <div className=" hidden sm:block sm:self-center">
-              <button className="text-white  bg-primary rounded  px-4 py-1 mt-2" onClick={() => navigate("/afterLab")}>
-                Select Lab
-              </button>
-          </div>
+        <div className=" hidden sm:block sm:self-center">
+          <Link to="/afterLab">
+            <button
+              className="text-white  bg-primary rounded  px-4 py-1 mt-2"
+              onClick={() => navigate("/afterLab")}
+            >
+              Select Lab
+            </button>
+          </Link>
+        </div>
       </div>
     )
   })
@@ -90,9 +100,11 @@ export default function Lab() {
         <h1 className="justify-self-center self-center">{lab.distance} km</h1>
         <h1 className="justify-self-center self-center">₹ {lab.price}</h1>
         <div className="self-center justify-self-center">
-          <button className="text-white  bg-primary rounded  px-4 py-1 mt-2">
-            Select Lab
-          </button>
+          <Link to="/afterLab">
+            <button className="text-white  bg-primary rounded  px-4 py-1 mt-2">
+              Select Lab
+            </button>
+          </Link>
         </div>
       </div>
     )

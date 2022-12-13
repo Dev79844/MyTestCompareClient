@@ -5,6 +5,7 @@ export default [
     timings: "All 24*7",
     location: "New Delhi",
     processingTime: "8 hours",
+    distance: 3.2,
     price: "900",
   },
   {
@@ -13,8 +14,8 @@ export default [
     timings: "All 24*7",
     location: "New Delhi",
     processingTime: "8 hours",
+    distance: 3.2,
     price: "900",
-    discount: "20%",
   },
   {
     name: "360 Diagnostics",
@@ -22,8 +23,8 @@ export default [
     timings: "All 24*7",
     location: "New Delhi",
     processingTime: "8 hours",
+    distance: 3.2,
     price: "900",
-    discount: "20%",
   },
   {
     name: "360 Diagnostics",
@@ -31,7 +32,7 @@ export default [
     timings: "All 24*7",
     location: "New Delhi",
     processingTime: "8 hours",
+    distance: 3.2,
     price: "900",
-    discount: "20%",
   },
 ]

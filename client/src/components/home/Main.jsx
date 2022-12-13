@@ -6,15 +6,18 @@ import { Link } from "react-router-dom"
 export default function Main() {
   const credebility = [
     {
+      id: 0,
       icon: "mingcute:safety-certificate-fill",
       h3: "Certified Labs",
     },
     {
+      id: 1,
       icon: "material-symbols:more-time",
       h3: "OnTime Reports",
     },
     {
-      icon: "material-symbols:star",
+      id: 2,
+      icon: "mdi:google",
       h3: "Rated 4.9/5",
       h4: "Customer love us!",
     },
@@ -22,9 +25,12 @@ export default function Main() {
 
   const credebilityArr = credebility.map((item) => {
     return (
-      <div className="flex items-center gap-4 mb-5 sm:gap-2 lg:mb-0">
-        <Icon icon={item.icon} color="#000000" className="text-4xl" />
-        <div className="text-2xl sm:text-xl lg:text-2xl">
+      <div key={item.id} className={`flex items-center gap-2 mb-5 sm:gap-2 lg:mb-0 ${item.h3 == "OnTime Reports" ? "hidden sm:flex" : ""} `} >
+        <div className="bg-background rounded-full p-[6px]">
+
+        <Icon icon={item.icon} color="#000000" className="text-3xl" />
+        </div>
+        <div className="text-lg sm:text-xl md:text-2xl">
           <h3 className="font-medium ">{item.h3}</h3>
           {item.h4 && <h3 className="font-medium">{item.h4}</h3>}
         </div>
@@ -33,7 +39,7 @@ export default function Main() {
   })
 
   return (
-    <div className=" mainBg  pt-8 lg:relative">
+    <div className=" mainBg  pt-8 lg:relative"> 
       <div className="hidden lg:block lg:absolute lg:w-36 lg:right-16 lg:top-24">
         <img src="images/home/bestPrice.png" alt="Our Promise, Best Price"/>
       </div>
@@ -86,7 +92,7 @@ export default function Main() {
 
       {/* Credibility */}
       <div className="bg-primary mt-12 lg:mt-8">
-        <div className="w-fit pt-6 pb-1 mx-auto sm:flex sm:gap-7 lg:justify-evenly lg:w-full lg:pt-2">{credebilityArr}</div>
+        <div className="pt-4 pb-1 flex mx-2 lg:mx-0 justify-evenly items-center gap-1 sm:gap-7 lg:justify-evenly lg:w-full lg:pt-2">{credebilityArr}</div>
       </div>
     </div>
   )

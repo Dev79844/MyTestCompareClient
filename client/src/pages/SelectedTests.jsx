@@ -7,11 +7,26 @@ import DiscountStrip from "../components/DiscountStrip"
 import SelectedTest from "../components/chooseLab/SelectedTest"
 import IndividualSelectedTest from "../components/SelectedTests/IndividualSelectedTest"
 import Footer from "../components/Footer"
-import SelectDate from "../components/SelectedTests/SelectDate"
+import Calendar from "react-calendar"
+import "react-calendar/dist/Calendar.css"
+import time from "../data/time"
 
 export default function SelectedTests() {
+  const [value, onChange] = React.useState(new Date())
 
-  const [value, onChange] = React.useState(new Date());
+  const [visible, setVisible] = React.useState(false)
+
+  function showDateAndTime() {
+    setVisible(!visible)
+  }
+
+  const timingArr = time.map((item, index) => {
+    return (
+      <h3 key={index} className="border-[1px] border-secondary rounded px-3 ">
+        {item}
+      </h3>
+    )
+  })
 
   return (
     <div className="font-Roboto bg-background">
@@ -34,7 +49,7 @@ export default function SelectedTests() {
           <Icon
             icon="ic:baseline-search"
             color="black"
-            inline={true} 
+            inline={true}
             className="text-3xl sm:text-4xl"
           />
           <input
@@ -63,7 +78,7 @@ export default function SelectedTests() {
           <h1 className="text-lg sm:text-left sm:text-xl font-medium text-center">
             Enter Patient Details:
           </h1>
-          <div className="px-4 sm:px-0 sm:flex sm:flex-wrap sm:justify-between sm:gap-x-4 xl:w-3/4">
+          <div className="px-4 sm:px-0 sm:flex sm:flex-wrap sm:justify-between sm:gap-x-4 lg:w-3/4 xl:w-[55%]">
             <div className="flex gap-2 items-center justify-between mt-2">
               <h1 className="font-medium text-lg">1. Name:</h1>
               <input
@@ -74,36 +89,42 @@ export default function SelectedTests() {
             </div>
             <div className="flex gap-2 justify-between items-center mt-2">
               <h1 className="font-medium text-lg ">2. Address:</h1>
-              <textarea
+              <input
                 type="text"
                 className="bg-transparent border border-secondary px-2 py-1"
                 placeholder="Address"
               />
             </div>
-            <div className="flex gap-2 items-center mt-2">
-              <h1 className="font-medium text-lg ">3. Home Collection:</h1>
-              <input type="radio" className="" />
-            </div>
           </div>
 
           {/* For date & time */}
-          <div className="mt-3 lg:mt-0">
+          <div className="mt-3">
             <h1 className="text-lg gap-2 flex font-semibold text-center items-center px-4 sm:px-0">
-              4. Select Date & Time
+              3. Select Date & Time
               <Icon
                 icon="tabler:chevron-down"
                 color="black"
-                className="text-3xl"
+                className="text-3xl cursor-pointer"
+                onClick={showDateAndTime}
               />
             </h1>
             {/* Date and Time Container */}
-            <div className="md:flex">
+            <div className={` ${visible ? "md:flex" : "hidden"}`}>
               {/* Date Container */}
-              <div>
-                <SelectDate/>
+              <div className="mx-4 mt-4">
+                <Calendar
+                  onChange={onChange}
+                  value={value}
+                  minDate={new Date()}
+                />
               </div>
               {/* Time Container */}
-              <div>Time</div>
+              <div className="mx-4 my-4">
+                <h1 className="font-bold text-lg">Time</h1>
+                <div className="flex gap-3 mt-2 flex-wrap xl:w-[90%]">
+                  {timingArr}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -223,7 +244,7 @@ export default function SelectedTests() {
         {/* End of Whole Container . Add all things before this */}
       </div>
 
-      <Footer/>
+      <Footer />
     </div>
   )
 }
