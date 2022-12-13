@@ -218,7 +218,7 @@ export default function SelectedTests() {
                   </div>
                   <div className="flex gap-1 justify-between">
                     <input type="text" placeholder="Apply Coupon" className="font-medium text-base border-[1px] rounded border-borderGray placeholder:font-light px-1" />
-                    <button className="font-medium text-base bg-primary text-white px-2 rounded">Apply</button>
+                    <button className="font-medium text-base bg-primary text-white px-2 rounded">Apply</button> 
                   </div>
                 </div>
                 {/* Discount div end */}
