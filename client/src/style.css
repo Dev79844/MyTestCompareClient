@@ -4,14 +4,15 @@
       rgba(252, 171, 65, 0.68),
       rgba(252, 171, 65, 0.68)
     ),
-    url("images/home/mainBg.jpg");
+    /* Add `./` because in build css file will be stored in `assets` and thus image path will be `assets/images/home/mainBg.jpg` and this it will break the bg image. That's why moving one directory back using "../" so that image path will be `images/home/mainBg.jpg`  */
+      url("../images/home/mainBg.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: right;
 }
 
-@media (min-width:1024px) {
-  .mainBg{
+@media (min-width: 1024px) {
+  .mainBg {
     background-position: right center;
   }
 }
