@@ -6,7 +6,6 @@ import MiniNav from "../components/MiniNav"
 import Nav from "../components/Nav"
 import DiscountStrip from "../components/DiscountStrip"
 import Footer from "../components/Footer"
-import tests from "../data/tests"
 
 const ChooseLab = () => {
   const certificates = ["NABL", "ISO", "CAP", "ICMR", "ISO", "NABH"]
@@ -20,10 +19,6 @@ const ChooseLab = () => {
       </div>
     )
   })
-
-  // const selectTests = tests.map((entry)=> (
-  //   <SelectedTest text={entry.test} />
-  // ))
 
   return (
     <div className="font-Roboto bg-background">
@@ -56,7 +51,7 @@ const ChooseLab = () => {
               placeholder=" Ahmedabad"
             />
           </div>
-          <div className="flex bg-secondary-withOpacity gap-2 py-2 px-3 rounded md:w-full">
+          <div className="flex bg-secondary-withOpacity gap-2 py-2 px-3 rounded md:w-[99%]">
             <Icon
               icon="ic:baseline-search"
               color="black"
