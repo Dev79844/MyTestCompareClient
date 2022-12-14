@@ -17,7 +17,7 @@ export default function LabPartner() {
     },
     {
       id:3,
-      src: 1,
+      src: 4,
     },
     {
       id:4,
@@ -29,11 +29,11 @@ export default function LabPartner() {
     },
     {
       id:6,
-      src: 1,
+      src: 4,
     },
     {
       id:7,
-      src: 2,
+      src: 1,
     },
     {
       id:8,
@@ -41,7 +41,7 @@ export default function LabPartner() {
     },
     {
       id:9,
-      src: 1,
+      src: 4,
     },
     {
       id:10,
@@ -49,11 +49,15 @@ export default function LabPartner() {
     },
     {
       id:11,
-      src: 3,
+      src: 4,
     },
     {
       id:12,
-      src: 1,
+      src: 3,
+    },
+    {
+      id:13,
+      src: 2,
     },
   ]
 
@@ -61,9 +65,9 @@ export default function LabPartner() {
     return (
       <img
         key={partner.id}
-        src={`images/home/labpartner/${partner.src}.png`}
+        src={`images/home/labpartner/${partner.src}.jpeg`}
         alt="1mg"
-        className="loop-animation"
+        className="loop-animation w-[700px] h-14"
       />
     )
   })

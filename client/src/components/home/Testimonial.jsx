@@ -5,15 +5,21 @@ export default function Testimonial() {
   const testimonials = [
     {
       id: 1,
-      text: "What were the chances? It would have to be a lot more than 100 to 1. It was likely even more than 1,000 to 1. The more he thought about it, the odds of it happening had to be more than 10,000 to 1 and even 100,000 to 1. People often threw around the chances of something happening as being 1,000,000 to 1 as an exaggeration of an unlikely event, but he could see that they may actually be accurate in this situation. ",
+      text: "Best price advised by labadvisor of MyTestCompare. Keep on the good work guys! ",
+      name: "Aarav Sharma",
+      rating: 4.5,
     },
     {
       id: 2,
-      text: "The words hadn't flowed from his fingers for the past few weeks. He never imagined he'd find himself with writer's block, but here he sat with a blank screen in front of him. That blank screen taunting him day after day had started to play with his mind. He didn't understand why he couldn't even type a single word, just one to begin the process and build from there.",
+      text: "Best company to take lab test as it helped me to save a lot of money and paying unnecessary high amount on health tests",
+      name: "Ishaan Gupta",
+      rating: 4.5,
     },
     {
       id: 3,
-      text: "There was only one way to do things in the Statton house. That one way was to do exactly what the father, Charlie, demanded. He made the decisions and everyone else followed without question. That was until today.",
+      text: "Reports came on time when i booked for my parents and price was also the best things which keeps me coming again and again to the MyTestCompare.",
+      name: "Anjali Mehta",
+      rating: 5,
     },
   ]
 
@@ -23,11 +29,13 @@ export default function Testimonial() {
     return (
       <div
         key={testimonial.id}
-        className={"bg-white w-[90%] py-8 px-8 drop-shadow-md rounded-2xl xs:w-4/5  sm:w-[65%]"}
+        className={
+          "bg-white w-[90%] py-8 px-8 drop-shadow-md rounded-2xl xs:w-4/5  sm:w-[65%] relative"
+        }
       >
         <svg
           aria-hidden="true"
-          className="w-12 h-12 text-secondary opacity-50"
+          className="w-12 h-12 text-secondary opacity-50 absolute "
           viewBox="0 0 24 27"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -37,6 +45,31 @@ export default function Testimonial() {
             fill="currentColor"
           />
         </svg>
+        <div className="flex ml-[70px] mt-3 mb-5 items-center gap-3">
+          <div>
+            <Icon icon="carbon:user-avatar-filled" className="text-3xl" />
+          </div>
+          <div>
+            <h1 className="text-xl">{testimonial.name}</h1>
+            {testimonial.rating === 5 ? (
+              <div className="flex">
+                <Icon icon="ic:sharp-star" color="#fdcc0d" />
+                <Icon icon="ic:sharp-star" color="#fdcc0d" />
+                <Icon icon="ic:sharp-star" color="#fdcc0d" />
+                <Icon icon="ic:sharp-star" color="#fdcc0d" />
+                <Icon icon="ic:sharp-star" color="#fdcc0d" />
+              </div>
+            ) : (
+              <div className="flex">
+                <Icon icon="ic:sharp-star" color="#fdcc0d" />
+                <Icon icon="ic:sharp-star" color="#fdcc0d" />
+                <Icon icon="ic:sharp-star" color="#fdcc0d" />
+                <Icon icon="ic:sharp-star" color="#fdcc0d" />
+                <Icon icon="material-symbols:star-rate-half" color="#fdcc0d" />
+              </div>
+            )}
+          </div>
+        </div>
         <p className="text-center font-normal text-lg">{testimonial.text}</p>
       </div>
     )
