@@ -6,19 +6,45 @@ import MiniNav from "../components/MiniNav"
 import Nav from "../components/Nav"
 import DiscountStrip from "../components/DiscountStrip"
 import Footer from "../components/Footer"
+import ReactModal from "react-modal"
+import SpecifyLabPopup from "../components/chooseLab/SpecifyLabPopup"
 
 const ChooseLab = () => {
   const certificates = ["NABL", "ISO", "CAP", "ICMR", "ISO", "NABH"]
 
-  const certificatesArr = certificates.map((certificate) => {
+  const certificatesArr = certificates.map((certificate,index) => {
     return (
-      <div className="flex gap-2 items-center">
-        <input type="checkbox" name="NABL" id="NABL" />
-        <span classname="text-base">{certificate}</span>
+      <div key={index} className="flex gap-2 items-center">
+        <input type="checkbox" name={certificate} id={certificate.toString()} />
+        <span className="text-base">{certificate}</span>
         <Icon icon={"mdi:information-outline"} color={"#E97F0E"} />
       </div>
     )
   })
+
+  const [modalIsOpen, setModalIsOpen] = React.useState(false)
+  const customStyles = {
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.8)",
+    },
+    content: {
+      height: "fit-content",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      padding: 0,
+      width: "75vw",
+    },
+  }
+  function openModal() {
+    setModalIsOpen(true)
+  }
+
+  function closeModal() {
+    setModalIsOpen(false)
+  }
+
+  document.body.style.overflow = modalIsOpen ? "hidden" : "auto"
 
   return (
     <div className="font-Roboto bg-background">
@@ -105,9 +131,19 @@ const ChooseLab = () => {
               </h1>
               <h3 className="my-2">Will try to add your lab on our platform</h3>
               <div className="mt-2 flex justify-center">
-                <button className="bg-secondary px-4 rounded py-1 text-white font-bold ">
+                <button
+                  className="bg-secondary px-4 rounded py-1 text-white font-bold "
+                  onClick={openModal}
+                >
                   Specify Lab Details
                 </button>
+                <ReactModal
+                  isOpen={modalIsOpen}
+                  style={customStyles}
+                  ariaHideApp={false}
+                >
+                  <SpecifyLabPopup closeModal={closeModal} />
+                </ReactModal>
               </div>
             </div>
           </div>
@@ -120,7 +156,7 @@ const ChooseLab = () => {
                 </p>
               </div>
               <div>
-                <SelectedTest/>
+                <SelectedTest />
               </div>
             </div>
             <div className="">
