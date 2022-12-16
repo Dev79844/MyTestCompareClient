@@ -8,6 +8,7 @@ import ChooseLab from "./pages/ChooseLab"
 import SelectedTests from './pages/SelectedTests'
 import Summary from './pages/Summary'
 import Success from './pages/Success'
+import BecomePartner from './pages/BecomePartner'
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
   {
     path: "/confirmed",
     element: <Success />
+  },
+  {
+    path: "/becomePartner",
+    element: <BecomePartner />
   }
 ])
 

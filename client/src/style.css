@@ -17,6 +17,24 @@
   }
 }
 
+/* BecomePartner.jsx */
+.becomePartnerBg {
+  background: linear-gradient(
+      rgba(0, 171, 116, 0.47),
+      rgba(0, 171, 116, 0.47)
+    ),
+    url("../images/becomePartner/becomePartner.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media (min-width: 1024px) {
+  .mainBg {
+    background-position: left center;
+  }
+}
+
 /* For lab partner */
 .loop-animation {
   animation: looopartner 20s infinite linear;
