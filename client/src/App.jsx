@@ -5,6 +5,9 @@ import Success from "./pages/Success"
 import {Route, Routes} from "react-router-dom"
 import ChooseLab from "./pages/ChooseLab"
 import SelectedTests from "./pages/SelectedTests"
+import ViewProfile from "./pages/ViewProfile"
+import ViewReports from "./pages/ViewReports"
+import ViewBookings from "./pages/ViewBookings"
 
 function App() {
   return (
@@ -15,6 +18,9 @@ function App() {
         <Route path="/afterLab" element={<SelectedTests />} />
         <Route path="/booking" element={<Summary />} />
         <Route path="/confirmed" element={<Success />} />
+        <Route path="/viewProfile" element={<ViewProfile />} />
+        <Route path="/viewReports" element={<ViewReports />} />
+        <Route path="/viewBookings" element={<ViewBookings />} />
       </Routes>
     </div>
   )

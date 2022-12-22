@@ -38,6 +38,7 @@ module.exports = {
         chooseLab4: "40% 15% 15% 15%",
         chooseLab5: "40% 15% 15% 15% 15%",
         selectedLab2: "2fr 1fr",
+        sidebarSetGrid: "0.7fr 2fr"
       },
       boxShadow: {
         summary: "0px 4px 22px rgba(0, 0, 0, 0.14)",
