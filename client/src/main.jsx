@@ -52,10 +52,6 @@ const router = createBrowserRouter([
     element: <Bookings />,
   },
   {
-    path: "/labbookings",
-    element: <Bookings />,
-  },
-  {
     path: "/labPaymentReminder",
     element: <PaymentReminder />,
   },
