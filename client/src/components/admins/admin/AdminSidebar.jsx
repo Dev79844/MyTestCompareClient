@@ -2,12 +2,12 @@ import {Icon} from "@iconify/react"
 import React from "react"
 import {Link} from "react-router-dom"
 
-export default function Sidebar(props) {
+export default function AdminSidebar(props) {
   const sidebarItems = [
     {
       name: "Profile",
       icon: "pajamas:profile",
-      link: "/labProfile",
+      link: "/adminProfile",
       active: "profile",
     },
     {
@@ -43,13 +43,14 @@ export default function Sidebar(props) {
     {
       name: "Payment Reminders",
       icon: "material-symbols:payments-outline-rounded",
-      link: "/labPaymentReminders",
+      link: "/labPaymentReminder",
       active: "paymentReminders",
     },
   ]
 
-  const sidebarItemsList = sidebarItems.map((item) => (
+  const sidebarItemsList = sidebarItems.map((item, index) => (
     <div
+      key={index}
       className={`flex items-center gap-3 p-3 ${
         props.active == item.active ? "bg-secondary-withOpacity" : null
       } `}
@@ -63,8 +64,7 @@ export default function Sidebar(props) {
 
   return (
     <div
-      className={` flex w-fit px-4 bg-white min-h-screen xs:w-4/5 sm:w-3/5 absolute 
-        top-0 left-0 z-1 transition-all duration-500 ease-in-out lg:static lg:w-full lg:transition-none lg:duration-0 lg:ease-none 
+      className={` flex w-fit px-4 bg-white min-h-screen xs:w-4/5 sm:w-3/5 lg:w-full
         `}
     >
       <div className="mt-5">
@@ -81,12 +81,6 @@ export default function Sidebar(props) {
               </h1>
             </div>
           </Link>
-
-          <Icon
-            icon="radix-icons:cross-2"
-            color="#f03a47"
-            className="text-6xl cursor-pointer lg:hidden"
-          />
         </div>
 
         <div className="px-3 mt-4 space-y-4">{sidebarItemsList}</div>
