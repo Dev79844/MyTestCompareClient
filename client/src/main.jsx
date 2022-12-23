@@ -9,32 +9,42 @@ import SelectedTests from './pages/SelectedTests'
 import Summary from './pages/Summary'
 import Success from './pages/Success'
 import Profile from './pages/admins/admin/Profile'
+import Bookings from './pages/admins/admin/Bookings'
+import PaymentReminder from './pages/admins/admin/PaymentReminder'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />
+    element: <HomePage />,
   },
   {
-    path:"/chooseLab",
-    element:<ChooseLab />
+    path: "/chooseLab",
+    element: <ChooseLab />,
   },
   {
-    path:"/afterLab",
-    element:<SelectedTests />
+    path: "/afterLab",
+    element: <SelectedTests />,
   },
   {
-    path:"/booking",
-    element:<Summary />
+    path: "/booking",
+    element: <Summary />,
   },
   {
     path: "/confirmed",
-    element: <Success />
+    element: <Success />,
   },
   {
     path: "/labprofile",
-    element: <Profile/>
-  }
+    element: <Profile />,
+  },
+  {
+    path: "/labbookings",
+    element: <Bookings />,
+  },
+  {
+    path: "/labPaymentReminder",
+    element: <PaymentReminder />,
+  },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
