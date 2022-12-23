@@ -8,6 +8,9 @@ import ChooseLab from "./pages/ChooseLab"
 import SelectedTests from './pages/SelectedTests'
 import Summary from './pages/Summary'
 import Success from './pages/Success'
+import BecomePartner from './pages/BecomePartner'
+import IndividualSelectedTest from './components/SelectedTests/IndividualSelectedTest'
+import Profile from "./pages/admins/admin/Profile"
 
 const router = createBrowserRouter([
   {
@@ -29,6 +32,19 @@ const router = createBrowserRouter([
   {
     path: "/confirmed",
     element: <Success />
+  },
+  {
+    path: "/becomepartner",
+    element: <BecomePartner />
+  },
+  {
+    path: "/adminprofile",
+    element: <Profile />,
+    children: [
+      {
+        path: "adminprofile/bookings",
+      }
+    ]
   }
 ])
 

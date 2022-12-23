@@ -1,12 +1,16 @@
 import {Icon} from "@iconify/react"
 import React from "react"
 import "../style.css"
+import {useNavigate} from "react-router-dom"
 
 import MiniNav from "../components/MiniNav"
 import Nav from "../components/Nav"
 import Footer from "../components/Footer"
 
 export default function BecomePartner() {
+
+  const navigate = useNavigate()
+
   return (
     <div className="bg-background font-Roboto">
       <MiniNav />
@@ -91,7 +95,7 @@ export default function BecomePartner() {
             </div>
           </div>
           <div className="flex justify-center mt-4">
-            <button className="bg-secondary text-white font-bold text-xl px-8 rounded py-1 lg:px-12">
+            <button className="bg-secondary text-white font-bold text-xl px-8 rounded py-1 lg:px-12" onClick={() => navigate("/adminprofile")}>
               Submit
             </button>
           </div>
