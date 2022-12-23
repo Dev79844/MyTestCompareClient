@@ -11,6 +11,7 @@ import Success from './pages/Success'
 import BecomePartner from './pages/BecomePartner'
 import IndividualSelectedTest from './components/SelectedTests/IndividualSelectedTest'
 import Profile from "./pages/admins/admin/Profile"
+import Bookings from "./pages/admins/admin/Bookings"
 
 const router = createBrowserRouter([
   {
@@ -40,11 +41,10 @@ const router = createBrowserRouter([
   {
     path: "/adminprofile",
     element: <Profile />,
-    children: [
-      {
-        path: "adminprofile/bookings",
-      }
-    ]
+  },
+  {
+    path: "/labBookings",
+    element: <Bookings />
   }
 ])
 
