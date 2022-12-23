@@ -5,6 +5,7 @@ import testwisebreakup from "../../../data/testwisebreakup"
 export default function IndividualTestBreakup() {
   const testWiseBreakupArr = testwisebreakup.map((item, index) => (
     <div
+      key={index}
       className={`grid grid-cols-labPaymentReminder px-3 py-2 ${
         index % 2 != 0 ? "bg-secondary-withOpacity" : "bg-transparent"
       } `}
