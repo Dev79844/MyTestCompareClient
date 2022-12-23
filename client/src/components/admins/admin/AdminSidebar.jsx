@@ -2,12 +2,12 @@ import {Icon} from "@iconify/react"
 import React from "react"
 import {Link} from "react-router-dom"
 
-export default function Sidebar(props) {
+export default function AdminSidebar(props) {
   const sidebarItems = [
     {
       name: "Profile",
       icon: "pajamas:profile",
-      link: "/labProfile",
+      link: "/adminProfile",
       active: "profile",
     },
     {

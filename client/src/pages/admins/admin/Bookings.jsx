@@ -1,6 +1,6 @@
 import React from "react"
-import Sidebar from "../../../components/admins/Sidebar"
-import TopStrip from "../../../components/admins/TopStrip"
+import AdminSidebar from "../../../components/admins/admin/AdminSidebar"
+import TopStrip from "../../../components/admins/admin/TopStrip"
 import {Icon} from "@iconify/react"
 import ReactModal from "react-modal"
 import ClientInfoPopup from "../../../components/admins/admin/Popups/ClientInfoPopup"
@@ -112,7 +112,7 @@ export default function Bookings() {
   return (
     <div className="font-Roboto bg-background">
       <div className=" lg:grid lg:grid-cols-summary xl:grid-cols-sidebarSetGrid">
-        <Sidebar active="bookings" />
+        <AdminSidebar active="bookings" />
         <div className="px-5 mt-4">
           <TopStrip />
           <div className="mt-5 ml-5">

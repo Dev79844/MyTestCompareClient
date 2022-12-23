@@ -1,7 +1,7 @@
 import React from "react"
 import {Icon} from "@iconify/react"
-import Sidebar from "../../../components/admins/Sidebar"
-import TopStrip from "../../../components/admins/TopStrip"
+import AdminSidebar from "../../../components/admins/admin/AdminSidebar"
+import TopStrip from "../../../components/admins/admin/TopStrip"
 
 export default function Profile() {
   const images = [1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => (
@@ -11,7 +11,7 @@ export default function Profile() {
   return (
     <div className="font-Roboto bg-background">
       <div className=" lg:grid lg:grid-cols-summary xl:grid-cols-sidebarSetGrid">
-        <Sidebar active="profile" />
+        <AdminSidebar active="profile" />
         <div className="px-5 mt-4">
           <TopStrip />
           {/* Lab Profile Div */}
