@@ -8,14 +8,7 @@ export default function IndividualSelectedTest() {
     return (
       <div key={index*2} className="border-borderGray rounded border-[1px] pt-3  ">
         <div className="px-4">
-          <div className="flex justify-between">
             <h1 className="font-bold text-xl">{item.name}</h1>
-            <div className="border-[1px] border-secondary flex rounded space-x-3 px-3 ">
-              <button className="text-lg text-secondary">-</button>
-              <h3 className="font-medium">1</h3>
-              <button className="text-lg text-secondary">+</button>
-            </div>
-          </div>
           <div className="space-y-1 mt-2">
             <div className="flex gap-1 items-center">
               <Icon
