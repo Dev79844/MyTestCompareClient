@@ -12,6 +12,11 @@ import Profile from "./pages/admins/admin/Profile"
 import Bookings from "./pages/admins/admin/Bookings"
 import PaymentReminder from './pages/admins/admin/PaymentReminder'
 import AddUpdateTests from './pages/admins/admin/AddUpdateTests'
+import AcceptClientBooking from './pages/admins/superadmin/AcceptClientBooking'
+import AcceptLab from './pages/admins/superadmin/AcceptLab'
+import ManageLabs from './pages/admins/superadmin/ManageLabs'
+import Payments from './pages/admins/superadmin/Payments'
+import ParticularLabPaymentBreakup from './pages/admins/superadmin/ParticularLabPaymentBreakup'
 
 const router = createBrowserRouter([
   {
@@ -47,17 +52,33 @@ const router = createBrowserRouter([
     element: <Bookings />,
   },
   {
-    path: "/labbookings",
-    element: <Bookings />,
-  },
-  {
     path: "/labPaymentReminder",
     element: <PaymentReminder />,
   },
   {
     path: "/labAddUpdateTests",
-    element: <AddUpdateTests/>
+    element: <AddUpdateTests />,
   },
+  {
+    path: "/clientRequests",
+    element: <AcceptClientBooking />,
+  },
+  {
+    path: "/labRequests",
+    element: <AcceptLab />,
+  },
+  {
+    path: "/manageLabs",
+    element: <ManageLabs/>
+  },
+  {
+    path: "/labPayments",
+    element: <Payments/>
+  },
+  {
+    path: "/labPayments/individualLab",
+    element: <ParticularLabPaymentBreakup/>
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
