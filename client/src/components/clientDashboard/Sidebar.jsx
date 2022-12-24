@@ -12,8 +12,8 @@ export default function Sidebar(props) {
   return (
     <div
       className={` flex w-fit px-4 bg-white min-h-screen xs:w-4/5 sm:w-3/5 absolute 
-        top-0 left-0 z-1 transition-all duration-500 ease-in-out lg:static lg:w-full lg:transition-none lg:duration-0 lg:ease-none 
-        ${show ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
+        top-0 left-0 z-1 transition-all duration-500 ease-in-out lg:static lg:w-full lg:transition-none lg:duration-0 lg:ease-none z-10
+        ${show ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}` }
     >
       <div className="mt-5">
         <div className="flex justify-between items-center">
@@ -79,7 +79,7 @@ export default function Sidebar(props) {
           </div>
           <div
             className={`flex items-center gap-3 p-4 ${
-              props.active == "track" ? "bg-secondary-withOpacity" : null
+              props.active == "trackOrder" ? "bg-secondary-withOpacity" : null
             } `}
           >
             <Icon

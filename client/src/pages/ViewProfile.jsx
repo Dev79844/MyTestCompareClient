@@ -22,7 +22,7 @@ export default function ViewProfile() {
             <TopStrip show={show} setShow={setShow} />
 
             <div className="px-2 mt-5">
-              <h1 className="text-2xl font-medium">Your Profile</h1>
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium">Your Profile</h1>
             </div>
             <div className="px-2 space-y-6 mt-6">
               <div className="flex gap-5">

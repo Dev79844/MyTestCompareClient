@@ -2,8 +2,13 @@ import React from "react"
 import {Icon} from "@iconify/react"
 import "../../style.css"
 import { Link } from "react-router-dom"
+import Success from "../../pages/Success"
 
 export default function Main() {
+
+  const location = navigator.geolocation.getCurrentPosition(Success,Error)
+  console.log(location)
+
   const credebility = [
     {
       id: 0,
@@ -57,7 +62,7 @@ export default function Main() {
           <input
             type="text"
             className="pl-3 w-full text-lg bg-transparent"
-            placeholder="Select Location"
+            placeholder={location}
           />
         </div>
 

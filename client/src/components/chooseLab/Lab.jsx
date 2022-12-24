@@ -10,6 +10,7 @@ export default function Lab() {
   const labs = lab.map((lab, index) => {
     return (
       <div
+        key={index}
         className={`flex justify-between py-3 px-4 sm:grid sm:grid-cols-chooseLab
       ${index % 2 != 0 ? "bg-secondary-withOpacity" : "bg-transparent"}
         `}
@@ -69,6 +70,7 @@ export default function Lab() {
   const largeLabs = labLargeScreen.map((lab, index) => {
     return (
       <div
+        key={index}
         className={`grid grid-cols-chooseLab5 p-3  ${
           index % 2 != 0 ? "bg-secondary-withOpacity" : "bg-transparent "
         }

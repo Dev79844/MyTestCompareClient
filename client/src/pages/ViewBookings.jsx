@@ -3,7 +3,6 @@ import {useState} from "react"
 
 import Sidebar from "../components/clientDashboard/Sidebar"
 import TopStrip from "../components/clientDashboard/TopStrip"
-import IndividualViewReport from "../components/clientDashboard/IndividualViewReport"
 import Nav from "../components/Nav"
 import MiniNav from "../components/MiniNav"
 import Footer from "../components/Footer"
@@ -13,11 +12,10 @@ import IndividualViewBooking from "../components/clientDashboard/IndividualViewB
 export default function ViewBookings() {
   const [show, setShow] = useState(false)
 
-  return (  
+  return (
     <div className="bg-background font-Roboto ">
       <div className="lg:grid lg:grid-cols-summary pb-16 xl:grid-cols-sidebarSetGrid">
-        <Sidebar show={show} setShow={setShow} active="reports" />
-
+        <Sidebar show={show} setShow={setShow} active="bookings" />
         <div>
           <MiniNav />
           <Nav />
@@ -26,15 +24,21 @@ export default function ViewBookings() {
             <TopStrip show={show} setShow={setShow} />
 
             <div className="px-2 mt-5">
-              <h1 className="text-2xl font-medium">My Bookings</h1>
+              <h1 className="text-2xl lg:text-4xl font-medium">My Bookings</h1>
             </div>
 
             {/* This is grid */}
             <div className="mt-5 ">
-              <div className="lg:grid lg:grid-cols-3 relative after:absolute after:bg-borderGray after:w-full after:h-[1px] after:bottom-0 after:left-0 pb-2">
+              <div className="lg:grid lg:grid-cols-clientBookings relative after:absolute after:bg-borderGray after:w-full after:h-[1px] after:bottom-0 after:left-0 pb-2">
                 <h1 className="text-2xl font-medium ml-2">Tests Booked</h1>
-                <h2 className="hidden col-span-2 lg:block text-2xl font-medium ml-[20%]">
+                <h2 className="hidden lg:block text-2xl font-medium  justify-self-center">
                   Date
+                </h2>
+                <h2 className="hidden lg:block text-2xl font-medium justify-self-center">
+                  Price (₹)
+                </h2>
+                <h2 className="hidden lg:block text-2xl font-medium justify-self-center">
+                  Lab Name
                 </h2>
               </div>
               <IndividualViewBooking />

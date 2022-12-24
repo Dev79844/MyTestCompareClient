@@ -27,7 +27,7 @@ export default function ViewReports() {
           <TopStrip show={show} setShow={setShow} />
 
           <div className="px-2 mt-5">
-            <h1 className="text-2xl font-medium">Your Reports</h1>
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium">Your Reports</h1>
           </div>
 
           {/* This is grid */}

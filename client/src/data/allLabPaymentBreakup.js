@@ -1,0 +1,58 @@
+export default [
+    {
+        name: "360 Diagnostic",
+        discount: 10,
+        comission: 20,
+        paymentCycle: "Monthly",
+        duePayment: 1000,
+    },
+    {
+        name: "360 Diagnostic",
+        discount: 10,
+        comission: 20,
+        paymentCycle: "Monthly",
+        duePayment: 1000,
+    },
+    {
+        name: "360 Diagnostic",
+        discount: 10,
+        comission: 20,
+        paymentCycle: "Monthly",
+        duePayment: 1000,
+    },
+    {
+        name: "360 Diagnostic",
+        discount: 10,
+        comission: 20,
+        paymentCycle: "Monthly",
+        duePayment: 1000,
+    },
+    {
+        name: "360 Diagnostic",
+        discount: 10,
+        comission: 20,
+        paymentCycle: "Monthly",
+        duePayment: 1000,
+    },
+    {
+        name: "360 Diagnostic",
+        discount: 10,
+        comission: 20,
+        paymentCycle: "Monthly",
+        duePayment: 1000,
+    },
+    {
+        name: "360 Diagnostic",
+        discount: 10,
+        comission: 20,
+        paymentCycle: "Monthly",
+        duePayment: 1000,
+    },
+    {
+        name: "360 Diagnostic",
+        discount: 10,
+        comission: 20,
+        paymentCycle: "Monthly",
+        duePayment: 1000,
+    },
+]
