@@ -6,8 +6,13 @@ import Success from "../../pages/Success"
 
 export default function Main() {
 
-  const location = navigator.geolocation.getCurrentPosition(Success,Error)
-  console.log(location)
+  const [pincode, setPincode] = React.useState("")
+
+  const handlePincode = (e) => {
+    setPincode(e.target.value)
+  }
+
+  
 
   const credebility = [
     {
@@ -62,7 +67,9 @@ export default function Main() {
           <input
             type="text"
             className="pl-3 w-full text-lg bg-transparent"
-            placeholder={location}
+            placeholder="Enter your pincode"
+            value={pincode}
+            onChange={handlePincode}
           />
         </div>
 
