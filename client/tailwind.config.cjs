@@ -41,6 +41,7 @@ module.exports = {
         labPaymentReminder: "1.2fr 0.8fr 1fr 1fr 1fr",
         manageLabs: "1.5fr 1fr 1fr 1fr 1fr",
         sidebarSetGrid: "1fr 3fr",
+        clientBookings: "2fr 1.2fr 1fr 2fr",
       },
       boxShadow: {
         summary: "0px 4px 22px rgba(0, 0, 0, 0.14)",

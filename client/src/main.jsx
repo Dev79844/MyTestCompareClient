@@ -2,11 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import {createBrowserRouter, RouterProvider, Route} from "react-router-dom"
-import HomePage from './pages/HomePage'
+import HomePage from "./pages/HomePage"
 import ChooseLab from "./pages/ChooseLab"
-import SelectedTests from './pages/SelectedTests'
-import Summary from './pages/Summary'
-import Success from './pages/Success'
+import SelectedTests from "./pages/SelectedTests"
+import Summary from "./pages/Summary"
+import Success from "./pages/Success"
+import ViewProfile from "./pages/ViewProfile"
+import ViewReports from "./pages/ViewReports"
+import ViewBookings from "./pages/ViewBookings"
 import BecomePartner from './pages/BecomePartner'
 import Profile from "./pages/admins/admin/Profile"
 import Bookings from "./pages/admins/admin/Bookings"
@@ -17,17 +20,23 @@ import AcceptLab from './pages/admins/superadmin/AcceptLab'
 import ManageLabs from './pages/admins/superadmin/ManageLabs'
 import Payments from './pages/admins/superadmin/Payments'
 import ParticularLabPaymentBreakup from './pages/admins/superadmin/ParticularLabPaymentBreakup'
+import TrackOrder from './pages/TrackOrder'
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
+    element: <HomePage />,
   },
   {
     path: "/chooseLab",
     element: <ChooseLab />,
+    path: "/chooseLab",
+    element: <ChooseLab />,
   },
   {
+    path: "/afterLab",
+    element: <SelectedTests />,
     path: "/afterLab",
     element: <SelectedTests />,
   },
@@ -38,6 +47,22 @@ const router = createBrowserRouter([
   {
     path: "/confirmed",
     element: <Success />,
+  },
+  {
+    path: "/viewProfile",
+    element: <ViewProfile />,
+  },
+  {
+    path: "/viewReports",
+    element: <ViewReports />,
+  },
+  {
+    path: "/viewBookings",
+    element: <ViewBookings />,
+  },
+  {
+    path: "/trackOrder",
+    element: <TrackOrder />,
   },
   {
     path: "/becomepartner",
@@ -78,10 +103,10 @@ const router = createBrowserRouter([
   {
     path: "/labPayments/individualLab",
     element: <ParticularLabPaymentBreakup/>
-  }
+  },
 ])
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
