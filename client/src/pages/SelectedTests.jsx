@@ -10,9 +10,14 @@ import Footer from "../components/Footer"
 import Calendar from "react-calendar"
 import "react-calendar/dist/Calendar.css"
 import time from "../data/time"
-import {Link} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
+import LoginPopup from "../components/LoginPopup"
+import ReactModal from "react-modal"
 
 export default function SelectedTests() {
+
+  const navigate = useNavigate()
+
   const [value, onChange] = React.useState(new Date())
 
   const [visible, setVisible] = React.useState(false)
@@ -20,6 +25,32 @@ export default function SelectedTests() {
   function showDateAndTime() {
     setVisible(!visible)
   }
+
+  const [modalIsOpen, setModalIsOpen] = React.useState(false)
+
+  const customStyles = {
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.8)",
+    },
+    content: {
+      height: "fit-content",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      padding: 0,
+      width: "75vw",
+    },
+  }
+
+  function openModal() {
+    setModalIsOpen(true)
+  }
+
+  function closeModal() {
+    setModalIsOpen(false)
+  }
+
+  document.body.style.overflow = modalIsOpen ? "hidden" : "auto"
 
   const timingArr = time.map((item, index) => {
     return (
@@ -37,7 +68,7 @@ export default function SelectedTests() {
 
       {/* Whole container */}
       <div className="my-8 px-2">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3" onClick={() => navigate(-1)}>
           <Icon
             icon="carbon:chevron-left"
             color="black"
@@ -232,14 +263,17 @@ export default function SelectedTests() {
                 </div>
                 {/* Total Price END */}
               </div>
-                <Link to="/booking">
+                {/* <Link to="/booking"> */}
               <div className="flex justify-center mx-3 my-4">
               
-                  <button className="bg-secondary text-white font-medium text-xl px-2 rounded-lg py-1 w-full">
+                  <button className="bg-secondary text-white font-medium text-xl px-2 rounded-lg py-1 w-full" onClick={openModal}>
                     Continue
                   </button>
+                  <ReactModal isOpen={modalIsOpen} style={customStyles} ariaHideApp={false}>
+                      <LoginPopup closeModal={closeModal} />
+                  </ReactModal>
               </div>
-                </Link>
+                {/* </Link> */}
             </div>
             {/* End Booking Summary */}
 

@@ -34,7 +34,7 @@ export default function Footer() {
               Subscribe
             </h4>
           </Link>
-          <Link to="becomePartner">
+          <Link to="/becomePartner">
             <h4 className="mb-1 hover:border-b-2 cursor-pointer w-fit">
               Become Partner
             </h4>
