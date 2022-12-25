@@ -9,7 +9,7 @@ export default function AcceptClientBooking() {
   const [requests, setRequests] = React.useState("")
 
   const getPendingRequests = async() => {
-    request = await axios.get("http://localhost:3000/api/v1/admin/booking/pending-to-verify")
+    const request = await axios.get("http://localhost:3000/api/v1/admin/booking/pending-to-verify")
     setRequests(request)
     console.log(requests)
   }
@@ -23,7 +23,8 @@ export default function AcceptClientBooking() {
         <div className="px-5 mt-4">
           <div className="mt-5 ml-5">
             <h2 className="text-4xl font-medium ">Pending Client Requests</h2>
-            <RequestContainer data={requests} type="clientData" />
+            {/* <RequestContainer data={requests} type="clientData" /> */}
+            <RequestContainer data={pendingClientRequests} type="clientData" />
           </div>
         </div>
       </div>

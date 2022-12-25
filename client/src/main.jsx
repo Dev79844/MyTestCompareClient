@@ -1,6 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import './index.css'
+import React from "react"
+import ReactDOM from "react-dom/client"
+import "./index.css"
 import {createBrowserRouter, RouterProvider, Route} from "react-router-dom"
 import HomePage from "./pages/HomePage"
 import ChooseLab from "./pages/ChooseLab"
@@ -10,17 +10,21 @@ import Success from "./pages/Success"
 import ViewProfile from "./pages/ViewProfile"
 import ViewReports from "./pages/ViewReports"
 import ViewBookings from "./pages/ViewBookings"
-import BecomePartner from './pages/BecomePartner'
+import BecomePartner from "./pages/BecomePartner"
 import Profile from "./pages/admins/admin/Profile"
 import Bookings from "./pages/admins/admin/Bookings"
-import PaymentReminder from './pages/admins/admin/PaymentReminder'
-import AddUpdateTests from './pages/admins/admin/AddUpdateTests'
-import AcceptClientBooking from './pages/admins/superadmin/AcceptClientBooking'
-import AcceptLab from './pages/admins/superadmin/AcceptLab'
-import ManageLabs from './pages/admins/superadmin/ManageLabs'
-import Payments from './pages/admins/superadmin/Payments'
-import ParticularLabPaymentBreakup from './pages/admins/superadmin/ParticularLabPaymentBreakup'
-import TrackOrder from './pages/TrackOrder'
+import PaymentReminder from "./pages/admins/admin/PaymentReminder"
+import AddUpdateTests from "./pages/admins/admin/AddUpdateTests"
+import AcceptClientBooking from "./pages/admins/superadmin/AcceptClientBooking"
+import AcceptLab from "./pages/admins/superadmin/AcceptLab"
+import ManageLabs from "./pages/admins/superadmin/ManageLabs"
+import Payments from "./pages/admins/superadmin/Payments"
+import ParticularLabPaymentBreakup from "./pages/admins/superadmin/ParticularLabPaymentBreakup"
+import TrackOrder from "./pages/TrackOrder"
+import AnalyticsOverview from "./pages/admins/admin/AnalyticsOverview"
+import SupAdminAnalyticsOverview from "./pages/admins/superadmin/SupAdminAnalyticsOverview"
+import AnalyticsMonthly from "./pages/admins/admin/AnalyticsMonthly"
+import SupAdminAnalyticsMonthly from "./pages/admins/superadmin/SupAdminAnalyticsMonthly"
 
 const router = createBrowserRouter([
   {
@@ -89,20 +93,36 @@ const router = createBrowserRouter([
   },
   {
     path: "/manageLabs",
-    element: <ManageLabs/>
+    element: <ManageLabs />,
   },
   {
     path: "/labPayments",
-    element: <Payments/>
+    element: <Payments />,
   },
   {
     path: "/labPayments/individualLab",
-    element: <ParticularLabPaymentBreakup/>
+    element: <ParticularLabPaymentBreakup />,
   },
+  {
+    path: "/labAnalytics",
+    element: <AnalyticsOverview />,
+  },
+  {
+    path: "/superadminlabAnalytics",
+    element: <SupAdminAnalyticsOverview />,
+  },
+  {
+    path: "/labMonthlyAnalytics",
+    element: <AnalyticsMonthly />,
+  },
+  {
+    path: "/superadminlabMonthlyAnalytics",
+    element: <SupAdminAnalyticsMonthly />,
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   </React.StrictMode>
 )

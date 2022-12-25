@@ -6,19 +6,14 @@ import Success from "../../pages/Success"
 
 import Select from "react-select"
 
-<<<<<<< HEAD
 export default function Main() {
   const location = navigator.geolocation.getCurrentPosition(Success, Error)
   console.log(location)
-=======
   const [pincode, setPincode] = React.useState("")
 
   const handlePincode = (e) => {
     setPincode(e.target.value)
   }
-
-  
->>>>>>> 2164918be6ec8603413a7aa51fadfd51416b8f0e
 
   const cityNames = [
     {value: "New York", label: "New York"},
@@ -110,20 +105,16 @@ export default function Main() {
           {/* <input
             type="text"
             className="pl-3 w-full text-lg bg-transparent"
-<<<<<<< HEAD
             placeholder="Enter Location"
           /> */}
           <Select
             options={cityNames}
             styles={selctStyles}
             className="w-full"
-            placeholder="Select City"
             isMulti={false}
-=======
             placeholder="Enter your pincode"
             value={pincode}
             onChange={handlePincode}
->>>>>>> 2164918be6ec8603413a7aa51fadfd51416b8f0e
           />
         </div>
 
