@@ -2,47 +2,48 @@ import React from "react"
 import { Icon } from "@iconify/react"
 import PopupSlider from "./PopupSlider"
 import axios from "axios"
-// import CircularJSON from "circular-json"
+import { useNavigate } from "react-router-dom"
 
 export default function LoginPopup(props) {
+
+  const navigate = useNavigate()
 
   const [phone, setPhone] = React.useState("+91")
   const [otp, setOtp] = React.useState("")
 
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false)
-
   // const getOtp = axios.post("http://localhost:3000/api/v1/generate-otp")
 
   const handlePhone = (e) => {
+    e.preventDefault()
     setPhone(e.target.value)
+    // alert(e.target.value)
+  }
+  const getOtp = async (phone) => {
+    JSON.stringify(phone)
+    const otp = await axios.post("http://localhost:3000/api/v1/generate-otp", {phone})
   }
 
-
   const handleOtp = (e) => {
+    e.preventDefault()
     setOtp(e.target.value)
   }
  
-  const getOtp = async(phone) => {
-    // phone.parent = null
-    // const num = JSON.stringify(phone)
-    console.log(phone)
-    await axios.post("http://localhost:3000/api/v1/generate-otp", {num})
-  }
 
   const login = async(phone,otp) => {
+    JSON.stringify(phone)
+    JSON.stringify(otp)
+    console.log(phone,otp)
     try {
-      const {success,data} = await axios.post("http://localhost:3000/api/v1/login", {phone,otp})
+      const {data} = await axios.post("http://localhost:3000/api/v1/login", {phone,otp})
+      console.log(data)
       localStorage.setItem('token', data.token)
-      if(success) {
-        setIsLoggedIn(true)
-        return(
-          <Navigate to="/booking" />
-        )
-      }
+      navigate("/booking")
     } catch (error) {
       console.log(error)
     }
   }
+
+  console.log(localStorage.getItem('token'))
 
   return (
     <div className="font-Roboto lg:grid lg:grid-cols-2">
@@ -67,7 +68,10 @@ export default function LoginPopup(props) {
               value={phone}
               onChange={handlePhone}
             />
-            <button className="bg-primary block w-3/5 sm:w-1/2 sm:mx-0 mt-4 mx-auto text-white font-medium px-4 text-lg rounded py-1" onClick={getOtp}>
+            <button type="submit" className="bg-primary block w-3/5 sm:w-1/2 sm:mx-0 mt-4 mx-auto text-white font-medium px-4 text-lg rounded py-1" 
+            onClick={() => {
+              getOtp(phone)
+            }}>
               Send OTP
             </button>
           </div>
@@ -98,7 +102,7 @@ export default function LoginPopup(props) {
               Receive latest offers & discounts through sms, email or whatsapp.
             </h3>
           </div>
-          <button className="bg-primary block w-3/5 mt-4 mx-auto text-white font-medium px-4 text-lg rounded py-1 sm:w-2/5" onClick={login}>
+          <button type="submit" className="bg-primary block w-3/5 mt-4 mx-auto text-white font-medium px-4 text-lg rounded py-1 sm:w-2/5" onClick={() => login(phone, otp)}>
             Login
           </button>
           <h3 className="font-light text-center mt-4">

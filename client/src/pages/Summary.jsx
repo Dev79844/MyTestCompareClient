@@ -1,6 +1,7 @@
 import React from "react"
 import {Icon} from "@iconify/react"
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import DiscountStrip from "../components/DiscountStrip"
 import MiniNav from "../components/MiniNav"
@@ -10,13 +11,16 @@ import TestSummary from "../components/summary/TestSummary"
 import Footer from "../components/Footer"
 
 export default function Summary() {
+
+  const navigate = useNavigate()
+
   return (
     <div className="font-Roboto bg-background">
       <MiniNav />
       <Nav />
       <DiscountStrip />
       <div className="mt-6 pb-10 lg:relative lg:before:w-full lg:before:h-1/2 lg:before:bg-primary lg:before:bottom-0 lg:before:absolute lg:mt-16">
-        <div className="flex gap-1 lg:ml-12">
+        <div className="flex gap-1 lg:ml-12" onClick={() => navigate(-1)}>
           <Icon
             icon="carbon:chevron-left"
             color="black"

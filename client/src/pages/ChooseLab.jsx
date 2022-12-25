@@ -1,5 +1,6 @@
 import React from "react"
 import {Icon} from "@iconify/react"
+import { useNavigate } from "react-router-dom"
 import Lab from "../components/chooseLab/Lab"
 import SelectedTest from "../components/chooseLab/SelectedTest"
 import MiniNav from "../components/MiniNav"
@@ -10,6 +11,9 @@ import ReactModal from "react-modal"
 import SpecifyLabPopup from "../components/chooseLab/SpecifyLabPopup"
 
 const ChooseLab = () => {
+
+  const navigate = useNavigate()
+
   const certificates = ["NABL", "ISO", "CAP", "ICMR", "ISO", "NABH"]
 
   const certificatesArr = certificates.map((certificate,index) => {
@@ -52,7 +56,7 @@ const ChooseLab = () => {
       <Nav />
       <DiscountStrip />
       <div className="pt-4 pb-12">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3" onClick={() => navigate(-1)}>
           <Icon
             icon="carbon:chevron-left"
             color="black"

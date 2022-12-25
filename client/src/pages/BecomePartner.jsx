@@ -79,9 +79,10 @@ export default function BecomePartner() {
                 color={"black"}
                 className="text-3xl"
               />
-              <button className="text-xl w-[205px] text-white border-[1px] font-bold border-black px-4 py-[2px] rounded">
-                Upload Logo
-              </button>
+              <label className="text-xl w-[150px] text-white border-[1px] font-bold border-black px-4 py-[2px] rounded">
+                <input type="file" />
+                  Upload Logo
+              </label>
             </div>
             <div className="flex gap-2 items-center">
               <Icon
@@ -89,9 +90,10 @@ export default function BecomePartner() {
                 color={"black"}
                 className="text-3xl"
               />
-              <button className="text-xl text-white border-[1px] font-bold border-black px-4 py-[2px] rounded">
-                Upload Lab Images
-              </button>
+              <label className="text-xl w-[210px] text-white border-[1px] font-bold border-black px-4 py-[2px] rounded">
+                <input type="file" />
+                  Upload Lab Images
+              </label>
             </div>
           </div>
           <div className="flex justify-center mt-4">

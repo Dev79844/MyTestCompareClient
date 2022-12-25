@@ -10,11 +10,14 @@ import Footer from "../components/Footer"
 import Calendar from "react-calendar"
 import "react-calendar/dist/Calendar.css"
 import time from "../data/time"
-import {Link} from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import LoginPopup from "../components/LoginPopup"
 import ReactModal from "react-modal"
 
 export default function SelectedTests() {
+
+  const navigate = useNavigate()
+
   const [value, onChange] = React.useState(new Date())
 
   const [visible, setVisible] = React.useState(false)
@@ -65,7 +68,7 @@ export default function SelectedTests() {
 
       {/* Whole container */}
       <div className="my-8 px-2">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3" onClick={() => navigate(-1)}>
           <Icon
             icon="carbon:chevron-left"
             color="black"
