@@ -1,8 +1,79 @@
 import {Icon} from "@iconify/react"
 import React from "react"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
+import ReactModal from "react-modal"
+import LoginPopup from "./LoginPopup"
 
 export default function Footer() {
+  const navigate = useNavigate()
+
+  const isAdminLoggedIn = localStorage.getItem("adminToken") ? true : false
+
+  // localStorage.removeItem("adminToken")
+
+  const quickLinks = [
+    {
+      name: "Home",
+      link: "/",
+    },
+    {
+      name: "Subscribe",
+      link: "/subscribe",
+    },
+    {
+      name: "Become Partner",
+      link: "/becomePartner",
+    },
+    {
+      name: "Lab Login",
+    },
+    {
+      name: "Contact Us",
+      link: "/contact",
+    },
+  ]
+
+  const quickLinksArr = quickLinks.map((item, index) => {
+    return item.link ? (
+      <Link key={index} to={item.link}>
+        <h4 className="mb-1 hover:border-b-2 cursor-pointer w-fit">
+          {item.name}
+        </h4>
+      </Link>
+    ) : (
+      <h4
+        key={index}
+        className="mb-1 hover:border-b-2 cursor-pointer w-fit"
+        onClick={openModal}
+      >
+        {item.name}
+      </h4>
+    )
+  })
+
+  const [modalIsOpen, setModalIsOpen] = React.useState(false)
+  const customStyles = {
+    overlay: {
+      backgroundColor: "rgba(0, 0, 0, 0.8)",
+    },
+    content: {
+      height: "fit-content",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      padding: 0,
+      width: "75vw",
+    },
+  }
+
+  function openModal() {
+    isAdminLoggedIn ? navigate("/adminProfile") : setModalIsOpen(true)
+  }
+
+  function closeModal() {
+    setModalIsOpen(false)
+  }
+
   return (
     <div className="bg-primary  text-white flex flex-col items-center py-8 sm:flex-row sm:justify-between sm:items-start sm:px-8 lg:px-14">
       <Link to="/">
@@ -26,25 +97,7 @@ export default function Footer() {
         </div>
 
         <div className="text-xl font-normal text-center flex flex-col items-center sm:items-start sm:ml-4 md:ml-7 xl:ml-12">
-          <Link to="/">
-            <h4 className="mb-1 hover:border-b-2 cursor-pointer w-fit">Home</h4>
-          </Link>
-          <Link to="">
-            <h4 className="mb-1 hover:border-b-2 cursor-pointer w-fit">
-              Subscribe
-            </h4>
-          </Link>
-          <Link to="/becomePartner">
-            <h4 className="mb-1 hover:border-b-2 cursor-pointer w-fit">
-              Become Partner
-            </h4>
-          </Link>
-          <Link to="contact">
-            <h4 className="mb-1 hover:border-b-2 cursor-pointer w-fit">
-              Contact Us
-            </h4>
-          </Link>
-          <h4 className="mb-1 hover:border-b-2 w-fit cursor-pointer">Login</h4>
+          {quickLinksArr}
         </div>
       </div>
       <div className="mt-4">
@@ -55,6 +108,13 @@ export default function Footer() {
           <Icon icon="mdi:linkedin" color="white" className="text-4xl" />
         </div>
       </div>
+      <ReactModal isOpen={modalIsOpen} style={customStyles} ariaHideApp={false}>
+        <LoginPopup
+          closeModal={closeModal}
+          whereToNavigate="/adminProfile"
+          type="admin"
+        />
+      </ReactModal>
     </div>
   )
 }

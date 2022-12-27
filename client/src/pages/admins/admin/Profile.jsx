@@ -2,11 +2,39 @@ import React from "react"
 import {Icon} from "@iconify/react"
 import AdminSidebar from "../../../components/admins/admin/AdminSidebar"
 import TopStrip from "../../../components/admins/admin/TopStrip"
+import axios from "axios"
 
 export default function Profile() {
   const images = [1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => (
     <div key={index} className="bg-[#D9D9D9] w-56 h-56"></div>
   ))
+
+  const [labName, setLabName] = React.useState("")
+  const [labAddress, setLabAddress] = React.useState("")
+  const [loading, setLoading] = React.useState(true)
+
+  axios
+    .get("http://localhost:3000/api/v1/manage/lab", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+      },
+    })
+    .then((res) => {
+      setLabName(res.data.data.lab.name)
+      setLabAddress(res.data.data.lab.address.address)
+      setLoading(false)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+  if (loading) {
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    )
+  }
 
   return (
     <div className="font-Roboto bg-background">
@@ -19,18 +47,13 @@ export default function Profile() {
             <h2 className="text-2xl font-medium ml-5">Lab Profile</h2>
             <div className="bg-white rounded-3xl flex p-8 mt-6 gap-6">
               {/* Logo Div */}
-              <div className="relative after:absolute after:bg-primary after:h-full after:w-[2px] after:top-0 after:right-0">
+              <div className="relative after:absolute after:bg-primary after:h-full after:w-[2px] after:top-0 after:right-0 w-[50%]">
                 <img
                   src="images/summary-success/lab.png"
                   className="mt-3 w-28"
                 />
-                <h2 className="text-4xl font-semibold mt-2 w-4/5">
-                  Anushka Pathology Laboratory
-                </h2>
-                <p className="font-light mt-2">
-                  Janta Nagar Ring Rd, Parshwanath Nagar, ONGC Colony,
-                  Chandkheda, Ahmedabad, Gujarat 382424
-                </p>
+                <h2 className="text-4xl font-semibold mt-2 w-4/5">{labName}</h2>
+                <p className="font-light mt-2">{labAddress}</p>
               </div>
               {/* Info Div */}
               <div className="w-4/5">

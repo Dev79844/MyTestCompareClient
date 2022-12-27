@@ -289,7 +289,7 @@ export default function SelectedTests() {
                   style={customStyles}
                   ariaHideApp={false}
                 >
-                  <LoginPopup closeModal={closeModal} />
+                  <LoginPopup closeModal={closeModal} whereToNavigate="/bookig" type="user" />
                 </ReactModal>
               </div>
               {/* </Link> */}

@@ -118,7 +118,7 @@ const router = createBrowserRouter([
   {
     path: "/superadminlabMonthlyAnalytics",
     element: <SupAdminAnalyticsMonthly />,
-  }
+  },
 ])
 
 ReactDOM.createRoot(document.getElementById("root")).render(
