@@ -5,41 +5,43 @@ import {Link} from "react-router-dom"
 import Success from "../../pages/Success"
 
 import Select from "react-select"
+import cityNames from "../../data/cityNames"
+import testsFromExcel from "../../data/testsFromExcel"
 
-<<<<<<< HEAD
 export default function Main() {
   const location = navigator.geolocation.getCurrentPosition(Success, Error)
-  console.log(location)
-=======
+  // console.log(location)
   const [pincode, setPincode] = React.useState("")
 
   const handlePincode = (e) => {
     setPincode(e.target.value)
   }
 
-  
->>>>>>> 2164918be6ec8603413a7aa51fadfd51416b8f0e
+  const testNames = [...testsFromExcel.values()].map((test) => ({
+    value: test.name,
+    label: test.name,
+  }))
 
-  const cityNames = [
-    {value: "New York", label: "New York"},
-    {value: "Los Angeles", label: "Los Angeles"},
-    {value: "Chicago", label: "Chicago"},
-    {value: "Houston", label: "Houston"},
-    {value: "Philadelphia", label: "Philadelphia"},
-    {value: "Phoenix", label: "Phoenix"},
-    {value: "San Antonio", label: "San Antonio"},
-    {value: "San Diego", label: "San Diego"},
-    {value: "Dallas", label: "Dallas"},
-    {value: "San Jose", label: "San Jose"},
-  ]
+  // const cityNames = [
+  //   {value: "New York", label: "New York"},
+  //   {value: "Los Angeles", label: "Los Angeles"},
+  //   {value: "Chicago", label: "Chicago"},
+  //   {value: "Houston", label: "Houston"},
+  //   {value: "Philadelphia", label: "Philadelphia"},
+  //   {value: "Phoenix", label: "Phoenix"},
+  //   {value: "San Antonio", label: "San Antonio"},
+  //   {value: "San Diego", label: "San Diego"},
+  //   {value: "Dallas", label: "Dallas"},
+  //   {value: "San Jose", label: "San Jose"},
+  // ]
 
-  const testNames = [
-    {value: "Test 1", label: "Test 1"},
-    {value: "Test 2", label: "Test 2"},
-    {value: "Test 3", label: "Test 3"},
-    {value: "Test 4", label: "Test 4"},
-    {value: "Test 5", label: "Test 5"},
-  ]
+  // const testNames = [
+  //   {value: "Test 1", label: "Test 1"},
+  //   {value: "Test 2", label: "Test 2"},
+  //   {value: "Test 3", label: "Test 3"},
+  //   {value: "Test 4", label: "Test 4"},
+  //   {value: "Test 5", label: "Test 5"},
+  // ]
 
   const selctStyles = {
     control: (baseStyles) => ({
@@ -110,20 +112,16 @@ export default function Main() {
           {/* <input
             type="text"
             className="pl-3 w-full text-lg bg-transparent"
-<<<<<<< HEAD
             placeholder="Enter Location"
           /> */}
           <Select
             options={cityNames}
             styles={selctStyles}
             className="w-full"
-            placeholder="Select City"
             isMulti={false}
-=======
-            placeholder="Enter your pincode"
+            placeholder="Select City"
             value={pincode}
             onChange={handlePincode}
->>>>>>> 2164918be6ec8603413a7aa51fadfd51416b8f0e
           />
         </div>
 

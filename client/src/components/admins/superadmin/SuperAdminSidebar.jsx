@@ -13,14 +13,14 @@ export default function SuperAdminSidebar(props) {
     {
       name: "Analytics",
       icon: "ic:baseline-analytics",
-      link: "/labAnalytics",
+      link: "/superadminlabAnalytics",
       active: "analytics",
     },
     {
       name: "Weekly Analytics",
       icon: "mdi:graph-bar",
-      link: "/labWeeklyAnalytics",
-      active: "weeklyAnalytics",
+      link: "/superadminlabMonthlyAnalytics",
+      active: "monthlyAnalytics",
     },
     {
       name: "Manage Labs",

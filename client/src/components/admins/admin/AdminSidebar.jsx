@@ -29,10 +29,10 @@ export default function AdminSidebar(props) {
       active: "analytics",
     },
     {
-      name: "Weekly Analytics",
+      name: "Monthly Analytics",
       icon: "mdi:graph-bar",
-      link: "/labWeeklyAnalytics",
-      active: "weeklyAnalytics",
+      link: "/labMonthlyAnalytics",
+      active: "monthlyAnalytics",
     },
     {
       name: "Add/Update Tests",

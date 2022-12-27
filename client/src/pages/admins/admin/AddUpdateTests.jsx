@@ -1,9 +1,51 @@
-import React from "react"
+import React, {useState} from "react"
 
 import AdminSidebar from "../../../components/admins/admin/AdminSidebar"
 import TopStrip from "../../../components/admins/admin/TopStrip"
 
 export default function AddUpdateTests() {
+  const headers = new Headers()
+  headers.append(
+    "Authorization",
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgxZGJkYjgxMzcxZWEyNmVhYjI5MCIsImlhdCI6MTY3MjEzNTI4OSwiZXhwIjoxNjcyMjIxNjg5fQ.Ao7HArP3_DXNLlyJpfp1N2Mo_-NpfETwOSmEXIx35JM"
+  )
+
+  const [file, setFile] = useState(null)
+  const [buttonDisabled, setButtonDisabled] = useState(true)
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0])
+    setButtonDisabled(false)
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    // Create a FormData object to store the file
+    const formData = new FormData()
+    formData.append("tests", file)
+
+    // Make a POST request to the server to upload the file
+    fetch("http://localhost:3000/api/v1/test/uploadTest", {
+      method: "POST",
+      body: formData,
+      headers: headers,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText)
+        }
+        setFile(null)
+        alert("File uploaded successfully")
+         setButtonDisabled(true)
+
+        // return response.text()
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }
+
   return (
     <div className="font-Roboto bg-background">
       <div className=" lg:grid lg:grid-cols-summary xl:grid-cols-sidebarSetGrid">
@@ -12,10 +54,24 @@ export default function AddUpdateTests() {
           <TopStrip />
           <div className="mt-5 ml-5 flex justify-between">
             <h2 className="text-4xl font-medium "> Add/Update Tests</h2>
-            <button className="bg-primary text-white px-8 text-lg rounded py-[2px]">
-              Add Excel
-            </button>
+            <form onSubmit={handleSubmit} className="space-x-4">
+              <label
+                htmlFor="file"
+                className="text-2xl font-medium cursor-pointer"
+              >
+                {file ? file.name : " Click to select a file:"}
+              </label>
+              <input type="file" id="file" onChange={handleFileChange} />
+              <button
+                type="submit"
+                disabled={buttonDisabled}
+                className={`bg-primary text-white px-8 text-lg rounded py-[2px] ${buttonDisabled ? "cursor-not-allowed opacity-60" : "cursor-pointer opacity-100"} `}
+              >
+                Upload
+              </button>
+            </form>
           </div>
+          <input type={"file"} />
           <div className="ml-5 mt-8">
             <h2 className="text-2xl font-medium ">
               Important Instructions for Uploading Excel
