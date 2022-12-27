@@ -5,11 +5,10 @@ import {Link} from "react-router-dom"
 import Success from "../../pages/Success"
 
 import Select from "react-select"
-import testsFromExcel from "../../data/testsFromExcel"
 import cityNames from "../../data/cityNames"
+import testsFromExcel from "../../data/testsFromExcel"
 
 export default function Main() {
-
   const location = navigator.geolocation.getCurrentPosition(Success, Error)
   // console.log(location)
   const [pincode, setPincode] = React.useState("")
@@ -17,6 +16,11 @@ export default function Main() {
   const handlePincode = (e) => {
     setPincode(e.target.value)
   }
+
+  const testNames = [...testsFromExcel.values()].map((test) => ({
+    value: test.name,
+    label: test.name,
+  }))
 
   // const cityNames = [
   //   {value: "New York", label: "New York"},
@@ -134,7 +138,7 @@ export default function Main() {
             placeholder="Select Tests"
           /> */}
           <Select
-            options={testsFromExcel}
+            options={testNames}
             styles={selctStyles}
             className="w-full"
             placeholder="Select Tests"

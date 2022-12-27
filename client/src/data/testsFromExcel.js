@@ -1,14 +1,20 @@
-const testsFromExcel = []
+const testsFromExcel = new Map()
 
-fetch("http://localhost:3000/api/v1/getTests")
-  .then((response) => response.json())
-  .then((data) => {
+async function populateTestsFromExcel() {
+  try {
+    const response = await fetch("http://localhost:3000/api/v1/getTests")
+    const data = await response.json()
     data.data.tests.map((item) => {
-      testsFromExcel.push({value: item.name, label: item.name})
+      delete item._id
+      delete item.__v
+      delete item.price
+      testsFromExcel.set(item.name, item)
     })
-  })
-  .catch((err) => console.log(err))
+  } catch (err) {
+    console.log(err)
+  }
+}
 
-// console.log(testsFromExcel)
+await populateTestsFromExcel()
 
 export default testsFromExcel
