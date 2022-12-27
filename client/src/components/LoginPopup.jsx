@@ -1,17 +1,15 @@
 import React from "react"
-import { Icon } from "@iconify/react"
+import {Icon} from "@iconify/react"
 import PopupSlider from "./PopupSlider"
 import axios from "axios"
-import { useNavigate } from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 
 export default function LoginPopup(props) {
-
   const navigate = useNavigate()
 
   const [phone, setPhone] = React.useState("+91")
   const [otp, setOtp] = React.useState("")
-
-  // const getOtp = axios.post("http://localhost:3000/api/v1/generate-otp")
+  const [otpButtonDisabled, setOtpButtonDisabled] = React.useState(false)
 
   const handlePhone = (e) => {
     e.preventDefault()
@@ -20,35 +18,46 @@ export default function LoginPopup(props) {
   }
   const getOtp = async (phone) => {
     JSON.stringify(phone)
-    const otp = await axios.post("http://localhost:3000/api/v1/generate-otp", {phone})
+    setOtpButtonDisabled(true)
+    const otp = await axios.post(
+      "http://localhost:3000/api/v1/user/generate-otp",
+      {
+        phone,
+      }
+    )
   }
 
   const handleOtp = (e) => {
     e.preventDefault()
     setOtp(e.target.value)
   }
- 
 
-  const login = async(phone,otp) => {
+  const login = async (phone, otp) => {
     JSON.stringify(phone)
     JSON.stringify(otp)
-    console.log(phone,otp)
+    // console.log(phone, otp)
     try {
-      const {data} = await axios.post("http://localhost:3000/api/v1/login", {phone,otp})
-      console.log(data)
-      localStorage.setItem('token', data.token)
+      const {data} = await axios.post(
+        "http://localhost:3000/api/v1/user/login",
+        {
+          phone,
+          otp,
+        }
+      )
+      // console.log(data.data)
+      localStorage.setItem("token", data.data.token)
       navigate("/booking")
     } catch (error) {
       console.log(error)
     }
   }
 
-  console.log(localStorage.getItem('token'))
+  // console.log(localStorage.getItem("token"))
 
   return (
     <div className="font-Roboto lg:grid lg:grid-cols-2">
       {/* Left Div */}
-      <PopupSlider/>
+      <PopupSlider />
 
       {/* Right Div */}
       <div className="relative ">
@@ -68,10 +77,16 @@ export default function LoginPopup(props) {
               value={phone}
               onChange={handlePhone}
             />
-            <button type="submit" className="bg-primary block w-3/5 sm:w-1/2 sm:mx-0 mt-4 mx-auto text-white font-medium px-4 text-lg rounded py-1" 
-            onClick={() => {
-              getOtp(phone)
-            }}>
+            <button
+              type="submit"
+              disabled={otpButtonDisabled}
+              className={`bg-primary block w-3/5 sm:w-1/2 sm:mx-0 mt-4 mx-auto text-white font-medium px-4 text-lg rounded py-1
+            ${otpButtonDisabled && "opacity-50 cursor-not-allowed"}
+            `}
+              onClick={() => {
+                getOtp(phone)
+              }}
+            >
               Send OTP
             </button>
           </div>
@@ -102,7 +117,11 @@ export default function LoginPopup(props) {
               Receive latest offers & discounts through sms, email or whatsapp.
             </h3>
           </div>
-          <button type="submit" className="bg-primary block w-3/5 mt-4 mx-auto text-white font-medium px-4 text-lg rounded py-1 sm:w-2/5" onClick={() => login(phone, otp)}>
+          <button
+            type="submit"
+            className="bg-primary block w-3/5 mt-4 mx-auto text-white font-medium px-4 text-lg rounded py-1 sm:w-2/5"
+            onClick={() => login(phone, otp)}
+          >
             Login
           </button>
           <h3 className="font-light text-center mt-4">

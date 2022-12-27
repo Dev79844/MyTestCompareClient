@@ -15,6 +15,13 @@ import LoginPopup from "../components/LoginPopup"
 import ReactModal from "react-modal"
 
 export default function SelectedTests() {
+  // const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(
+  //   localStorage.getItem("token") ? true : false
+  // )
+
+  const isUserLoggedIn = localStorage.getItem("token") ? true : false
+
+  // console.log(localStorage.getItem("token"))
 
   const navigate = useNavigate()
 
@@ -43,7 +50,7 @@ export default function SelectedTests() {
   }
 
   function openModal() {
-    setModalIsOpen(true)
+    isUserLoggedIn ? navigate("/booking") : setModalIsOpen(true)
   }
 
   function closeModal() {
@@ -248,8 +255,14 @@ export default function SelectedTests() {
                     <h1 className="font-medium text-base">₹180</h1>
                   </div>
                   <div className="flex gap-1 justify-between">
-                    <input type="text" placeholder="Apply Coupon" className="font-medium text-base border-[1px] rounded border-borderGray placeholder:font-light px-1" />
-                    <button className="font-medium text-base bg-primary text-white px-2 rounded">Apply</button> 
+                    <input
+                      type="text"
+                      placeholder="Apply Coupon"
+                      className="font-medium text-base border-[1px] rounded border-borderGray placeholder:font-light px-1"
+                    />
+                    <button className="font-medium text-base bg-primary text-white px-2 rounded">
+                      Apply
+                    </button>
                   </div>
                 </div>
                 {/* Discount div end */}
@@ -263,17 +276,23 @@ export default function SelectedTests() {
                 </div>
                 {/* Total Price END */}
               </div>
-                {/* <Link to="/booking"> */}
+              {/* <Link to="/booking"> */}
               <div className="flex justify-center mx-3 my-4">
-              
-                  <button className="bg-secondary text-white font-medium text-xl px-2 rounded-lg py-1 w-full" onClick={openModal}>
-                    Continue
-                  </button>
-                  <ReactModal isOpen={modalIsOpen} style={customStyles} ariaHideApp={false}>
-                      <LoginPopup closeModal={closeModal} />
-                  </ReactModal>
+                <button
+                  className="bg-secondary text-white font-medium text-xl px-2 rounded-lg py-1 w-full"
+                  onClick={openModal}
+                >
+                  Continue
+                </button>
+                <ReactModal
+                  isOpen={modalIsOpen}
+                  style={customStyles}
+                  ariaHideApp={false}
+                >
+                  <LoginPopup closeModal={closeModal} />
+                </ReactModal>
               </div>
-                {/* </Link> */}
+              {/* </Link> */}
             </div>
             {/* End Booking Summary */}
 

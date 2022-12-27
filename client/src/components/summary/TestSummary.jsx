@@ -25,18 +25,18 @@ export default function TestSummary() {
     {
       heading: "Phone",
       value: "9876543210",
-    }
+    },
   ]
 
-  const TestSummaryArr = TestSummary.map((item) => { 
+  const TestSummaryArr = TestSummary.map((item, index) => {
     return (
-      <div className="grid grid-cols-summary mt-3">
+      <div key={index} className="grid grid-cols-summary mt-3">
         <h1 className="font-bold xs:text-lg">{item.heading}</h1>
         {item.heading === "Tests" ? (
           <div className="space-y-1 sm:text-lg">
-            <h2>{ item.value.test1 }</h2>
-            <h2>{ item.value.test2}</h2>
-            <h2>{ item.value.test2 }</h2>
+            <h2>{item.value.test1}</h2>
+            <h2>{item.value.test2}</h2>
+            <h2>{item.value.test2}</h2>
           </div>
         ) : (
           <h1 className="sm:text-lg">{item.value}</h1>
