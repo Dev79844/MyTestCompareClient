@@ -4,10 +4,18 @@ import AdminSidebar from "../../../components/admins/admin/AdminSidebar"
 import TopStrip from "../../../components/admins/admin/TopStrip"
 
 export default function AddUpdateTests() {
+  const headers = new Headers()
+  headers.append(
+    "Authorization",
+    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgxZGJkYjgxMzcxZWEyNmVhYjI5MCIsImlhdCI6MTY3MjEzNTI4OSwiZXhwIjoxNjcyMjIxNjg5fQ.Ao7HArP3_DXNLlyJpfp1N2Mo_-NpfETwOSmEXIx35JM"
+  )
+
   const [file, setFile] = useState(null)
+  const [buttonDisabled, setButtonDisabled] = useState(true)
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0])
+    setButtonDisabled(false)
   }
 
   const handleSubmit = (event) => {
@@ -18,18 +26,20 @@ export default function AddUpdateTests() {
     formData.append("tests", file)
 
     // Make a POST request to the server to upload the file
-    fetch("http://localhost:3000/api/v1/test/uplaodTest", {
+    fetch("http://localhost:3000/api/v1/test/uploadTest", {
       method: "POST",
       body: formData,
+      headers: headers,
     })
       .then((response) => {
         if (!response.ok) {
           throw new Error(response.statusText)
         }
-        return response.json()
-      })
-      .then((data) => {
-        console.log(data)
+        setFile(null)
+        alert("File uploaded successfully")
+         setButtonDisabled(true)
+
+        // return response.text()
       })
       .catch((error) => {
         console.error(error)
@@ -54,7 +64,8 @@ export default function AddUpdateTests() {
               <input type="file" id="file" onChange={handleFileChange} />
               <button
                 type="submit"
-                className="bg-primary text-white px-8 text-lg rounded py-[2px]"
+                disabled={buttonDisabled}
+                className={`bg-primary text-white px-8 text-lg rounded py-[2px] ${buttonDisabled ? "cursor-not-allowed opacity-60" : "cursor-pointer opacity-100"} `}
               >
                 Upload
               </button>
