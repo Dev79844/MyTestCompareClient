@@ -7,7 +7,7 @@ export default function AddUpdateTests() {
   const headers = new Headers()
   headers.append(
     "Authorization",
-    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYTgxZGJkYjgxMzcxZWEyNmVhYjI5MCIsImlhdCI6MTY3MjEzNTI4OSwiZXhwIjoxNjcyMjIxNjg5fQ.Ao7HArP3_DXNLlyJpfp1N2Mo_-NpfETwOSmEXIx35JM"
+    "Bearer " + localStorage.getItem("adminToken")
   )
 
   const [file, setFile] = useState(null)

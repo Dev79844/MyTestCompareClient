@@ -45,8 +45,9 @@ export default function LoginPopup(props) {
         }
       )
       // console.log(data.data)
-      localStorage.setItem("token", data.data.token)
-      navigate("/booking")
+      props.type === "admin" ? localStorage.setItem("adminToken", data.data.token) : localStorage.setItem("token", data.data.token)
+      
+      navigate(props.whereToNavigate)
     } catch (error) {
       console.log(error)
     }
