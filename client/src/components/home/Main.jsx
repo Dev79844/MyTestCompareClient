@@ -5,7 +5,7 @@ import {Link, useNavigate} from "react-router-dom"
 import Success from "../../pages/Success"
 
 import Select from "react-select"
-// import cityNames from "../../data/cityNames"
+import cityNames from "../../data/cityNames"
 import testsFromExcel from "../../data/testsFromExcel"
 import axios from "axios"
 import qs from "qs"
@@ -67,20 +67,20 @@ export default function Main() {
 
   // console.log(test)
 
-  const cityNames = [
-    {value: "Ahd", label: "Ahd"},
-    {value: "New York", label: "New York"},
-    {value: "London", label: "London"},
-    {value: "Los Angeles", label: "Los Angeles"},
-    {value: "Chicago", label: "Chicago"},
-    {value: "Houston", label: "Houston"},
-    {value: "Philadelphia", label: "Philadelphia"},
-    {value: "Phoenix", label: "Phoenix"},
-    {value: "San Antonio", label: "San Antonio"},
-    {value: "San Diego", label: "San Diego"},
-    {value: "Dallas", label: "Dallas"},
-    {value: "San Jose", label: "San Jose"},
-  ]
+  // const cityNames = [
+  //   {value: "Ahd", label: "Ahd"},
+  //   {value: "New York", label: "New York"},
+  //   {value: "London", label: "London"},
+  //   {value: "Los Angeles", label: "Los Angeles"},
+  //   {value: "Chicago", label: "Chicago"},
+  //   {value: "Houston", label: "Houston"},
+  //   {value: "Philadelphia", label: "Philadelphia"},
+  //   {value: "Phoenix", label: "Phoenix"},
+  //   {value: "San Antonio", label: "San Antonio"},
+  //   {value: "San Diego", label: "San Diego"},
+  //   {value: "Dallas", label: "Dallas"},
+  //   {value: "San Jose", label: "San Jose"},
+  // ]
 
   const selctStyles = {
     control: (baseStyles) => ({
