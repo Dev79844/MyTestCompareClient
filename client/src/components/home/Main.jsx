@@ -5,28 +5,34 @@ import {Link, useNavigate} from "react-router-dom"
 import Success from "../../pages/Success"
 
 import Select from "react-select"
-import cityNames from "../../data/cityNames"
+// import cityNames from "../../data/cityNames"
 import testsFromExcel from "../../data/testsFromExcel"
 import axios from "axios"
+import qs from "qs"
 
 export default function Main() {
-
   const navigate = useNavigate()
 
   const location = navigator.geolocation.getCurrentPosition(Success, Error)
   // console.log(location)
   const [pincode, setPincode] = React.useState("")
-  const [city, setCity] = React.useState(null)
+  const [city, setCity] = React.useState("")
   const [test, setTest] = React.useState([])
+  const [bookNowDisabled, setBookNowDisabled] = React.useState(
+    city == "" || test.length == 0 ? true : false
+  )
 
   const handleCity = (city) => {
     setCity(city.value)
-    console.log(city)
+    setBookNowDisabled(test.length == 0 ? true : false)
+    // console.log(city.value)
   }
 
-  const handleTest = (options) => {
-    setTest(options)
-    console.log(options)
+  const handleTest = (selectedTests) => {
+    const testNames = selectedTests.map((test) => test.value)
+    setTest(testNames)
+    // console.log(testNames)
+    setBookNowDisabled(city == "" ? true : false)
   }
 
   const testNames = [...testsFromExcel.values()].map((test) => ({
@@ -34,32 +40,47 @@ export default function Main() {
     label: test.name,
   }))
 
-  const handleClick = async() => {
-    navigate("/selectLab")
-    const data = await axios.get("http://localhost:3000/api/v1/getLabs")
-    console.log(data)
+  const handleClick = () => {
+    const queryParams = {
+      city: city,
+      tests: test,
+    }
+    const queryString = qs.stringify(queryParams)
+    navigate({
+      pathname: "/chooseLab",
+      search: `?${queryString}`,
+    })
+
+    if (city == "") {
+      alert("Please select a city")
+      return
+    }
+    if (test.length == 0) {
+      alert("Please select a test")
+      return
+    }
+    navigate({
+      pathname: "/chooseLab",
+      search: `?${queryString}`,
+    })
   }
 
-  // const cityNames = [
-  //   {value: "New York", label: "New York"},
-  //   {value: "Los Angeles", label: "Los Angeles"},
-  //   {value: "Chicago", label: "Chicago"},
-  //   {value: "Houston", label: "Houston"},
-  //   {value: "Philadelphia", label: "Philadelphia"},
-  //   {value: "Phoenix", label: "Phoenix"},
-  //   {value: "San Antonio", label: "San Antonio"},
-  //   {value: "San Diego", label: "San Diego"},
-  //   {value: "Dallas", label: "Dallas"},
-  //   {value: "San Jose", label: "San Jose"},
-  // ]
+  // console.log(test)
 
-  // const testNames = [
-  //   {value: "Test 1", label: "Test 1"},
-  //   {value: "Test 2", label: "Test 2"},
-  //   {value: "Test 3", label: "Test 3"},
-  //   {value: "Test 4", label: "Test 4"},
-  //   {value: "Test 5", label: "Test 5"},
-  // ]
+  const cityNames = [
+    {value: "Ahd", label: "Ahd"},
+    {value: "New York", label: "New York"},
+    {value: "London", label: "London"},
+    {value: "Los Angeles", label: "Los Angeles"},
+    {value: "Chicago", label: "Chicago"},
+    {value: "Houston", label: "Houston"},
+    {value: "Philadelphia", label: "Philadelphia"},
+    {value: "Phoenix", label: "Phoenix"},
+    {value: "San Antonio", label: "San Antonio"},
+    {value: "San Diego", label: "San Diego"},
+    {value: "Dallas", label: "Dallas"},
+    {value: "San Jose", label: "San Jose"},
+  ]
 
   const selctStyles = {
     control: (baseStyles) => ({
@@ -138,7 +159,7 @@ export default function Main() {
             className="w-full"
             isMulti={false}
             placeholder="Select City"
-            value={city}
+            // value={city}
             onChange={handleCity}
           />
           {/* {console.log(city)} */}
@@ -162,24 +183,30 @@ export default function Main() {
             className="w-full"
             placeholder="Select Tests"
             isMulti={true}
-            value={test}
+            // value={{value: test, label: test}}
             onChange={handleTest}
           />
         </div>
 
         {/* Book Now */}
-        <Link to="/chooseLab">
-          <div className="flex justify-center">
-            <button className="bg-secondary text-white font-bold flex justify-center items-center py-1 px-4 rounded-md w-3/5 lg:w-1/2 text-xl  group" onClick={handleClick}>
-              Book Now
-              <Icon
-                icon="material-symbols:arrow-right-alt"
-                color="white"
-                className="text-2xl ml-3 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
-              />
-            </button>
-          </div>
-        </Link>
+        <div className="flex justify-center">
+          <button
+            className={`bg-secondary text-white font-bold flex justify-center items-center py-1 px-4 rounded-md w-3/5 lg:w-1/2 text-xl  group ${
+              bookNowDisabled
+                ? "opacity-75 cursor-not-allowed"
+                : "opacity-100 cursor-pointer"
+            } `}
+            disabled={bookNowDisabled}
+            onClick={handleClick}
+          >
+            Book Now
+            <Icon
+              icon="material-symbols:arrow-right-alt"
+              color="white"
+              className="text-2xl ml-3 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
+            />
+          </button>
+        </div>
       </div>
 
       {/* Credibility */}
