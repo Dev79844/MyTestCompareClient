@@ -1,24 +1,19 @@
-const cityNames = []
+import axios from "axios"
 
-var headers = new Headers()
-headers.append(
-  "X-CSCAPI-KEY",
-  "Y0NYVG9tNVlBck5iSXAxVENMeDFyTDRhMGduMUUzTWc5cjY3TGZDSQ=="
-)
+let cityNames = []
 
-var requestOptions = {
-  method: "GET",
-  headers: headers,
-  redirect: "follow",
+const getCityNames = async () => {
+  try {
+    const response = await axios.get("http://localhost:3000/api/v1/lab")
+    const data = response.data.data.require
+
+    cityNames = [...new Set(data)].map((item) => ({value: item, label: item}))
+  } catch (error) {
+    console.log(error)
+  }
 }
 
-fetch("https://api.countrystatecity.in/v1/countries/IN/cities", requestOptions)
-  .then((response) => response.json())
-  .then((result) => {
-    result.map((item) => {
-      cityNames.push({value: item.name, label: item.name})
-    })
-  })
-  .catch((error) => console.log("error", error))
+await getCityNames()
 
+console.log(cityNames)
 export default cityNames
