@@ -15,5 +15,5 @@ const getCityNames = async () => {
 
 await getCityNames()
 
-console.log(cityNames)
+// console.log(cityNames)
 export default cityNames
