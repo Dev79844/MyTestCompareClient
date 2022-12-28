@@ -1,26 +1,44 @@
 import React from "react"
 import {Icon} from "@iconify/react"
 import "../../style.css"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 import Success from "../../pages/Success"
 
 import Select from "react-select"
 import cityNames from "../../data/cityNames"
 import testsFromExcel from "../../data/testsFromExcel"
+import axios from "axios"
 
 export default function Main() {
+
+  const navigate = useNavigate()
+
   const location = navigator.geolocation.getCurrentPosition(Success, Error)
   // console.log(location)
   const [pincode, setPincode] = React.useState("")
+  const [city, setCity] = React.useState(null)
+  const [test, setTest] = React.useState([])
 
-  const handlePincode = (e) => {
-    setPincode(e.target.value)
+  const handleCity = (city) => {
+    setCity(city.value)
+    console.log(city)
+  }
+
+  const handleTest = (options) => {
+    setTest(options)
+    console.log(options)
   }
 
   const testNames = [...testsFromExcel.values()].map((test) => ({
     value: test.name,
     label: test.name,
   }))
+
+  const handleClick = async() => {
+    navigate("/selectLab")
+    const data = await axios.get("http://localhost:3000/api/v1/getLabs")
+    console.log(data)
+  }
 
   // const cityNames = [
   //   {value: "New York", label: "New York"},
@@ -120,9 +138,10 @@ export default function Main() {
             className="w-full"
             isMulti={false}
             placeholder="Select City"
-            value={pincode}
-            onChange={handlePincode}
+            value={city}
+            onChange={handleCity}
           />
+          {/* {console.log(city)} */}
         </div>
 
         {/* Test input */}
@@ -143,13 +162,15 @@ export default function Main() {
             className="w-full"
             placeholder="Select Tests"
             isMulti={true}
+            value={test}
+            onChange={handleTest}
           />
         </div>
 
         {/* Book Now */}
         <Link to="/chooseLab">
           <div className="flex justify-center">
-            <button className="bg-secondary text-white font-bold flex justify-center items-center py-1 px-4 rounded-md w-3/5 lg:w-1/2 text-xl  group">
+            <button className="bg-secondary text-white font-bold flex justify-center items-center py-1 px-4 rounded-md w-3/5 lg:w-1/2 text-xl  group" onClick={handleClick}>
               Book Now
               <Icon
                 icon="material-symbols:arrow-right-alt"

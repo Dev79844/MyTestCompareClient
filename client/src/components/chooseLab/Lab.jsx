@@ -1,11 +1,25 @@
 import {Icon} from "@iconify/react"
+import axios from "axios"
 import React from "react"
 import {Link, useNavigate} from "react-router-dom"
-import lab from "../../data/lab"
+// import lab from "../../data/lab"
 import labLargeScreen from "../../data/labLargeScreen"
 
 export default function Lab() {
   const navigate = useNavigate()
+
+  const [lab, setLab] = React.useState([])
+
+  React.useEffect(() => {
+    getLabs()
+  }, [])
+  
+
+  const getLabs = async() => {
+    const data = await axios.get("http://localhost:3000/api/v1/getLabs")
+    console.log(data.data.data.labs)
+    setLab(data.data.data.labs)
+  }
 
   const labs = lab.map((lab, index) => {
     return (
@@ -32,7 +46,7 @@ export default function Lab() {
               icon={"material-symbols:location-on-outline"}
               color={"#E97F0E"}
             />
-            <p className="text-[0.85rem]">{lab.location}</p>
+            <p className="text-[0.85rem]">{lab.address.city}</p>
           </div>
           <div className="flex items-center gap-1">
             <Icon icon={"mdi:information-outline"} color={"#E97F0E"} />
@@ -67,7 +81,7 @@ export default function Lab() {
     )
   })
 
-  const largeLabs = labLargeScreen.map((lab, index) => {
+  const largeLabs = lab.map((lab, index) => {
     return (
       <div
         key={index}
@@ -77,15 +91,15 @@ export default function Lab() {
       `}
       >
         <div className="grid grid-cols-chooseLab2">
-          <p className="font-medium col-span-2 text-xl">{lab.basic.name}</p>
+          <p className="font-medium col-span-2 text-xl">{lab.name}</p>
           <div className="flex gap-[3rem] text-[0.85rem] col-span-2 my-1">
             <div className="flex items-center gap-1">
               <Icon icon={"mdi:badge-outline"} color={"#E97F0E"} />
-              {lab.basic.certificate}
+              {lab.certificate}
             </div>
             <div className="flex items-center gap-1">
               <Icon icon={"simple-line-icons:calender"} color={"#E97F0E"} />
-              <span className="font-bold">Timings:</span> {lab.basic.timings}
+              <span className="font-bold">Timings:</span> {lab.timings}
             </div>
           </div>
           <div className="flex items-center gap-1 col-span-2">
@@ -93,7 +107,7 @@ export default function Lab() {
               icon={"material-symbols:location-on-outline"}
               color={"#E97F0E"}
             />
-            <p className="text-[0.85rem] ">{lab.basic.location}</p>
+            <p className="text-[0.85rem] ">{lab.address.city}</p>
           </div>
         </div>
         <h1 className="justify-self-center self-center">
