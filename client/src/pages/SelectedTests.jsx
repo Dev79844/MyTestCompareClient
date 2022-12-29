@@ -14,6 +14,7 @@ import {useNavigate, useLocation} from "react-router-dom"
 import LoginPopup from "../components/LoginPopup"
 import ReactModal from "react-modal"
 import qs from "qs"
+import axios from "axios"
 
 export default function SelectedTests() {
   // const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(
@@ -70,6 +71,18 @@ export default function SelectedTests() {
   const queryParams = qs.parse(search, {ignoreQueryPrefix: true})
   const {tests} = queryParams
   // console.log(tests)
+
+  const getTestDeatils = async() => {
+    const response = await axios.get("http://localhost:3000/api/v1/test", {
+      data:{
+        lab,
+        tests
+      }
+    })
+    console.log(response)
+  }
+
+  getTestDeatils()
 
   document.body.style.overflow = modalIsOpen ? "hidden" : "auto"
 

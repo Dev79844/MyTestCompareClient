@@ -11,6 +11,8 @@ export default function IndividualSelectedTest() {
   const queryParams = qs.parse(search, {ignoreQueryPrefix: true})
   const {tests} = queryParams
 
+  
+
   const selectedTestArr = tests.map((item,index) => {
     return (
       <div key={index*2} className="border-borderGray rounded border-[1px] pt-3  ">
