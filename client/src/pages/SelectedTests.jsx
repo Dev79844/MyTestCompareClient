@@ -70,16 +70,21 @@ export default function SelectedTests() {
 
   const queryParams = qs.parse(search, {ignoreQueryPrefix: true})
   const {tests} = queryParams
-  // console.log(tests)
+
+  let strTest = `[${tests.join(', ')}]`
+  console.log(strTest)
 
   const getTestDeatils = async() => {
-    const response = await axios.get("http://localhost:3000/api/v1/test", {
-      data:{
-        lab,
-        tests
-      }
-    })
-    console.log(response)
+    // try {
+      const response = await axios.get("http://localhost:3000/api/v1/lab/test", {
+        params:{
+          name: lab,
+          tests: tests
+        }
+      })
+    // } catch (error) {
+    //   console.log(error)
+    // }
   }
 
   getTestDeatils()

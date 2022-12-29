@@ -12,7 +12,7 @@ export default function SelectedTest() {
   // console.log(tests)
 
   const selectedTests = tests.map((entry, index) => {
-    console.log(entry, index)
+    // console.log(entry, index)
     return (
       <div
         key={index}
