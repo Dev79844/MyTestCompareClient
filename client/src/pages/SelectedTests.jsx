@@ -36,6 +36,8 @@ export default function SelectedTests() {
 
   const [value, onChange] = React.useState(new Date())
 
+  const [response, setResponse] = React.useState({})
+
   const [appoint, setTime] = React.useState("")
 
   const [visible, setVisible] = React.useState(false)
@@ -71,23 +73,27 @@ export default function SelectedTests() {
   const queryParams = qs.parse(search, {ignoreQueryPrefix: true})
   const {tests} = queryParams
 
-  let strTest = `[${tests.join(', ')}]`
-  console.log(strTest)
+  React.useEffect(() => {
+    const getTestDeatils = async() => {
+      try {
+        const response = await axios.get("http://localhost:3000/api/v1/lab/test", {
+          params:{
+            name: lab,
+            tests: tests
+          }
+        })
+       setResponse(response.data)
+      //  console.log(response.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getTestDeatils()
+  }, [])
+  // console.log(response.data)
 
-  const getTestDeatils = async() => {
-    // try {
-      const response = await axios.get("http://localhost:3000/api/v1/lab/test", {
-        params:{
-          name: lab,
-          tests: tests
-        }
-      })
-    // } catch (error) {
-    //   console.log(error)
-    // }
-  }
+  const selectedTests = response.data.test
 
-  getTestDeatils()
 
   document.body.style.overflow = modalIsOpen ? "hidden" : "auto"
 
@@ -137,7 +143,7 @@ export default function SelectedTests() {
 
         <div className="md:flex md:gap-5 md:items-center md:mt-4">
           <div className="text-center pt-4 md:pt-0 text-xl font-medium md:mt-3 sm:text-left sm:mx-4 md:flex-shrink-0">
-            <h1>Selected Lab: {lab}</h1>
+            <h1>Selected Lab: {response.data.labDetails.labName}</h1>
           </div>
 
           <div className="sm:flex sm:px-3 sm:items-center">
@@ -262,11 +268,11 @@ export default function SelectedTests() {
               <h1 className="text-center font-bold text-xl">Booking Summary</h1>
               <div className="border-[1px] border-borderGray px-3 py-4 space-y-1 rounded mt-3 mx-2  ">
                 {/* Test prices div */}
-                {tests.map(test => {
+                {selectedTests.map(entry => {
                   return (
                     <div className="flex gap-1 justify-between">
-                    <h1 className="font-medium">{test}</h1>
-                    <h1>{test.price}</h1>
+                    <h1 className="font-medium">{entry.name}</h1>
+                    <h1>₹{entry.price}</h1>
                   </div>
                   )
                 })}
@@ -276,7 +282,7 @@ export default function SelectedTests() {
                 <div className="border-t border-b border-borderGray py-3 space-y-2">
                   <div className="flex gap-1 justify-between">
                     <h1 className="font-semibold text-lg">Total MRP</h1>
-                    <h1 className="font-medium text-lg">₹900</h1>
+                    {/* <h1 className="font-medium text-lg">₹{selectedTests.map(entry => entry.price)}</h1> */}
                   </div>
                   <div className="flex gap-1 justify-between">
                     <h1 className="font-medium text-base">Discount (20%)</h1>
