@@ -31,8 +31,7 @@ export default function SelectedTests() {
 
   const params = new URLSearchParams(search)
 
-
-  const lab = params.get('lab')
+  const lab = params.get("lab")
 
   const [value, onChange] = React.useState(new Date())
 
@@ -74,37 +73,44 @@ export default function SelectedTests() {
   const {tests} = queryParams
 
   React.useEffect(() => {
-    const getTestDeatils = async() => {
+    const getTestDeatils = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/v1/lab/test", {
-          params:{
-            name: lab,
-            tests: tests
+        const response = await axios.get(
+          "http://localhost:3000/api/v1/lab/test",
+          {
+            params: {
+              name: lab,
+              tests: tests,
+            },
           }
-        })
-       setResponse(response.data)
-      //  console.log(response.data)
+        )
+        setResponse(response.data.data)
+        // console.log(response.data.data)
       } catch (error) {
         console.log(error)
       }
     }
     getTestDeatils()
   }, [])
-  // console.log(response.data)
 
-  const selectedTests = response.data.test
+  // console.log(response.test)
+  // console.log(response.labDetails)
 
+  // const selectedTests = response.data.test
 
-  document.body.style.overflow = modalIsOpen ? "hidden" : "auto"
+  // document.body.style.overflow = modalIsOpen ? "hidden" : "auto"
 
   const timingArr = time.map((item, index) => {
-
     const handleClick = (e) => {
       setTime(e.target.innerHTML)
     }
 
     return (
-      <button key={index} className="border-[1px] border-secondary rounded px-3" onClick={(e) => handleClick(e)}>
+      <button
+        key={index}
+        className="border-[1px] border-secondary rounded px-3"
+        onClick={(e) => handleClick(e)}
+      >
         {item}
       </button>
     )
@@ -143,7 +149,7 @@ export default function SelectedTests() {
 
         <div className="md:flex md:gap-5 md:items-center md:mt-4">
           <div className="text-center pt-4 md:pt-0 text-xl font-medium md:mt-3 sm:text-left sm:mx-4 md:flex-shrink-0">
-            <h1>Selected Lab: {response.data.labDetails.labName}</h1>
+            <h1>Selected Lab: {response.labDetails.labName}</h1>
           </div>
 
           <div className="sm:flex sm:px-3 sm:items-center">
@@ -214,7 +220,7 @@ export default function SelectedTests() {
         <div className="lgGrid:grid lgGrid:grid-cols-[75%_25%] 2xl:w-[90%]">
           {/* Left Side */}
           <div className="md:mt-8 lgGrid:mt-4">
-            <IndividualSelectedTest />
+            <IndividualSelectedTest filteredTests={response.test} />
           </div>
           {/* End of Left Side */}
           {/* Right Side */}
@@ -222,7 +228,9 @@ export default function SelectedTests() {
             {/* about Lab */}
             <div className="border-[1px] rounded border-borderGray mt-4 mx-2 sm:w-1/2 sm:mx-auto lgGrid:w-full">
               <div className="p-3">
-                <h1 className="font-medium text-lg">{lab}</h1>
+                <h1 className="font-medium text-lg">
+                  {response.labDetails.labName}
+                </h1>
                 <div className="space-y-1 mt-2">
                   <div className="flex gap-1 items-center">
                     <Icon
@@ -232,17 +240,17 @@ export default function SelectedTests() {
                     />
                     <h3>Certified by NABL</h3>
                   </div>
-                  <div className="flex gap-1 items-center">
+                  {/* <div className="flex gap-1 items-center">
                     <Icon
                       icon={"material-symbols:group"}
                       color={"#E97F0E"}
                       className="text-lg"
                     />
                     <h3>15 booked this week</h3>
-                  </div>
+                  </div> */}
                 </div>
               </div>
-              <div className="border-t border-borderGray">
+              {/* <div className="border-t border-borderGray">
                 <div className="flex items-center justify-between px-3 py-1">
                   <h2 className="text-lg">About Lab</h2>
                   <Icon
@@ -251,7 +259,7 @@ export default function SelectedTests() {
                     className="text-3xl"
                   />
                 </div>
-              </div>
+              </div> */}
             </div>
             {/* end about lab*/}
 
@@ -268,12 +276,12 @@ export default function SelectedTests() {
               <h1 className="text-center font-bold text-xl">Booking Summary</h1>
               <div className="border-[1px] border-borderGray px-3 py-4 space-y-1 rounded mt-3 mx-2  ">
                 {/* Test prices div */}
-                {selectedTests.map(entry => {
+                {response.test.map((entry) => {
                   return (
-                    <div className="flex gap-1 justify-between">
-                    <h1 className="font-medium">{entry.name}</h1>
-                    <h1>₹{entry.price}</h1>
-                  </div>
+                    <div key={entry._id} className="flex gap-1 justify-between">
+                      <h1 className="font-medium">{entry.name}</h1>
+                      <h1>₹{entry.price}</h1>
+                    </div>
                   )
                 })}
                 {/* Test Prices Div end */}
@@ -282,7 +290,12 @@ export default function SelectedTests() {
                 <div className="border-t border-b border-borderGray py-3 space-y-2">
                   <div className="flex gap-1 justify-between">
                     <h1 className="font-semibold text-lg">Total MRP</h1>
-                    {/* <h1 className="font-medium text-lg">₹{selectedTests.map(entry => entry.price)}</h1> */}
+                    <h1 className="font-medium text-lg">
+                      ₹
+                      {response.test.map((entry) => (
+                        <span key={entry._id}>{entry.price}</span>
+                      ))}
+                    </h1>
                   </div>
                   <div className="flex gap-1 justify-between">
                     <h1 className="font-medium text-base">Discount (20%)</h1>
@@ -323,7 +336,11 @@ export default function SelectedTests() {
                   style={customStyles}
                   ariaHideApp={false}
                 >
-                  <LoginPopup closeModal={closeModal} whereToNavigate="/booking" type="user" />
+                  <LoginPopup
+                    closeModal={closeModal}
+                    whereToNavigate="/booking"
+                    type="user"
+                  />
                 </ReactModal>
               </div>
               {/* </Link> */}
