@@ -1,14 +1,21 @@
 import React from "react"
 import {Icon} from "@iconify/react"
+import { useLocation } from "react-router-dom"
+import qs from "qs"
 
 import selectedTestData from "../../data/selectedTestData"
 
 export default function IndividualSelectedTest() {
-  const selectedTestArr = selectedTestData.map((item,index) => {
+
+  const {search} = useLocation()
+  const queryParams = qs.parse(search, {ignoreQueryPrefix: true})
+  const {tests} = queryParams
+
+  const selectedTestArr = tests.map((item,index) => {
     return (
       <div key={index*2} className="border-borderGray rounded border-[1px] pt-3  ">
         <div className="px-4">
-            <h1 className="font-bold text-xl">{item.name}</h1>
+            <h1 className="font-bold text-xl">{item}</h1>
           <div className="space-y-1 mt-2">
             <div className="flex gap-1 items-center">
               <Icon

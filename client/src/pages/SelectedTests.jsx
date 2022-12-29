@@ -10,9 +10,10 @@ import Footer from "../components/Footer"
 import Calendar from "react-calendar"
 import "react-calendar/dist/Calendar.css"
 import time from "../data/time"
-import {useNavigate} from "react-router-dom"
+import {useNavigate, useLocation} from "react-router-dom"
 import LoginPopup from "../components/LoginPopup"
 import ReactModal from "react-modal"
+import qs from "qs"
 
 export default function SelectedTests() {
   // const [isUserLoggedIn, setIsUserLoggedIn] = React.useState(
@@ -24,8 +25,17 @@ export default function SelectedTests() {
   // console.log(localStorage.getItem("token"))
 
   const navigate = useNavigate()
+  const location = useLocation()
+  const search = location.search
+
+  const params = new URLSearchParams(search)
+
+
+  const lab = params.get('lab')
 
   const [value, onChange] = React.useState(new Date())
+
+  const [appoint, setTime] = React.useState("")
 
   const [visible, setVisible] = React.useState(false)
 
@@ -57,13 +67,22 @@ export default function SelectedTests() {
     setModalIsOpen(false)
   }
 
+  const queryParams = qs.parse(search, {ignoreQueryPrefix: true})
+  const {tests} = queryParams
+  // console.log(tests)
+
   document.body.style.overflow = modalIsOpen ? "hidden" : "auto"
 
   const timingArr = time.map((item, index) => {
+
+    const handleClick = (e) => {
+      setTime(e.target.innerHTML)
+    }
+
     return (
-      <h3 key={index} className="border-[1px] border-secondary rounded px-3 ">
+      <button key={index} className="border-[1px] border-secondary rounded px-3" onClick={(e) => handleClick(e)}>
         {item}
-      </h3>
+      </button>
     )
   })
 
@@ -100,7 +119,7 @@ export default function SelectedTests() {
 
         <div className="md:flex md:gap-5 md:items-center md:mt-4">
           <div className="text-center pt-4 md:pt-0 text-xl font-medium md:mt-3 sm:text-left sm:mx-4 md:flex-shrink-0">
-            <h1>Selected Lab: PRO Lab</h1>
+            <h1>Selected Lab: {lab}</h1>
           </div>
 
           <div className="sm:flex sm:px-3 sm:items-center">
@@ -128,8 +147,7 @@ export default function SelectedTests() {
             </div>
             <div className="flex gap-2 justify-between items-center mt-2">
               <h1 className="font-medium text-lg ">2. Address:</h1>
-              <input
-                type="text"
+              <textarea
                 className="bg-transparent border border-secondary px-2 py-1 rounded"
                 placeholder="Address"
               />
@@ -180,7 +198,7 @@ export default function SelectedTests() {
             {/* about Lab */}
             <div className="border-[1px] rounded border-borderGray mt-4 mx-2 sm:w-1/2 sm:mx-auto lgGrid:w-full">
               <div className="p-3">
-                <h1 className="font-medium text-lg">PRO Lab</h1>
+                <h1 className="font-medium text-lg">{lab}</h1>
                 <div className="space-y-1 mt-2">
                   <div className="flex gap-1 items-center">
                     <Icon
@@ -216,8 +234,8 @@ export default function SelectedTests() {
             {/* selected date time */}
             <div className="mx-3 mt-3 sm:text-center lgGrid:text-left">
               <h2 className="text-lg font-medium">Selected Date & Time</h2>
-              <h3 className="">Date: 4 December 2022 </h3>
-              <h3>Time: 10 AM </h3>
+              <h3 className="">Date: {value.toLocaleDateString()}</h3>
+              <h3>Time: {appoint}</h3>
             </div>
             {/* end selected date time */}
 
@@ -226,22 +244,14 @@ export default function SelectedTests() {
               <h1 className="text-center font-bold text-xl">Booking Summary</h1>
               <div className="border-[1px] border-borderGray px-3 py-4 space-y-1 rounded mt-3 mx-2  ">
                 {/* Test prices div */}
-                <div>
-                  <div className="flex gap-1 justify-between">
-                    <h1 className="font-medium">Calcium Test</h1>
-                    <h1>₹150</h1>
+                {tests.map(test => {
+                  return (
+                    <div className="flex gap-1 justify-between">
+                    <h1 className="font-medium">{test}</h1>
+                    <h1>{test.price}</h1>
                   </div>
-                  <div className="flex gap-1 justify-between">
-                    <h1 className="font-medium">CBC - Complete Blood Count</h1>
-                    <h1>₹300</h1>
-                  </div>
-                  <div className="flex gap-1 justify-between">
-                    <h1 className="font-medium">
-                      Complete Urine Routine Analysis (CUE)
-                    </h1>
-                    <h1>₹450</h1>
-                  </div>
-                </div>
+                  )
+                })}
                 {/* Test Prices Div end */}
 
                 {/* Discount div */}
@@ -289,7 +299,7 @@ export default function SelectedTests() {
                   style={customStyles}
                   ariaHideApp={false}
                 >
-                  <LoginPopup closeModal={closeModal} whereToNavigate="/bookig" type="user" />
+                  <LoginPopup closeModal={closeModal} whereToNavigate="/booking" type="user" />
                 </ReactModal>
               </div>
               {/* </Link> */}
