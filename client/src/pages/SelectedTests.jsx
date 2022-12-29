@@ -30,8 +30,7 @@ export default function SelectedTests() {
 
   const params = new URLSearchParams(search)
 
-
-  const lab = params.get('lab')
+  const lab = params.get("lab")
 
   const [value, onChange] = React.useState(new Date())
 
@@ -74,13 +73,16 @@ export default function SelectedTests() {
   document.body.style.overflow = modalIsOpen ? "hidden" : "auto"
 
   const timingArr = time.map((item, index) => {
-
     const handleClick = (e) => {
       setTime(e.target.innerHTML)
     }
 
     return (
-      <button key={index} className="border-[1px] border-secondary rounded px-3" onClick={(e) => handleClick(e)}>
+      <button
+        key={index}
+        className="border-[1px] border-secondary rounded px-3"
+        onClick={(e) => handleClick(e)}
+      >
         {item}
       </button>
     )
@@ -244,12 +246,12 @@ export default function SelectedTests() {
               <h1 className="text-center font-bold text-xl">Booking Summary</h1>
               <div className="border-[1px] border-borderGray px-3 py-4 space-y-1 rounded mt-3 mx-2  ">
                 {/* Test prices div */}
-                {tests.map(test => {
+                {tests.map((test, index) => {
                   return (
-                    <div className="flex gap-1 justify-between">
-                    <h1 className="font-medium">{test}</h1>
-                    <h1>{test.price}</h1>
-                  </div>
+                    <div key={index} className="flex gap-1 justify-between">
+                      <h1 className="font-medium">{test}</h1>
+                      <h1>{test.price}</h1>
+                    </div>
                   )
                 })}
                 {/* Test Prices Div end */}
@@ -299,7 +301,11 @@ export default function SelectedTests() {
                   style={customStyles}
                   ariaHideApp={false}
                 >
-                  <LoginPopup closeModal={closeModal} whereToNavigate="/booking" type="user" />
+                  <LoginPopup
+                    closeModal={closeModal}
+                    whereToNavigate="/booking"
+                    type="user"
+                  />
                 </ReactModal>
               </div>
               {/* </Link> */}

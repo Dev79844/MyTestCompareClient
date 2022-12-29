@@ -9,10 +9,10 @@ export default function SelectedTest() {
   const {search} = useLocation()
   const queryParams = qs.parse(search, {ignoreQueryPrefix: true})
   const {tests} = queryParams
-  console.log(tests)
+  // console.log(tests)
 
   const selectedTests = tests.map((entry, index) => {
-    console.log(entry, index)
+    // console.log(entry, index)
     return (
       <div
         key={index}
