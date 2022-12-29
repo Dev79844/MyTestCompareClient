@@ -1,23 +1,34 @@
 import React from "react"
 import {Icon} from "@iconify/react"
-import { useLocation } from "react-router-dom"
+import {useLocation} from "react-router-dom"
 import qs from "qs"
 
-import selectedTestData from "../../data/selectedTestData"
+// import selectedTestData from "../../data/selectedTestData"
 
-export default function IndividualSelectedTest() {
+export default function IndividualSelectedTest(props) {
+  const {filteredTests} = props
 
   const {search} = useLocation()
   const queryParams = qs.parse(search, {ignoreQueryPrefix: true})
-  const {tests} = queryParams
+  // const {tests} = queryParams
 
-  
+  // console.log(tests)
 
-  const selectedTestArr = tests.map((item,index) => {
+  // const fetchedTests = response.tests
+
+  // const testsArr = fetchedTests.filter((item) => {
+  //   tests.includes(item.name)
+  // })
+  console.log(filteredTests)
+
+  const selectedTestArr = filteredTests.map((item, index) => {
     return (
-      <div key={index*2} className="border-borderGray rounded border-[1px] pt-3  ">
+      <div
+        key={index * 2}
+        className="border-borderGray rounded border-[1px] pt-3  min-w-[40%]"
+      >
         <div className="px-4">
-            <h1 className="font-bold text-xl">{item}</h1>
+          <h1 className="font-bold text-xl">{item.name}</h1>
           <div className="space-y-1 mt-2">
             <div className="flex gap-1 items-center">
               <Icon
@@ -69,10 +80,10 @@ export default function IndividualSelectedTest() {
       </div>
     )
   })
-    
-    return (
-        <div className="space-y-4 md:space-y-0 md:gap-4 md:justify-center lgGrid:justify-start px-2 md:flex md:flex-wrap">
-            {selectedTestArr}
-        </div>
-    )
+
+  return (
+    <div className="space-y-4 md:space-y-0 md:gap-4 md:justify-center lgGrid:justify-start px-2 md:flex md:flex-wrap">
+      {selectedTestArr}
+    </div>
+  )
 }
