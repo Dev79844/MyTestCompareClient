@@ -45,11 +45,6 @@ export default function Main() {
       tests: test,
     }
     const queryString = qs.stringify(queryParams)
-    navigate({
-      pathname: "/chooseLab",
-      search: `?${queryString}`,
-    })
-
     if (city == "") {
       alert("Please select a city")
       return

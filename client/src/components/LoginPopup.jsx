@@ -5,6 +5,8 @@ import axios from "axios"
 import {useNavigate} from "react-router-dom"
 
 export default function LoginPopup(props) {
+  const {whereToNavigate, type, postreqData, origin, bookingConfirmedData} =
+    props
   const navigate = useNavigate()
 
   const [phone, setPhone] = React.useState("+91")
@@ -45,11 +47,27 @@ export default function LoginPopup(props) {
         }
       )
       // console.log(data.data)
-      props.type === "admin" ? localStorage.setItem("adminToken", data.data.token) : localStorage.setItem("token", data.data.token)
-      
-      navigate(props.whereToNavigate)
+      type === "admin"
+        ? localStorage.setItem("adminToken", data.data.token)
+        : localStorage.setItem("token", data.data.token)
     } catch (error) {
       console.log(error)
+    }
+    if (origin === "booking") {
+      axios
+        .post("http://localhost:3000/api/v1/booking", postreqData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((response) => {
+          console.log(response.data)
+          navigate(whereToNavigate, {
+            state: {
+              data: bookingConfirmedData,
+            },
+          })
+        })
     }
   }
 
