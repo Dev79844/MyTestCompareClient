@@ -7,7 +7,6 @@ import Success from "../../pages/Success"
 import Select from "react-select"
 import cityNames from "../../data/cityNames"
 import testsFromExcel from "../../data/testsFromExcel"
-import axios from "axios"
 import qs from "qs"
 
 export default function Main() {

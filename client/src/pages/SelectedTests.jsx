@@ -276,11 +276,11 @@ export default function SelectedTests() {
               <h1 className="text-center font-bold text-xl">Booking Summary</h1>
               <div className="border-[1px] border-borderGray px-3 py-4 space-y-1 rounded mt-3 mx-2  ">
                 {/* Test prices div */}
-                {response.test.map((entry) => {
+                {tests.map((test) => {
                   return (
-                    <div key={entry._id} className="flex gap-1 justify-between">
-                      <h1 className="font-medium">{entry.name}</h1>
-                      <h1>₹{entry.price}</h1>
+                    <div className="flex gap-1 justify-between">
+                      <h1 className="font-medium">{test}</h1>
+                      <h1>{test.price}</h1>
                     </div>
                   )
                 })}

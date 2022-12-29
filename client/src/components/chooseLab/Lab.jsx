@@ -5,7 +5,6 @@ import {Link, useLocation, useNavigate} from "react-router-dom"
 // import lab from "../../data/lab"
 // import labLargeScreen from "../../data/labLargeScreen"
 import qs from "qs"
-import QueryString from "qs"
 
 export default function Lab() {
   const navigate = useNavigate()
@@ -27,7 +26,7 @@ export default function Lab() {
         tests: tests,
       },
     })
-    // console.log(data.data.data.labs)
+    // console.log(data.data.data.labs[0].tests)
     setLabArr(data.data.data.labs)
   }
 
