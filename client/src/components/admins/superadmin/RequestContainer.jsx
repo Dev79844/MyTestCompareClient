@@ -7,6 +7,13 @@ export default function RequestContainer(props) {
   const onBookingAccepted = props.onBookingAccepted
 
   // console.log("rendered");
+  // console.log(data)
+
+  const [fetchedData, setFetchedData] = React.useState(data && data)
+
+  React.useEffect(() => {
+    setFetchedData(data && data)
+  }, [data])
 
   const handleClick = (item) => {
     if (type == "clientData") {
@@ -19,7 +26,7 @@ export default function RequestContainer(props) {
           {
             headers: {
               // Authorization: `Bearer ${localStorage.getItem("token")}`,
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWM2YThlYjgxMzcxZWEyNjNlNGEzYyIsImlhdCI6MTY3MjI0Mzg1NCwiZXhwIjoxNjcyMzMwMjU0fQ.5e96I-vM3tCnMgV5krUnSmKB-vbuJhmV1-4ffdc66O0`,
+              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWRmOGNmYjgxMzcxZWEyNjg5YmNlZiIsImlhdCI6MTY3MjM5NjUyMCwiZXhwIjoxNjcyNDgyOTIwfQ.OukbtIlti0A1be2ixtIebRdbXwPKsebyeW0mG72FuM4`,
             },
           }
         )
@@ -32,9 +39,51 @@ export default function RequestContainer(props) {
           console.log(err)
         })
     }
+    if (type == "labRequest") {
+      axios
+        .patch(
+          `http://localhost:3000/api/v1/admin/lab/${item._id}`,
+          {
+            verified: true,
+          },
+          {
+            headers: {
+              // Authorization: `Bearer ${localStorage.getItem("token")}`,
+              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWRmOGNmYjgxMzcxZWEyNjg5YmNlZiIsImlhdCI6MTY3MjM5NjUyMCwiZXhwIjoxNjcyNDgyOTIwfQ.OukbtIlti0A1be2ixtIebRdbXwPKsebyeW0mG72FuM4`,
+            },
+          }
+        )
+        .then((res) => {
+          console.log(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+
+      item.verified = true
+      setFetchedData(data.filter((lab) => lab.verified == false))
+    }
   }
 
-  const allRequests = data.map((item, index) => (
+  // console.log(fetchedData)
+
+  if (!fetchedData) {
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    )
+  }
+
+  if (fetchedData && fetchedData.length == 0) {
+    return (
+      <div className="flex justify-center items-center h-[80vh]">
+        <h1 className="text-3xl font-medium">No Requests</h1>
+      </div>
+    )
+  }
+
+  const allRequests = fetchedData.map((item, index) => (
     <div
       key={index}
       className="border-[1px] border-borderGray text-lg px-5 py-5 max-w-[32%] "
@@ -69,13 +118,16 @@ export default function RequestContainer(props) {
         <div className="space-y-3 mb-4">
           <h2 className="font-medium text-xl">{item.name}</h2>
           <h2>
-            <span className="font-medium mr-4">Mobile:</span> {item.mobile}
+            <span className="font-medium mr-4">Mobile:</span>
+            {item.submitter.phone}
           </h2>
           <h2>
-            <span className="font-medium mr-7">Email:</span> {item.email}
+            <span className="font-medium mr-7">Email:</span>
+            {item.submitter.email}
           </h2>
           <h2>
-            <span className="font-medium mr-2">Address:</span> {item.address}
+            <span className="font-medium mr-2">Address:</span>
+            {item.address.address}
           </h2>
         </div>
       )}

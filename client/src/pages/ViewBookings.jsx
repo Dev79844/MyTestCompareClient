@@ -29,8 +29,11 @@ export default function ViewBookings() {
 
             {/* This is grid */}
             <div className="mt-5 ">
-              <div className="lg:grid lg:grid-cols-clientBookings relative after:absolute after:bg-borderGray after:w-full after:h-[1px] after:bottom-0 after:left-0 pb-2">
+              <div className=" flex justify-between items-center gap-2 lg:grid lg:grid-cols-clientBookings relative after:absolute after:bg-borderGray after:w-full after:h-[1px] after:bottom-0 after:left-0 pb-2">
                 <h1 className="text-2xl font-medium ml-2">Tests Booked</h1>
+                <h1 className="text-2xl font-medium ml-2 lg:hidden">
+                  Price (₹)
+                </h1>
                 <h2 className="hidden lg:block text-2xl font-medium  justify-self-center">
                   Date
                 </h2>

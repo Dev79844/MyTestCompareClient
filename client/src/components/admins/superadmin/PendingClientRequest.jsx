@@ -19,7 +19,7 @@ export default function PendingClientRequest() {
       .get("http://localhost:3000/api/v1/admin/booking/pending-to-verify", {
         headers: {
           // Authorization: `Bearer ${localStorage.getItem("token")}`,
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWU3NmJlYjgxMzcxZWEyNjNkMGM4MiIsImlhdCI6MTY3MjM3ODA0NiwiZXhwIjoxNjcyNDY0NDQ2fQ.ErA1f_iw2xv94aeCSCKz6Y6uk288JNRJ-T7fu5mRwKw`,
+          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWRmOGNmYjgxMzcxZWEyNjg5YmNlZiIsImlhdCI6MTY3MjM5NjUyMCwiZXhwIjoxNjcyNDgyOTIwfQ.OukbtIlti0A1be2ixtIebRdbXwPKsebyeW0mG72FuM4`,
         },
       })
       .then((res) => {
@@ -49,11 +49,12 @@ export default function PendingClientRequest() {
 
   if (pendingClientRequests.length === 0) {
     return (
-      <div>
-        <h1>No Pending Requests</h1>
+      <div className="flex justify-center items-center h-[80vh]">
+        <h1 className="text-3xl font-medium">Loading</h1>
       </div>
     )
   }
+
   return (
     <RequestContainer
       data={pendingClientRequests}
