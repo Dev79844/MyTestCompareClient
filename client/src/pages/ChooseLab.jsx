@@ -1,6 +1,6 @@
 import React from "react"
 import {Icon} from "@iconify/react"
-import { useNavigate } from "react-router-dom"
+import {useNavigate} from "react-router-dom"
 import Lab from "../components/chooseLab/Lab"
 import SelectedTest from "../components/chooseLab/SelectedTest"
 import MiniNav from "../components/MiniNav"
@@ -11,12 +11,11 @@ import ReactModal from "react-modal"
 import SpecifyLabPopup from "../components/chooseLab/SpecifyLabPopup"
 
 const ChooseLab = () => {
-
   const navigate = useNavigate()
 
   const certificates = ["NABL", "ISO", "CAP", "ICMR", "ISO", "NABH"]
 
-  const certificatesArr = certificates.map((certificate,index) => {
+  const certificatesArr = certificates.map((certificate, index) => {
     return (
       <div key={index} className="flex gap-2 items-center">
         <input type="checkbox" name={certificate} id={certificate.toString()} />
@@ -166,13 +165,13 @@ const ChooseLab = () => {
             <div className="">
               <div className="grid grid-cols-chooseLab4 mx-3 mt-4">
                 <h1 className="font-bold text-lg ">Lab Name</h1>
-                <h1 className="font-bold text-lg justify-self-center text-center">
+                {/* <h1 className="font-bold text-lg justify-self-center text-center">
                   Processing Time
                 </h1>
                 <h1 className="font-bold text-lg justify-self-center">
                   Distance
                 </h1>
-                <h1 className="font-bold text-lg justify-self-center">Price</h1>
+                <h1 className="font-bold text-lg justify-self-center">Price</h1> */}
               </div>
               <Lab />
             </div>
@@ -207,7 +206,7 @@ const ChooseLab = () => {
             <hr />
             <div className="flex justify-between font-medium text-lg sm:grid-cols-chooseLab sm:grid">
               <p className="">Lab Name</p>
-              <p>Price</p>
+              {/* <p>Price</p> */}
             </div>
             <hr />
           </div>

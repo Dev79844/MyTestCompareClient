@@ -3,8 +3,10 @@ import {Icon} from "@iconify/react"
 import AdminSidebar from "../../../components/admins/admin/AdminSidebar"
 import TopStrip from "../../../components/admins/admin/TopStrip"
 import axios from "axios"
+import {useNavigate} from "react-router-dom"
 
 export default function Profile() {
+  const navigate = useNavigate()
   const images = [1, 2, 3, 4, 5, 6, 7, 8].map((_, index) => (
     <div key={index} className="bg-[#D9D9D9] w-56 h-56"></div>
   ))
@@ -25,6 +27,19 @@ export default function Profile() {
       setLoading(false)
     })
     .catch((err) => {
+      if (err.response.status === 401) {
+        alert("Session Expired. Please Login Again")
+        localStorage.removeItem("adminToken")
+        navigate("/")
+      }
+      if (err.response.status === 403) {
+        alert("You are not authorized to access this page")
+        navigate("/")
+      }
+      if (err.response.status === 500) {
+        alert("Internal Server Error")
+        navigate("/")
+      }
       console.log(err)
     })
 
