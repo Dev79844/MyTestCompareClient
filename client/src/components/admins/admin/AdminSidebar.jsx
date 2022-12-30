@@ -1,8 +1,15 @@
 import {Icon} from "@iconify/react"
 import React from "react"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 
 export default function AdminSidebar(props) {
+  const navigate = useNavigate()
+
+  const handleLogOut = () => {
+    localStorage.removeItem("adminToken")
+    navigate("/")
+  }
+
   const sidebarItems = [
     {
       name: "Profile",
@@ -86,7 +93,10 @@ export default function AdminSidebar(props) {
         <div className="px-3 mt-4 space-y-4">{sidebarItemsList}</div>
 
         <div className="mt-4 px-3">
-          <button className="bg-primary text-white font-medium px-5 py-1 rounded w-3/5 text-2xl lg:w-4/5">
+          <button
+            className="bg-primary text-white font-medium px-5 py-1 rounded w-3/5 text-2xl lg:w-4/5"
+            onClick={handleLogOut}
+          >
             Log Out
           </button>
         </div>

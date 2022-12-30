@@ -1,6 +1,6 @@
 import {Icon} from "@iconify/react"
 import React from "react"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 
 export default function Sidebar(props) {
   const {show, setShow} = props
@@ -9,11 +9,18 @@ export default function Sidebar(props) {
     setShow(!show)
   }
 
+  const navigate = useNavigate()
+
+  const handleLogOut = () => {
+    localStorage.removeItem("token")
+    navigate("/")
+  }
+
   return (
     <div
       className={` flex w-fit px-4 bg-white min-h-screen xs:w-4/5 sm:w-3/5 absolute 
         top-0 left-0 z-1 transition-all duration-500 ease-in-out lg:static lg:w-full lg:transition-none lg:duration-0 lg:ease-none z-10
-        ${show ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}` }
+        ${show ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}`}
     >
       <div className="mt-5">
         <div className="flex justify-between items-center">
@@ -94,7 +101,10 @@ export default function Sidebar(props) {
         </div>
 
         <div className="mt-4 px-3">
-          <button className="bg-primary text-white font-medium px-5 py-1 rounded w-3/5 text-2xl lg:w-4/5">
+          <button
+            className="bg-primary text-white font-medium px-5 py-1 rounded w-3/5 text-2xl lg:w-4/5"
+            onClick={handleLogOut}
+          >
             Log Out
           </button>
         </div>

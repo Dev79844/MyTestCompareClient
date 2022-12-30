@@ -47,13 +47,13 @@ export default function PendingClientRequest() {
     return () => clearInterval(intervalId)
   }, [])
 
-  if (pendingClientRequests.length === 0) {
-    return (
-      <div className="flex justify-center items-center h-[80vh]">
-        <h1 className="text-3xl font-medium">Loading</h1>
-      </div>
-    )
-  }
+  // if (pendingClientRequests.length === 0) {
+  //   return (
+  //     <div className="flex justify-center items-center h-[80vh]">
+  //       <h1 className="text-3xl font-medium">No requests</h1>
+  //     </div>
+  //   )
+  // }
 
   return (
     <RequestContainer
