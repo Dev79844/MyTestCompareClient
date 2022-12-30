@@ -36,7 +36,7 @@ export default function RequestContainer(props) {
 
   const allRequests = data.map((item, index) => (
     <div
-      key={item._id}
+      key={index}
       className="border-[1px] border-borderGray text-lg px-5 py-5 max-w-[32%] "
     >
       {type == "clientData" ? (
