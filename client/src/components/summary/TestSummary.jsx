@@ -3,6 +3,8 @@ import React from "react"
 export default function TestSummary(props) {
   const {data} = props
 
+  console.log(props);
+
   /**
    * data = {
   "patient": {

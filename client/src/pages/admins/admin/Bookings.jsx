@@ -6,6 +6,7 @@ import ReactModal from "react-modal"
 import ClientInfoPopup from "../../../components/admins/admin/Popups/ClientInfoPopup"
 import AssignPhlebotomistPopup from "../../../components/admins/admin/Popups/AssignPhlebotomistPopup"
 import UploadReportPopup from "../../../components/admins/admin/Popups/UploadReportPopup"
+import axios from "axios"
 
 export default function Bookings() {
   const [clientInfoModalIsOpen, setClientInfoModalIsOpen] =
@@ -15,6 +16,8 @@ export default function Bookings() {
   const [uploadReportModalIsOpen, setUploadReportModalIsOpen] =
     React.useState(false)
   const [elementid, setElementid] = React.useState()
+
+  const [bookings, setBookings] = React.useState([])
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.8)",
@@ -50,16 +53,30 @@ export default function Bookings() {
     setUploadReportModalIsOpen(false)
   }
 
-  const bookings = [
-    "Ankush Raje",
-    "John David",
-    "Victoria Rose",
-    "Michael Thompson",
-    "Sarah Johnson",
-    "Jason Reed",
-    "Adam Hernandez",
-    "Jessica Davis",
-  ]
+  // const bookings = [
+  //   "Ankush Raje",
+  //   "John David",
+  //   "Victoria Rose",
+  //   "Michael Thompson",
+  //   "Sarah Johnson",
+  //   "Jason Reed",
+  //   "Adam Hernandez",
+  //   "Jessica Davis",
+  // ]
+
+  React.useEffect(() => {
+    const getBookings = async() => {
+      const booking = await axios.get("http://localhost:3000/api/v1/manage/booking", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+        },
+      })
+      setBookings(booking.data.data.bookings)
+    }
+    getBookings()
+  }, [])
+
+  console.log(bookings);
 
   const bookingsArr = bookings.map((name, index) => (
     <div

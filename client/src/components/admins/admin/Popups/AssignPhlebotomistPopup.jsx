@@ -1,8 +1,24 @@
 import React from "react"
 import {Icon} from "@iconify/react"
+import { fromJSON } from "postcss"
 
 export default function AssignPlebotomistPopup(props) {
   const {closeModal} = props
+
+  const [form, setForm] = React.useState({
+    name: "",
+    mobile:""
+  })
+
+  const handleChange = (e) => {
+    const {name, value} = e.target
+    setForm({...form, [name]: value})
+  }
+
+  const handleAssign = () => {
+    
+  }
+
   return (
     <div className="px-12 py-8">
       <Icon
@@ -17,7 +33,7 @@ export default function AssignPlebotomistPopup(props) {
       <div className="mt-8 space-y-4">
         <div className="flex gap-5">
           <h2 className="text-2xl font-semibold w-36">Name:</h2>
-          <input type="text" className="border-[1px] border-secondary ml-4" />
+          <input type="text" className="border-[1px] border-secondary ml-4" onChange={(e) => handleChange(e)} />
         </div>
         <div className="flex gap-5">
           <h2 className="text-2xl font-semibold w-36">Contact No:</h2>
@@ -25,7 +41,7 @@ export default function AssignPlebotomistPopup(props) {
         </div>
       </div>
       <div className="flex justify-center mt-6">
-        <button className="border-[1px] border-secondary px-8 py-1 rounded-lg text-2xl font-semibold">
+        <button className="border-[1px] border-secondary px-8 py-1 rounded-lg text-2xl font-semibold" onClick={() => handleAssign()}>
           Assign
         </button>
       </div>

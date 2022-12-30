@@ -12,6 +12,7 @@ import {Link, useLocation} from "react-router-dom"
 export default function Success() {
   const location = useLocation()
   const data = location.state.data
+  console.log(data)
 
   /**
    * Structure of data
