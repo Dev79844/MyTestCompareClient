@@ -7,8 +7,32 @@ import Nav from "../components/Nav"
 import LabDetails from "../components/summary/LabDetails"
 import TestSummary from "../components/summary/TestSummary"
 import Footer from "../components/Footer"
+import {Link, useLocation} from "react-router-dom"
 
 export default function Success() {
+  const location = useLocation()
+  const data = location.state.data
+
+  /**
+   * Structure of data
+    data ={
+  "patient": {
+    "name": "",
+    "address": "",
+    "age": "",
+    "phone": ""
+  },
+  "appointmentAt": "31 Dec 2022 , 12:00 PM ",
+  "tests": [
+    "CBC - Complete Blood Count"
+  ],
+  "lab": {
+    "labName": "Preet's Lab",
+    "labId": "63ab45aead8eae227ce2cf74"
+  }
+}
+   */
+
   return (
     <div className="font-Roboto bg-background">
       <MiniNav />
@@ -22,9 +46,11 @@ export default function Success() {
         >
           <h1 className="font-bold text-xl sm:text-3xl">Booking Status</h1>
           <div className="flex items-center">
-            <h1 className="font-medium text-lg lg:text-2xl">
-              Track your order
-            </h1>
+            <Link to="/trackOrder">
+              <h1 className="font-medium text-lg lg:text-2xl">
+                Track your order
+              </h1>
+            </Link>
             <Icon
               icon="carbon:chevron-right"
               color="black"
@@ -35,9 +61,9 @@ export default function Success() {
         </div>
 
         <div className="py-8 lg:flex lg:bg-white lg:mx-12 lg:mt-10 lg:rounded-3xl lg:gap-7 lg:pt-18 md:relative md:z-1 ">
-          <LabDetails />
+          <LabDetails lab={data.lab} />
           <div className=" m-4 rounded-2xl xs:mx-8 sm:w-3/4 md:w-3/5 sm:mx-auto lg:w-4/5 xl:w-3/4 lg:pr-7 xl:px-10">
-            <TestSummary />
+            <TestSummary data={data} />
             <div className="flex items-center gap-4 mt-4 justify-center xl:gap-6">
               <img
                 src="images/summary-success/booked.png"

@@ -5,9 +5,10 @@ import qs from "qs"
 
 // import selectedTestData from "../../data/selectedTestData"
 
-export default function IndividualSelectedTest() {
-  const {search} = useLocation()
-  const queryParams = qs.parse(search, {ignoreQueryPrefix: true})
+export default function IndividualSelectedTest(props) {
+  const {filteredTests} = props
+  // const {search} = useLocation()
+  // const queryParams = qs.parse(search, {ignoreQueryPrefix: true})
   // const {tests} = queryParams
 
   // console.log(tests)
@@ -17,9 +18,9 @@ export default function IndividualSelectedTest() {
   // const testsArr = fetchedTests.filter((item) => {
   //   tests.includes(item.name)
   // })
-  console.log(filteredTests)
+  // console.log(filteredTests)
 
-  const selectedTestArr = tests.map((item, index) => {
+  const selectedTestArr = filteredTests.map((item, index) => {
     return (
       <div
         key={index * 2}
@@ -78,12 +79,6 @@ export default function IndividualSelectedTest() {
       </div>
     )
   })
-
-  return (
-    <div className="space-y-4 md:space-y-0 md:gap-4 md:justify-center lgGrid:justify-start px-2 md:flex md:flex-wrap">
-      {selectedTestArr}
-    </div>
-  )
 
   return (
     <div className="space-y-4 md:space-y-0 md:gap-4 md:justify-center lgGrid:justify-start px-2 md:flex md:flex-wrap">
