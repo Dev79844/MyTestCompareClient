@@ -154,21 +154,43 @@ export default function SelectedTests() {
       return
     }
 
-    // Make Post Request to backend
-    axios
-      .post("http://localhost:3000/api/v1/booking", patientbookingData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      })
-      .then((response) => {
-        console.log(response.data)
-        navigate("/confirmed", {
-          state: {
-            data: bookingConfiremedData,
+    const patientDataIsEmpty = Object.values(patientData).includes("")
+    const patientMobile = patientData.phone
+    let isMobileValid = false
+    if (
+      patientMobile.length === 12 ||
+      patientMobile.substring(3).length === 10
+    ) {
+      isMobileValid = true
+    }
+
+    if (patientDataIsEmpty) {
+      alert("Please fill all the details")
+      return
+    } else if (!isMobileValid) {
+      alert("Please enter a valid mobile number")
+      return
+    } else if (!appoint) {
+      alert("Please select a time slot")
+      return
+    } else {
+      // Make Post Request to backend
+      axios
+        .post("http://localhost:3000/api/v1/booking", patientbookingData, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         })
-      })
+        .then((response) => {
+          console.log(response.data)
+          navigate("/confirmed", {
+            state: {
+              data: bookingConfiremedData,
+            },
+          })
+        })
+      // console.log("Booking Confirmed")
+    }
 
     // console.log(patientbookingData)
   }

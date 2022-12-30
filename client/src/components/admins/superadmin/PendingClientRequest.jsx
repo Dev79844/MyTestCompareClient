@@ -1,8 +1,11 @@
 import React from "react"
 import RequestContainer from "./RequestContainer"
 import axios from "axios"
+import {useNavigate} from "react-router-dom"
 
 export default function PendingClientRequest() {
+  const navigate = useNavigate()
+
   const [pendingClientRequests, setPendingClientRequests] = React.useState([])
 
   const handleBookingAccept = (bookingId) => {
@@ -26,7 +29,15 @@ export default function PendingClientRequest() {
         setPendingClientRequests(data)
       })
       .catch((err) => {
-        console.log(err)
+        if (err.response.status === 401) {
+          alert("Please login again")
+          navigate("/")
+        }
+        if (err.response.status === 403) {
+          alert("You are not authorized to access this page")
+          navigate("/")
+        }
+        // console.log(err)
       })
   }
 
