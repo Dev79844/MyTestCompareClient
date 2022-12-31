@@ -34,10 +34,12 @@ export default function Profile() {
       }
       if (err.response.status === 403) {
         alert("You are not authorized to access this page")
+        localStorage.removeItem("adminToken")
         navigate("/")
       }
       if (err.response.status === 500) {
         alert("Internal Server Error")
+        localStorage.removeItem("adminToken")
         navigate("/")
       }
       console.log(err)

@@ -4,59 +4,59 @@ import "../../style.css"
 export default function LabPartner() {
   const partners = [
     {
-      id:0,
+      id: 0,
       src: 1,
     },
     {
-      id:1,
+      id: 1,
       src: 2,
     },
     {
-      id:2,
+      id: 2,
       src: 3,
     },
     {
-      id:3,
+      id: 3,
       src: 4,
     },
     {
-      id:4,
+      id: 4,
       src: 2,
     },
     {
-      id:5,
+      id: 5,
       src: 3,
     },
     {
-      id:6,
+      id: 6,
       src: 4,
     },
     {
-      id:7,
+      id: 7,
       src: 1,
     },
     {
-      id:8,
+      id: 8,
       src: 3,
     },
     {
-      id:9,
+      id: 9,
       src: 4,
     },
     {
-      id:10,
+      id: 10,
       src: 2,
     },
     {
-      id:11,
+      id: 11,
       src: 4,
     },
     {
-      id:12,
+      id: 12,
       src: 3,
     },
     {
-      id:13,
+      id: 13,
       src: 2,
     },
   ]
@@ -73,7 +73,7 @@ export default function LabPartner() {
   })
 
   return (
-    <div className="text-center font-medium py-6 bg-white md:flex md:items-center md:justify-center md:gap-3 lg:px-10 md:px-2">
+    <div className="text-center font-medium py-6 bg-white md:flex md:items-center md:justify-center md:gap-3 lg:px-10 md:px-2 lg:py-2">
       <div className="lg:w-[20%] md:w-2/5">
         <h1 className="text-3xl md:text-2xl ">Our Lab Partners</h1>
         <h3 className="text-secondary text-[18px] mt-2 lg:mt-0">

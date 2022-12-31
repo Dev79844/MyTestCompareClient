@@ -2,7 +2,11 @@ import React from "react"
 import {Icon} from "@iconify/react"
 
 export default function ClientInfoPopup(props) {
-  const {closeModal, bookingsArr, elementid} = props
+  const {closeModal, fetchedBookings, elementid} = props
+  console.log(fetchedBookings)
+  // console.log(fetchedBookings[elementid])
+  const userObject = fetchedBookings.find((user) => user._id === elementid)
+  // console.log(userObject)
   return (
     <div className="px-12 py-8">
       <Icon
@@ -17,33 +21,31 @@ export default function ClientInfoPopup(props) {
       <div className="mt-5 space-y-4">
         <div className="flex gap-8">
           <h2 className="text-2xl font-semibold w-24">Name:</h2>
-          <h2 className="text-2xl">{bookingsArr[elementid]}</h2>
+          <h2 className="text-2xl">{userObject.patient.name}</h2>
         </div>
         <div className="flex gap-8">
           <h2 className="text-2xl font-semibold w-24">Tests:</h2>
           <div className="text-2xl">
-            <h2>1. CBC - Complete Blood Count</h2>
-            <h2>2. CBC - Complete Blood Count</h2>
-            <h2>3. CBC - Complete Blood Count</h2>
+            {userObject.tests.map((test) => (
+              <h2 key={test._id}>{test.name}</h2>
+            ))}
           </div>
         </div>
         <div className="flex gap-8">
           <h2 className="text-2xl font-semibold w-24">Mobile:</h2>
-          <h2 className="text-2xl">+91 8980XXXXXX</h2>
+          <h2 className="text-2xl">{userObject.patient.phone}</h2>
         </div>
         <div className="flex gap-8">
-          <h2 className="text-2xl font-semibold w-24">Email:</h2>
-          <h2 className="text-2xl">loremipsum@gmail.com</h2>
+          <h2 className="text-2xl font-semibold w-24">Age:</h2>
+          <h2 className="text-2xl">{userObject.patient.age}</h2>
         </div>
         <div className="flex gap-8">
           <h2 className="text-2xl font-semibold w-24">Charge: </h2>
-          <h2 className="text-2xl">₹750</h2>
+          <h2 className="text-2xl">₹{userObject.price}</h2>
         </div>
         <div className="flex gap-8">
           <h2 className="text-2xl font-semibold w-24">Address: </h2>
-          <h2 className="text-2xl">
-            lorem ipsum dolor isit, lorem, dolor vitesat , 385620
-          </h2>
+          <h2 className="text-2xl">{userObject.patient.address}</h2>
         </div>
       </div>
     </div>
