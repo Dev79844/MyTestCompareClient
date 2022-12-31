@@ -14,7 +14,7 @@ export default function AcceptClientBooking() {
           pendingOnly: true,
         },
         headers: {
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWRmOGNmYjgxMzcxZWEyNjg5YmNlZiIsImlhdCI6MTY3MjM5NjUyMCwiZXhwIjoxNjcyNDgyOTIwfQ.OukbtIlti0A1be2ixtIebRdbXwPKsebyeW0mG72FuM4`,
+          Authorization: `Bearer ${localStorage.getItem("superAdminToken")}`,
         },
       })
       .then((res) => {
