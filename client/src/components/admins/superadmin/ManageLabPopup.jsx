@@ -1,8 +1,63 @@
 import React from "react"
 import {Icon} from "@iconify/react"
+import Select from "react-select"
+import axios from "axios"
 
 export default function ManageLabPopup(props) {
-  const {closeModal} = props
+  const {closeModal, selectedLab} = props
+
+  const [saveDisabled, setSaveDisabled] = React.useState(true)
+
+  // console.log(selectedLab)
+
+  const paymentCycleOptions = [
+    {value: "weekly", label: "Weekly"},
+    {value: "monthly", label: "Monthly"},
+    {value: "quarterly", label: "Quarterly"},
+    {value: "half-yearly", label: "Half-yearly"},
+    {value: "yearly", label: "Yearly"},
+  ]
+
+  const [labData, setLabData] = React.useState({
+    discount: "",
+    comission: "",
+  })
+
+  const handleLabData = (e) => {
+    const {name, value} = e.target
+    setLabData({...labData, [name]: value})
+
+    if (labData.discount != "" && labData.comission != "") {
+      setSaveDisabled(false)
+    }
+  }
+
+  const handleSave = () => {
+    axios
+      .patch(
+        `http://localhost:3000/api/v1/admin/lab/${selectedLab._id}`,
+        {
+          discount: labData.discount,
+          comission: labData.comission,
+        },
+        {
+          headers: {
+            // Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWRmOGNmYjgxMzcxZWEyNjg5YmNlZiIsImlhdCI6MTY3MjM5NjUyMCwiZXhwIjoxNjcyNDgyOTIwfQ.OukbtIlti0A1be2ixtIebRdbXwPKsebyeW0mG72FuM4`,
+          },
+        }
+      )
+      .then((res) => {
+        closeModal()
+        // console.log(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    // console.log(selectedLab._id)
+    // console.log(labData)
+  }
+
   return (
     <div className="px-12 py-8">
       <Icon
@@ -17,45 +72,77 @@ export default function ManageLabPopup(props) {
       <div className="mt-5 space-y-4">
         <div className="flex gap-8">
           <h2 className="text-2xl font-semibold w-[180px]">Name:</h2>
-          <h2 className="text-2xl">360 Diagnotics</h2>
+          <h2 className="text-2xl">{selectedLab.name}</h2>
         </div>
         <div className="flex gap-8">
           <h2 className="text-2xl font-semibold w-[176px]">Mobile:</h2>
-          <h2 className="text-2xl">+91 8980XXXXXX</h2>
+          <h2 className="text-2xl">{selectedLab.submitter.phone}</h2>
         </div>
         <div className="flex gap-8">
           <h2 className="text-2xl font-semibold w-[180px]">Email:</h2>
-          <h2 className="text-2xl">loremipsum@gmail.com</h2>
+          <h2 className="text-2xl">{selectedLab.submitter.email}</h2>
         </div>
         <div className="flex gap-8">
-          <h2 className="text-2xl font-semibold w-80">Address: </h2>
-          <h2 className="text-2xl">
-            lorem ipsum dolor isit, lorem, dolor vitesat , 385620
-          </h2>
+          <h2 className="text-2xl font-semibold w-44">Address: </h2>
+          <h2 className="text-2xl">{selectedLab.address.address}</h2>
         </div>
         <div className="flex gap-5">
           <h2 className="text-2xl font-semibold w-44">Discount:</h2>
-          <input type="text" className="border-[1px] border-secondary ml-4" />
+          <input
+            type="text"
+            className="border-[1px] border-secondary ml-4"
+            name="discount"
+            onChange={handleLabData}
+            value={labData.discount}
+            // defaultValue={selectedLab.discount}
+          />
         </div>
         <div className="flex gap-5">
           <h2 className="text-2xl font-semibold w-44">Comission:</h2>
-          <input type="text" className="border-[1px] border-secondary ml-4" />
+          <input
+            type="text"
+            className="border-[1px] border-secondary ml-4"
+            name="comission"
+            onChange={handleLabData}
+            value={labData.comission}
+            // defaultValue={selectedLab.comission}
+          />
+        </div>
+        <div className="flex gap-5">
+          <h2 className="text-2xl font-semibold w-44">Cart Charge:</h2>
+          <input
+            type="text"
+            className="border-[1px] border-secondary ml-4"
+            name="cartCharge"
+            // onChange={handleLabData}
+            // value={labData.comission}
+            // defaultValue={selectedLab.comission}
+          />
         </div>
         <div className="flex gap-5">
           <h2 className="text-2xl font-semibold w-48">Payment Cycle:</h2>
-          <div className="flex items-center gap-1 cursor-pointer">
+          <Select options={paymentCycleOptions} className="w-[30%]" />
+          {/* <div className="flex items-center gap-1 cursor-pointer">
             <h2 className="text-2xl">Monthly</h2>
             <Icon icon={"mdi:chevron-down"} className="text-3xl" />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex justify-evenly mt-8">
-        <button className="border-[1px] border-secondary px-8 py-1 rounded-lg text-2xl font-semibold">
+        <button
+          className={`border-[1px] border-secondary px-8 py-1 rounded-lg text-2xl font-semibold ${
+            saveDisabled
+              ? "cursor-not-allowed opacity-50"
+              : "opacity-100 cursor-pointer"
+          } `}
+          disabled={saveDisabled}
+          onClick={handleSave}
+        >
           Save
         </button>
-        <button className="border-[1px] border-secondary px-8 py-1 rounded-lg text-2xl font-semibold">
+        {/* <button className="border-[1px] border-secondary px-8 py-1 rounded-lg text-2xl font-semibold">
           Edit Profile
-        </button>
+        </button> */}
       </div>
     </div>
   )

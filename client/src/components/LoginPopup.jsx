@@ -5,7 +5,7 @@ import axios from "axios"
 import {useNavigate} from "react-router-dom"
 
 export default function LoginPopup(props) {
-  const {whereToNavigate, type, postreqData, origin, bookingConfirmedData} =
+  const {whereToNavigate, type, postreqData, origin, bookingConfiremedData} =
     props
   const navigate = useNavigate()
 
@@ -64,7 +64,7 @@ export default function LoginPopup(props) {
           console.log(response.data)
           navigate(whereToNavigate, {
             state: {
-              data: bookingConfirmedData,
+              data: bookingConfiremedData,
             },
           })
         })
