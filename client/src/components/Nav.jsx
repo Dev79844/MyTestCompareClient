@@ -3,12 +3,12 @@ import {Link} from "react-router-dom"
 
 export default function Nav() {
   return (
-    <div className="flex items-center gap-2 justify-center my-2">
+    <div className="flex items-center gap-2 justify-center my-[2px]">
       <Link to="/">
         <img
           src="images/logo.png"
           alt="MyTestCompare Logo"
-          className="w-[100px] md:w-28"
+          className="w-[100px] md:w-20"
         />
       </Link>
       <Link to="/">

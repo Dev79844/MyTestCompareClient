@@ -1,8 +1,8 @@
 /* Main.jsx */
 .mainBg {
   background: linear-gradient(
-      rgba(252, 171, 65, 0.68),
-      rgba(252, 171, 65, 0.68)
+      rgba(237, 160, 62, 0.68),
+      rgba(237, 160, 62, 0.68)
     ),
     /* Add `./` because in build css file will be stored in `assets` and thus image path will be `assets/images/home/mainBg.jpg` and this it will break the bg image. That's why moving one directory back using "../" so that image path will be `images/home/mainBg.jpg`  */
       url("../images/home/mainBg.jpg");
@@ -19,10 +19,7 @@
 
 /* BecomePartner.jsx */
 .becomePartnerBg {
-  background: linear-gradient(
-      rgba(0, 171, 116, 0.47),
-      rgba(0, 171, 116, 0.47)
-    ),
+  background: linear-gradient(rgba(0, 171, 116, 0.47), rgba(0, 171, 116, 0.47)),
     url("../images/becomePartner/becomePartner.jpg");
   background-size: cover;
   background-repeat: no-repeat;
