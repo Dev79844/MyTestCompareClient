@@ -9,6 +9,8 @@ export default function Footer() {
 
   const isAdminLoggedIn = localStorage.getItem("adminToken") ? true : false
 
+  // console.log(isAdminLoggedIn)
+
   // localStorage.removeItem("adminToken")
 
   const quickLinks = [

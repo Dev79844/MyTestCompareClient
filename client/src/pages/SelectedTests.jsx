@@ -28,6 +28,8 @@ export default function SelectedTests() {
 
   // For getting lab details and test details from backend
   const [response, setResponse] = React.useState({})
+  const [testArr, setTestArr] = React.useState([])
+
   React.useEffect(() => {
     const getTestDeatils = async () => {
       try {
@@ -41,7 +43,8 @@ export default function SelectedTests() {
           }
         )
         setResponse(response.data.data)
-        console.log(response.data.data)
+        // console.log(response.data.data)
+        setTestArr(response.data.data.test)
       } catch (error) {
         console.log(error)
       }
@@ -50,6 +53,14 @@ export default function SelectedTests() {
   }, [])
   // console.log(response.test)
   // console.log(response.labDetails)
+  // console.log(response.test)
+
+  const removeTest = (item) => {
+    const filteredArr = testArr.filter((test) => test.name !== item.name)
+    setTestArr(filteredArr)
+  }
+
+  // console.log(testArr && testArr)
 
   // For Time
   const [appoint, setTime] = React.useState("")
@@ -77,7 +88,7 @@ export default function SelectedTests() {
   // document.body.style.overflow = modalIsOpen ? "hidden" : "auto"
 
   // For Total Price
-  const testprice = response.test && response.test.map((item) => item.price)
+  const testprice = testArr && testArr.map((item) => item.price)
   const totalMrp = testprice && testprice.reduce((a, b) => a + b, 0)
   // const discount = response.labDetails && response.labDetails.discount
   const discount = 20
@@ -134,14 +145,14 @@ export default function SelectedTests() {
     patient: patientData,
     appointmentAt: `${returnAppointmentDate()} , ${appoint} `,
     labId: response.labDetails && response.labDetails.labId,
-    testIds: response.test && response.test.map((item) => item._id),
+    testIds: testArr && testArr.map((item) => item._id),
   }
 
   const bookingConfiremedData = {
     patient: patientData,
     appointmentAt: `${returnAppointmentDate()} , ${appoint} `,
     totalCharge: finalPrice,
-    tests: response.test && response.test.map((item) => item.name),
+    tests: testArr && testArr.map((item) => item.name),
     lab: response.labDetails && response.labDetails,
   }
 
@@ -190,7 +201,7 @@ export default function SelectedTests() {
           })
         })
       // console.log("Booking Confirmed")
-      console.log(bookingConfiremedData)
+      // console.log(bookingConfiremedData)
     }
 
     // console.log(patientbookingData)
@@ -218,7 +229,7 @@ export default function SelectedTests() {
 
   return (
     <div className="font-Roboto bg-background">
-      {response.test && response.labDetails && (
+      {testArr && response.labDetails && (
         <div>
           <MiniNav />
           <Nav />
@@ -234,7 +245,7 @@ export default function SelectedTests() {
                 icon="carbon:chevron-left"
                 color="black"
                 inline={true}
-                className="text-3xl sm:text-4xl"
+                className="text-3xl sm:text-4xl cursor-pointer"
               />
               <h3 className="text-2xl font-medium lg:text-3xl">
                 Choose Other Lab
@@ -357,7 +368,10 @@ export default function SelectedTests() {
             <div className="lgGrid:grid lgGrid:grid-cols-[75%_25%] 2xl:w-[90%]">
               {/* Left Side */}
               <div className="md:mt-8 lgGrid:mt-4">
-                <IndividualSelectedTest filteredTests={response.test} />
+                <IndividualSelectedTest
+                  filteredTests={testArr}
+                  removeTest={removeTest}
+                />
               </div>
               {/* End of Left Side */}
               {/* Right Side */}
@@ -410,19 +424,21 @@ export default function SelectedTests() {
 
                 {/* Booking Summary */}
                 <div className="mt-4 sm:w-3/4 md:w-3/5 lg:w-1/2 sm:mx-auto lgGrid:w-full">
-                  <h1 className="text-center font-bold text-xl">
+                  <h1 className="text-center font-bold text-2xl">
                     Booking Summary
                   </h1>
                   <div className="border-[1px] border-borderGray px-3 py-4 space-y-1 rounded mt-3 mx-2  ">
                     {/* Test prices div */}
-                    {response.test.map((test) => {
+                    {testArr.map((test) => {
                       return (
                         <div
                           key={test._id}
                           className="flex gap-1 justify-between"
                         >
-                          <h1 className="font-medium w-[77%]">{test.name}</h1>
-                          <h1>₹ {test.price}</h1>
+                          <h1 className="font-medium w-[77%] text-xl">
+                            {test.name}
+                          </h1>
+                          <h1 className="text-xl">₹ {test.price}</h1>
                         </div>
                       )
                     })}
@@ -431,18 +447,16 @@ export default function SelectedTests() {
                     {/* Discount div */}
                     <div className="border-t border-b border-borderGray py-3 space-y-2">
                       <div className="flex gap-1 justify-between">
-                        <h1 className="font-semibold text-lg">Total MRP</h1>
-                        <h1 className="font-medium text-lg">₹{totalMrp}</h1>
+                        <h1 className="font-semibold text-xl">Total MRP</h1>
+                        <h1 className="font-medium text-xl">₹{totalMrp}</h1>
                       </div>
                       <div className="flex gap-1 justify-between">
-                        <h1 className="font-medium text-base">
-                          Discount (20%)
-                        </h1>
-                        <h1 className="font-medium text-base">
+                        <h1 className="font-medium text-lg">Discount (20%)</h1>
+                        <h1 className="font-medium text-xl">
                           ₹ {discountPrice}
                         </h1>
                       </div>
-                      <div className="flex gap-1 justify-between">
+                      {/* <div className="flex gap-1 justify-between">
                         <input
                           type="text"
                           placeholder="Apply Coupon"
@@ -451,15 +465,15 @@ export default function SelectedTests() {
                         <button className="font-medium text-base bg-primary text-white px-2 rounded">
                           Apply
                         </button>
-                      </div>
+                      </div> */}
                     </div>
                     {/* Discount div end */}
 
                     {/* Total Price */}
                     <div className="pt-2">
                       <div className="flex gap-1 justify-between">
-                        <h1 className="font-semibold text-lg">Total Amount</h1>
-                        <h1 className="font-medium text-lg">₹{finalPrice}</h1>
+                        <h1 className="font-semibold text-xl">Total Amount</h1>
+                        <h1 className="font-medium text-xl">₹{finalPrice}</h1>
                       </div>
                     </div>
                     {/* Total Price END */}

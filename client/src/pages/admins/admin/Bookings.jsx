@@ -17,7 +17,7 @@ export default function Bookings() {
     React.useState(false)
   const [elementid, setElementid] = React.useState()
 
-  const [bookings, setBookings] = React.useState([])
+  // const [bookings, setBookings] = React.useState([])
   const customStyles = {
     overlay: {
       backgroundColor: "rgba(0, 0, 0, 0.8)",
@@ -32,11 +32,12 @@ export default function Bookings() {
     },
   }
 
-  document.body.style.overflow = clientInfoModalIsOpen ? "hidden" : "auto"
+  // document.body.style.overflow = clientInfoModalIsOpen ? "hidden" : "auto"
 
-  function openClientInfoModal(e) {
-    setElementid(e.target.id)
+  function openClientInfoModal(booking) {
+    setElementid(booking._id)
     setClientInfoModalIsOpen(true)
+    // console.log(elementid)
   }
 
   function openAssignPhlebotomistModal() {
@@ -53,42 +54,82 @@ export default function Bookings() {
     setUploadReportModalIsOpen(false)
   }
 
-  // const bookings = [
-  //   "Ankush Raje",
-  //   "John David",
-  //   "Victoria Rose",
-  //   "Michael Thompson",
-  //   "Sarah Johnson",
-  //   "Jason Reed",
-  //   "Adam Hernandez",
-  //   "Jessica Davis",
-  // ]
+  const bookings = [
+    "Ankush Raje",
+    "John David",
+    "Victoria Rose",
+    "Michael Thompson",
+    "Sarah Johnson",
+    "Jason Reed",
+    "Adam Hernandez",
+    "Jessica Davis",
+  ]
+
+  const [fetchedBookings, setFetchedBookings] = React.useState([])
 
   React.useEffect(() => {
-    const getBookings = async() => {
-      const booking = await axios.get("http://localhost:3000/api/v1/manage/booking", {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
-        },
-      })
-      setBookings(booking.data.data.bookings)
+    const getBookings = async () => {
+      const booking = await axios.get(
+        "http://localhost:3000/api/v1/manage/booking",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
+          },
+        }
+      )
+      // console.log(booking.data.data.bookings)
+      setFetchedBookings(booking.data.data.bookings)
+      // setBookings(booking.data.data.bookings)
     }
     getBookings()
   }, [])
 
-  console.log(bookings);
+  // Booking object
+  /**
+   * {
+  "patient": {
+    "name": "Athena Noel",
+    "address": "Architecto asperiore",
+    "phone": "+918980856832",
+    "age": "Omnis quidem minima "
+  },
+  "_id": "63b02291080e204637dabe1c",
+  "user": "63b0106ab81371ea269d3a94",
+  "lab": "63b01069080e204637dabcb7",
+  "tests": [
+    {
+      "testId": "63b01722080e204637dabd78",
+      "name": "2D Echo",
+      "price": 1120,
+      "_id": "63b02291080e204637dabe1d"
+    },
+    {
+      "testId": "63b01722080e204637dabd79",
+      "name": "CBC - Complete Blood Count",
+      "price": 500,
+      "_id": "63b02291080e204637dabe1e"
+    }
+  ],
+  "price": 1620,
+  "verified": true,
+  "completed": false,
+  "status": "CREATED",
+  "createdAt": "2022-12-31T11:52:49.651Z",
+  "updatedAt": "2022-12-31T11:52:49.651Z",
+  "__v": 0
+}
+   */
 
-  const bookingsArr = bookings.map((name, index) => (
+  const bookingsArr = fetchedBookings.map((booking) => (
     <div
-      key={index}
+      key={booking._id}
       className="grid grid-cols-4 border-[1px] border-secondary rounded-2xl px-6 py-3 gap-3"
     >
       <h2
         className="cursor-pointer w-fit"
-        id={index}
-        onClick={openClientInfoModal}
+        onClick={() => openClientInfoModal(booking)}
       >
-        {name}
+        {booking.patient.name}
       </h2>
       <div className="space-x-2 flex items-center">
         <input
@@ -121,7 +162,9 @@ export default function Bookings() {
           icon="material-symbols:upload-rounded"
           className="text-[26px] cursor-pointer"
         />
-        <h2 className="cursor-pointer" onClick={ openUploadReportModal } >Upload Report</h2>
+        <h2 className="cursor-pointer" onClick={openUploadReportModal}>
+          Upload Report
+        </h2>
       </div>
     </div>
   ))
@@ -148,7 +191,7 @@ export default function Bookings() {
       >
         <ClientInfoPopup
           closeModal={closeModal}
-          bookingsArr={bookings}
+          fetchedBookings={fetchedBookings}
           elementid={elementid}
         />
       </ReactModal>

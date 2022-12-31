@@ -23,12 +23,12 @@ export default function AdminSidebar(props) {
       link: "/labBookings",
       active: "bookings",
     },
-    {
-      name: "Previous Bookings",
-      icon: "ic:baseline-history-toggle-off",
-      link: "/labPreviousBookings",
-      active: "previousBookings",
-    },
+    // {
+    //   name: "Previous Bookings",
+    //   icon: "ic:baseline-history-toggle-off",
+    //   link: "/labPreviousBookings",
+    //   active: "previousBookings",
+    // },
     {
       name: "Analytics",
       icon: "ic:baseline-analytics",

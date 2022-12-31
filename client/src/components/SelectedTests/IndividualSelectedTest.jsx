@@ -6,19 +6,22 @@ import qs from "qs"
 // import selectedTestData from "../../data/selectedTestData"
 
 export default function IndividualSelectedTest(props) {
-  const {filteredTests} = props
+  const {filteredTests, removeTest} = props
   // const {search} = useLocation()
   // const queryParams = qs.parse(search, {ignoreQueryPrefix: true})
   // const {tests} = queryParams
 
   // console.log(tests)
 
-  // const fetchedTests = response.tests
+  // const [testArr, setTestArr] = React.useState(filteredTests)
+  // console.log(testArr)
 
-  // const testsArr = fetchedTests.filter((item) => {
-  //   tests.includes(item.name)
-  // })
-  // console.log(filteredTests)
+  // const removeTest = (item) => {
+  //   const filteredArr = testArr.filter((test) => test.name !== item.name)
+  //   setTestArr(filteredArr)
+  // }
+  // console.log(testArr)
+  // console.log(removeTest)
 
   const selectedTestArr = filteredTests.map((item, index) => {
     return (
@@ -67,7 +70,10 @@ export default function IndividualSelectedTest(props) {
           </h3>
         </div>
         <div className="bg-secondary-withOpacity px-4 border-t border-borderGray mt-3">
-          <div className="flex items-center gap-2 py-2">
+          <div
+            className="flex items-center gap-2 py-2 cursor-pointer"
+            onClick={() => removeTest(item)}
+          >
             <Icon
               icon={"ph:trash-fill"}
               color={"#E97F0E"}
