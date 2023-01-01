@@ -9,6 +9,8 @@ export default function LoginPopup(props) {
     props
   const navigate = useNavigate()
 
+  console.log(type)
+
   const [phone, setPhone] = React.useState("+91")
   const [otp, setOtp] = React.useState("")
   const [otpButtonDisabled, setOtpButtonDisabled] = React.useState(false)
@@ -47,14 +49,18 @@ export default function LoginPopup(props) {
         }
       )
       // console.log(data.data)
-      type === "admin"
-        ? localStorage.setItem("adminToken", data.data.token)
-        : localStorage.setItem("token", data.data.token)
 
-      navigate(whereToNavigate)
+      if (type === "admin") {
+        localStorage.setItem("adminToken", data.data.token)
+        navigate("/adminProfile")
+      } else if (type === "user") {
+        localStorage.setItem("token", data.data.token)
+        navigate("/")
+      }
     } catch (error) {
       console.log(error)
     }
+
     if (origin === "booking") {
       axios
         .post("http://localhost:3000/api/v1/booking", postreqData, {

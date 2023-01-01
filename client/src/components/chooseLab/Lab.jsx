@@ -7,6 +7,13 @@ import {Link, useLocation, useNavigate} from "react-router-dom"
 import qs from "qs"
 
 export default function Lab() {
+  /**
+   * @todo
+   * * 1. Show processing time
+   * * 2. Show lab certificate
+   * * 3. Show lab timings
+   */
+
   const navigate = useNavigate()
   const {search} = useLocation()
 
@@ -29,6 +36,8 @@ export default function Lab() {
     // console.log(data.data.data.labs[0].tests)
     setLabArr(data.data.data.labs)
   }
+
+  // console.log(labArr)
 
   const labs = labArr.map((lab, index) => {
     return (
@@ -81,7 +90,13 @@ export default function Lab() {
           {/* </Link> */}
         </div>
         <div className="pt-[2.5rem] sm:pt-0 sm:self-center">
-          <p>{lab.price}</p>
+          <p>
+            {" "}
+            ₹
+            {lab.tests.reduce((acc, curr) => {
+              return acc + curr.price
+            }, 0)}
+          </p>
         </div>
         <div className=" hidden sm:block sm:self-center">
           {/* <Link to="/afterLab"> */}
@@ -132,7 +147,12 @@ export default function Lab() {
           {lab.processingTime}
         </h1> */}
         {/* <h1 className="justify-self-center self-center">{lab.distance} km</h1> */}
-        {/* <h1 className="justify-self-center self-center">₹ {lab.price}</h1> */}
+        <h1 className="justify-self-center self-center text-xl">
+          ₹
+          {lab.tests.reduce((acc, curr) => {
+            return acc + curr.price
+          }, 0)}
+        </h1>
         <div className="self-center justify-self-center">
           {/* <Link to="/afterLab"> */}
           <button

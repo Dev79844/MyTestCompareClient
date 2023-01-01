@@ -1,3 +1,4 @@
+import axios from "axios"
 import React from "react"
 import ReactModal from "react-modal"
 import {useNavigate, Link} from "react-router-dom"
@@ -26,7 +27,27 @@ export default function MiniNav() {
   }
 
   function openModal() {
-    isUserLoggedIn ? navigate("/viewProfile") : setModalIsOpen(true)
+    isUserLoggedIn
+      ? axios
+          .get("http://localhost:3000/api/v1/user/auth-verify", {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+          .then((res) => {
+            // console.log(res)
+            if (res.status === 200) {
+              navigate("/viewProfile")
+            }
+          })
+          .catch((err) => {
+            if (err.response.status === 401) {
+              alert("Session expired. Please login again.")
+              localStorage.removeItem("token")
+              setModalIsOpen(true)
+            }
+          })
+      : setModalIsOpen(true)
   }
 
   function closeModal() {
@@ -39,11 +60,9 @@ export default function MiniNav() {
     <div className="bg-black text-white flex justify-between p-2 text-lg">
       <h4>Call to book: +91 99999 99999</h4>
       {isUserLoggedIn ? (
-        <Link to="/viewProfile">
-          <h4 onClick={openModal} className="cursor-pointer">
-            My Profile
-          </h4>
-        </Link>
+        <h4 onClick={openModal} className="cursor-pointer">
+          My Profile
+        </h4>
       ) : (
         <h4 onClick={openModal} className="cursor-pointer">
           Login
@@ -51,7 +70,7 @@ export default function MiniNav() {
       )}
 
       <ReactModal isOpen={modalIsOpen} style={customStyles} ariaHideApp={false}>
-        <LoginPopup closeModal={closeModal} whereToNavigate="/" />
+        <LoginPopup closeModal={closeModal} whereToNavigate="/" type="user" />
       </ReactModal>
     </div>
   )
