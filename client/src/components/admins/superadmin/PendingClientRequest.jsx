@@ -8,24 +8,23 @@ export default function PendingClientRequest() {
 
   const [pendingClientRequests, setPendingClientRequests] = React.useState([])
 
-  const handleBookingAccept = (bookingId) => {
-    setPendingClientRequests(
-      pendingClientRequests.filter((booking) => booking._id !== bookingId)
-    )
-  }
+  // const handleBookingAccept = (bookingId) => {
+  //   setPendingClientRequests(
+  //     pendingClientRequests.filter((booking) => booking._id !== bookingId)
+  //   )
+  // }
 
   const fetchPendingClientRequests = () => {
     axios
       .get("http://localhost:3000/api/v1/admin/booking/pending-to-verify", {
         headers: {
-          // Authorization: `Bearer ${localStorage.getItem("token")}`,
-          Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWRmOGNmYjgxMzcxZWEyNjg5YmNlZiIsImlhdCI6MTY3MjM5NjUyMCwiZXhwIjoxNjcyNDgyOTIwfQ.OukbtIlti0A1be2ixtIebRdbXwPKsebyeW0mG72FuM4`,
+          Authorization: `Bearer ${localStorage.getItem("superAdminToken")}`,
         },
       })
       .then((res) => {
         const data = res.data.data.bookings
 
-        // console.log(data);
+        // console.log(data)
         setPendingClientRequests(data)
       })
       .catch((err) => {
@@ -42,24 +41,14 @@ export default function PendingClientRequest() {
   }
 
   React.useEffect(() => {
-    const intervalId = setInterval(fetchPendingClientRequests, 1000)
-
-    return () => clearInterval(intervalId)
+    fetchPendingClientRequests()
   }, [])
-
-  // if (pendingClientRequests.length === 0) {
-  //   return (
-  //     <div className="flex justify-center items-center h-[80vh]">
-  //       <h1 className="text-3xl font-medium">No requests</h1>
-  //     </div>
-  //   )
-  // }
 
   return (
     <RequestContainer
       data={pendingClientRequests}
       type="clientData"
-      onBookingAccepted={handleBookingAccept}
+      // onBookingAccepted={handleBookingAccept}
     />
   )
 }

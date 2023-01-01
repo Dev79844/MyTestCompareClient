@@ -4,7 +4,7 @@ import axios from "axios"
 export default function RequestContainer(props) {
   const data = props.data
   const type = props.type
-  const onBookingAccepted = props.onBookingAccepted
+  // const onBookingAccepted = props.onBookingAccepted
 
   // console.log("rendered");
   // console.log(data)
@@ -14,6 +14,8 @@ export default function RequestContainer(props) {
   React.useEffect(() => {
     setFetchedData(data && data)
   }, [data])
+
+  // console.log(fetchedData)
 
   const handleClick = (item) => {
     if (type == "clientData") {
@@ -25,13 +27,17 @@ export default function RequestContainer(props) {
           },
           {
             headers: {
-              // Authorization: `Bearer ${localStorage.getItem("token")}`,
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWRmOGNmYjgxMzcxZWEyNjg5YmNlZiIsImlhdCI6MTY3MjM5NjUyMCwiZXhwIjoxNjcyNDgyOTIwfQ.OukbtIlti0A1be2ixtIebRdbXwPKsebyeW0mG72FuM4`,
+              Authorization: `Bearer ${localStorage.getItem(
+                "superAdminToken"
+              )}`,
             },
           }
         )
         .then((res) => {
-          onBookingAccepted(item._id)
+          // onBookingAccepted(item._id)
+          item.verified = true
+          setFetchedData(data.filter((booking) => booking.verified == false))
+
           //  console.log(item._id)
           //  console.log(res.data.message)
         })
@@ -48,20 +54,60 @@ export default function RequestContainer(props) {
           },
           {
             headers: {
-              // Authorization: `Bearer ${localStorage.getItem("token")}`,
-              Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWRmOGNmYjgxMzcxZWEyNjg5YmNlZiIsImlhdCI6MTY3MjM5NjUyMCwiZXhwIjoxNjcyNDgyOTIwfQ.OukbtIlti0A1be2ixtIebRdbXwPKsebyeW0mG72FuM4`,
+              Authorization: `Bearer ${localStorage.getItem(
+                "superAdminToken"
+              )}`,
             },
           }
         )
         .then((res) => {
-          console.log(res.data)
+          item.verified = true
+          setFetchedData(data.filter((lab) => lab.verified == false))
+          // console.log(res.data)
         })
         .catch((err) => {
           console.log(err)
         })
+    }
+  }
 
-      item.verified = true
-      setFetchedData(data.filter((lab) => lab.verified == false))
+  const handleReject = (item) => {
+    if (type === "clientData") {
+      axios
+        .delete("http://localhost:3000/api/v1/admin/booking/reject", {
+          data: {
+            bookingId: item._id,
+          },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("superAdminToken")}`,
+          },
+        })
+        .then((res) => {
+          setFetchedData(data.filter((booking) => booking._id !== item._id))
+          // console.log(res.data.message)
+        })
+        .catch((err) => {
+          console.log(err)
+          // console.log("request object:", JSON.stringify(err.config, null, 2))
+        })
+      item.status = "REJECTED"
+      setFetchedData(data.filter((booking) => booking.status == "CREATED"))
+    }
+    if (type === "labRequest") {
+      axios
+        .delete(`http://localhost:3000/api/v1/admin/lab/${item._id}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("superAdminToken")}`,
+          },
+        })
+        .then((res) => {
+          item.verified = "rejected"
+          setFetchedData(data.filter((lab) => lab.verified !== "rejected"))
+          // console.log(res.data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
     }
   }
 
@@ -139,7 +185,10 @@ export default function RequestContainer(props) {
         >
           Confirm
         </button>
-        <button className="text-xl font-medium border-[1px] border-secondary rounded-md px-4 w-1/2">
+        <button
+          className="text-xl font-medium border-[1px] border-secondary rounded-md px-4 w-1/2"
+          onClick={() => handleReject(item)}
+        >
           Reject
         </button>
       </div>
