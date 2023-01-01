@@ -21,6 +21,7 @@ export default function ManageLabPopup(props) {
   const [labData, setLabData] = React.useState({
     discount: "",
     comission: "",
+    duration: ""
   })
 
   const handleLabData = (e) => {
@@ -39,6 +40,7 @@ export default function ManageLabPopup(props) {
         {
           discount: labData.discount,
           comission: labData.comission,
+          duration: labData.duration
         },
         {
           headers: {

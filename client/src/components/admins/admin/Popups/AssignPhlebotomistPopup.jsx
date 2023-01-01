@@ -5,6 +5,10 @@ import { fromJSON } from "postcss"
 export default function AssignPlebotomistPopup(props) {
   const {closeModal} = props
 
+  const {data} = props
+
+  console.log(data)
+
   const [form, setForm] = React.useState({
     name: "",
     mobile:""

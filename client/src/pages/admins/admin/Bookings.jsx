@@ -84,41 +84,7 @@ export default function Bookings() {
     getBookings()
   }, [])
 
-  // Booking object
-  /**
-   * {
-  "patient": {
-    "name": "Athena Noel",
-    "address": "Architecto asperiore",
-    "phone": "+918980856832",
-    "age": "Omnis quidem minima "
-  },
-  "_id": "63b02291080e204637dabe1c",
-  "user": "63b0106ab81371ea269d3a94",
-  "lab": "63b01069080e204637dabcb7",
-  "tests": [
-    {
-      "testId": "63b01722080e204637dabd78",
-      "name": "2D Echo",
-      "price": 1120,
-      "_id": "63b02291080e204637dabe1d"
-    },
-    {
-      "testId": "63b01722080e204637dabd79",
-      "name": "CBC - Complete Blood Count",
-      "price": 500,
-      "_id": "63b02291080e204637dabe1e"
-    }
-  ],
-  "price": 1620,
-  "verified": true,
-  "completed": false,
-  "status": "CREATED",
-  "createdAt": "2022-12-31T11:52:49.651Z",
-  "updatedAt": "2022-12-31T11:52:49.651Z",
-  "__v": 0
-}
-   */
+  // console.log(bookings);
 
   const bookingsArr = fetchedBookings.map((booking) => (
     <div
@@ -129,7 +95,7 @@ export default function Bookings() {
         className="cursor-pointer w-fit"
         onClick={() => openClientInfoModal(booking)}
       >
-        {booking.patient.name}
+        {name.patient.name}
       </h2>
       <div className="space-x-2 flex items-center">
         <input
@@ -200,7 +166,7 @@ export default function Bookings() {
         style={customStyles}
         ariaHideApp={false}
       >
-        <AssignPhlebotomistPopup closeModal={closeModal} />
+        <AssignPhlebotomistPopup closeModal={closeModal} data={bookings } />
       </ReactModal>
       <ReactModal
         isOpen={uploadReportModalIsOpen}
