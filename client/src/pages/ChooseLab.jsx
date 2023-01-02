@@ -47,7 +47,7 @@ const ChooseLab = () => {
     setModalIsOpen(false)
   }
 
-  document.body.style.overflow = modalIsOpen ? "hidden" : "auto"
+  // document.body.style.overflow = modalIsOpen ? "hidden" : "auto"
 
   return (
     <div className="font-Roboto bg-background">
@@ -60,7 +60,7 @@ const ChooseLab = () => {
             icon="carbon:chevron-left"
             color="black"
             inline={true}
-            className="text-3xl sm:text-4xl"
+            className="text-3xl sm:text-4xl cursor-pointer"
           />
           <h3 className="text-2xl font-medium lg:text-3xl">Results</h3>
         </div>
@@ -171,7 +171,8 @@ const ChooseLab = () => {
                 <h1 className="font-bold text-lg justify-self-center">
                   Distance
                 </h1>
-                <h1 className="font-bold text-lg justify-self-center">Price</h1> */}
+                */}
+                <h1 className="font-bold text-lg justify-self-center">Price</h1>
               </div>
               <Lab />
             </div>
@@ -206,7 +207,7 @@ const ChooseLab = () => {
             <hr />
             <div className="flex justify-between font-medium text-lg sm:grid-cols-chooseLab sm:grid">
               <p className="">Lab Name</p>
-              {/* <p>Price</p> */}
+              <p>Price</p>
             </div>
             <hr />
           </div>

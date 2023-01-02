@@ -17,6 +17,11 @@ import qs from "qs"
 import axios from "axios"
 
 export default function SelectedTests() {
+  /**
+   // TODO: Fetch all test data from backend (sample type, special instructions, processing time, parameters covered)
+   // TODO: Fetch Lab Certificate from backend (if any)
+   */
+
   const navigate = useNavigate()
   const {search} = useLocation()
   const queryParams = qs.parse(search, {ignoreQueryPrefix: true})
@@ -53,7 +58,12 @@ export default function SelectedTests() {
   }, [])
   // console.log(response.test)
   // console.log(response.labDetails)
-  // console.log(response.test)
+  // console.log(response)
+  /**
+   * response has 2 keys:
+   * 1. labData - contains lab details
+   * 2. test - contains test details asscociated with that lab
+   */
 
   const removeTest = (item) => {
     const filteredArr = testArr.filter((test) => test.name !== item.name)
@@ -91,7 +101,7 @@ export default function SelectedTests() {
   const testprice = testArr && testArr.map((item) => item.price)
   const totalMrp = testprice && testprice.reduce((a, b) => a + b, 0)
   // const discount = response.labDetails && response.labDetails.discount
-  const discount = 20
+  const discount = response.labData && response.labData.discount
   const discountPrice = (totalMrp * discount) / 100
   const finalPrice = totalMrp - discountPrice
 
@@ -193,12 +203,19 @@ export default function SelectedTests() {
           },
         })
         .then((response) => {
-          console.log(response.data)
+          // console.log(response.data)
           navigate("/confirmed", {
             state: {
               data: bookingConfiremedData,
             },
           })
+        })
+        .catch((err) => {
+          if (err.response.status === 401) {
+            alert("Session Expired. Please Login Again")
+            setModalIsOpen(true)
+          }
+          console.log(err)
         })
       // console.log("Booking Confirmed")
       // console.log(bookingConfiremedData)
@@ -229,7 +246,7 @@ export default function SelectedTests() {
 
   return (
     <div className="font-Roboto bg-background">
-      {testArr && response.labDetails && (
+      {testArr && response.labData && (
         <div>
           <MiniNav />
           <Nav />
@@ -267,7 +284,7 @@ export default function SelectedTests() {
 
             <div className="md:flex md:gap-5 md:items-center md:mt-4">
               <div className="text-center pt-4 md:pt-0 text-xl font-medium md:mt-3 sm:text-left sm:mx-4 md:flex-shrink-0">
-                <h1>Selected Lab: {response.labDetails.labName}</h1>
+                <h1>Selected Lab: {response.labData.name}</h1>
               </div>
 
               <div className="sm:flex sm:px-3 sm:items-center">
@@ -365,7 +382,7 @@ export default function SelectedTests() {
             </div>
 
             {/* Grid with 2 columns */}
-            <div className="lgGrid:grid lgGrid:grid-cols-[75%_25%] 2xl:w-[90%]">
+            <div className="lgGrid:grid lgGrid:grid-cols-[70%_30%] 2xl:w-[95%]">
               {/* Left Side */}
               <div className="md:mt-8 lgGrid:mt-4">
                 <IndividualSelectedTest
@@ -380,7 +397,7 @@ export default function SelectedTests() {
                 <div className="border-[1px] rounded border-borderGray mt-4 mx-2 sm:w-1/2 sm:mx-auto lgGrid:w-full">
                   <div className="p-3">
                     <h1 className="font-medium text-lg">
-                      {response.labDetails.labName}
+                      {response.labData.name}
                     </h1>
                     <div className="space-y-1 mt-2">
                       <div className="flex gap-1 items-center">
@@ -418,7 +435,14 @@ export default function SelectedTests() {
                 <div className="mx-3 mt-3 sm:text-center lgGrid:text-left">
                   <h2 className="text-lg font-medium">Selected Date & Time</h2>
                   <h3 className="">Date: {value.toLocaleDateString()}</h3>
-                  <h3>Time: {appoint}</h3>
+                  {appoint === "" ? (
+                    <h3 className="text-red font-semibold">
+                      Please Select Time
+                    </h3>
+                  ) : (
+                    <h3>Time: {appoint}</h3>
+                  )}
+                  {/* <h3>Time: {appoint}</h3> */}
                 </div>
                 {/* end selected date time */}
 
@@ -451,7 +475,9 @@ export default function SelectedTests() {
                         <h1 className="font-medium text-xl">₹{totalMrp}</h1>
                       </div>
                       <div className="flex gap-1 justify-between">
-                        <h1 className="font-medium text-lg">Discount (20%)</h1>
+                        <h1 className="font-medium text-lg">
+                          Discount ({response.labData.discount}%)
+                        </h1>
                         <h1 className="font-medium text-xl">
                           ₹ {discountPrice}
                         </h1>
