@@ -24,6 +24,7 @@ export default function IndividualSelectedTest(props) {
   // console.log(removeTest)
 
   const selectedTestArr = filteredTests.map((item, index) => {
+    // console.log(item)
     return (
       <div
         key={index * 2}
@@ -46,7 +47,21 @@ export default function IndividualSelectedTest(props) {
                 color={"#E97F0E"}
                 className="text-lg"
               />
-              <h3>Special Instructions: {item.specialInstruction}</h3>
+              <div className="flex gap-2">
+                <h3>Special Instructions: </h3>
+                <div>
+                  {item.specialInstruction.map((instruction, index) => {
+                    return (
+                      <span key={index}>
+                        {instruction}
+                        {index === item.specialInstruction.length - 1
+                          ? ""
+                          : ","}
+                      </span>
+                    )
+                  })}
+                </div>
+              </div>
             </div>
             <div className="flex gap-1 items-center">
               <Icon
@@ -56,14 +71,14 @@ export default function IndividualSelectedTest(props) {
               />
               <h3>Processing Time: {item.processingTime}</h3>
             </div>
-            <div className="flex gap-1 items-center">
+            {/* <div className="flex gap-1 items-center">
               <Icon
                 icon={"mdi:information-outline"}
                 color={"#E97F0E"}
                 className="text-lg"
               />
               <h3>Parameters Covered: {item.parameters}</h3>
-            </div>
+            </div> */}
           </div>
           <h3 className="font-medium text-xl mt-2">
             Price: <span className="ml-3">₹{item.price}</span>
