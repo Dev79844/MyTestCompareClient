@@ -21,7 +21,7 @@ export default function RequestContainer(props) {
     if (type == "clientData") {
       axios
         .patch(
-          "http://localhost:3000/api/v1/admin/booking/accept",
+          `${process.env.REACT_APP_URI}/api/v1/admin/booking/accept`,
           {
             bookingId: item._id,
           },
@@ -48,7 +48,7 @@ export default function RequestContainer(props) {
     if (type == "labRequest") {
       axios
         .patch(
-          `http://localhost:3000/api/v1/admin/lab/${item._id}`,
+          `${process.env.REACT_APP_URI}/api/v1/admin/lab/${item._id}`,
           {
             verified: true,
           },
@@ -74,7 +74,7 @@ export default function RequestContainer(props) {
   const handleReject = (item) => {
     if (type === "clientData") {
       axios
-        .delete("http://localhost:3000/api/v1/admin/booking/reject", {
+        .delete(`${process.env.REACT_APP_URI}/api/v1/admin/booking/reject`, {
           data: {
             bookingId: item._id,
           },
@@ -95,7 +95,7 @@ export default function RequestContainer(props) {
     }
     if (type === "labRequest") {
       axios
-        .delete(`http://localhost:3000/api/v1/admin/lab/${item._id}`, {
+        .delete(`${process.env.REACT_APP_URI}/api/v1/admin/lab/${item._id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("superAdminToken")}`,
           },

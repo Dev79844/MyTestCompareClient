@@ -44,7 +44,7 @@ export default function IndividulaLab() {
     }
 
     axios
-      .get("http://localhost:3000/api/v1/admin/lab/", {
+      .get(`${process.env.REACT_APP_URI}/api/v1/admin/lab/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("superAdminToken")}`,
           // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWRmOGNmYjgxMzcxZWEyNjg5YmNlZiIsImlhdCI6MTY3MjM5NjUyMCwiZXhwIjoxNjcyNDgyOTIwfQ.OukbtIlti0A1be2ixtIebRdbXwPKsebyeW0mG72FuM4`,
