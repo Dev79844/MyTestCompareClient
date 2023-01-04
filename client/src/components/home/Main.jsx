@@ -27,7 +27,7 @@ export default function Main() {
   React.useEffect(() => {
     // Fetching city names from the database
     axios
-      .get("http://localhost:3000/api/v1/lab")
+      .get(`${import.meta.env.VITE_APP_URI}/api/v1/lab`)
       .then((response) => {
         let cityNames = []
         const data = response.data.data.require
@@ -42,7 +42,7 @@ export default function Main() {
       })
 
     // Fetching tests from the database
-    axios.get("http://localhost:3000/api/v1/getTests").then((response) => {
+    axios.get(`${import.meta.env.VITE_APP_URI}/api/v1/getTests`).then((response) => {
       let testsFromExcelMap = new Map()
       const data = response.data.data.tests
       data.map((item) => {

@@ -10,7 +10,7 @@ export default function IndividualViewBooking() {
 
   React.useEffect(() => {
     axios
-      .get("http://localhost:3000/api/v1/booking", {
+      .get(`${import.meta.env.VITE_APP_URI}/api/v1/booking`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

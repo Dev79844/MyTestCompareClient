@@ -29,7 +29,7 @@ export default function MiniNav() {
   function openModal() {
     isUserLoggedIn
       ? axios
-          .get("http://localhost:3000/api/v1/user/auth-verify", {
+          .get(`${import.meta.env.VITE_APP_URI}/api/v1/user/auth-verify`, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },

@@ -26,7 +26,7 @@ export default function AddUpdateTests() {
     formData.append("tests", file)
 
     // Make a POST request to the server to upload the file
-    fetch("http://localhost:3000/api/v1/test/uploadTest", {
+    fetch(`${import.meta.env.VITE_APP_URI}/api/v1/test/uploadTest`, {
       method: "POST",
       body: formData,
       headers: headers,
