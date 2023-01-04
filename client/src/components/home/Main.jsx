@@ -5,21 +5,63 @@ import {Link, useNavigate} from "react-router-dom"
 import Success from "../../pages/Success"
 
 import Select from "react-select"
-import cityNames from "../../data/cityNames"
-import testsFromExcel from "../../data/testsFromExcel"
 import qs from "qs"
+import axios from "axios"
 
 export default function Main() {
   const navigate = useNavigate()
 
-  const location = navigator.geolocation.getCurrentPosition(Success, Error)
+  // const location = navigator.geolocation.getCurrentPosition(Success, Error)
   // console.log(location)
-  const [pincode, setPincode] = React.useState("")
+  // const [pincode, setPincode] = React.useState("")
   const [city, setCity] = React.useState("")
   const [test, setTest] = React.useState([])
   const [bookNowDisabled, setBookNowDisabled] = React.useState(
     city == "" || test.length == 0 ? true : false
   )
+  const [cityNames, setCityNames] = React.useState([])
+
+  const [testNames, setTestNames] = React.useState([])
+  let testsFromExcelArr = []
+
+  React.useEffect(() => {
+    // Fetching city names from the database
+    axios
+      .get("http://localhost:3000/api/v1/lab")
+      .then((response) => {
+        let cityNames = []
+        const data = response.data.data.require
+        cityNames = [...new Set(data)].map((item) => ({
+          value: item,
+          label: item,
+        }))
+        setCityNames(cityNames)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+
+    // Fetching tests from the database
+    axios.get("http://localhost:3000/api/v1/getTests").then((response) => {
+      let testsFromExcelMap = new Map()
+      const data = response.data.data.tests
+      data.map((item) => {
+        delete item._id
+        delete item.__v
+        delete item.price
+        testsFromExcelMap.set(item.name, item)
+      })
+      testsFromExcelArr = [...testsFromExcelMap.values()].map((test) => ({
+        value: test.name,
+        label: test.name,
+      }))
+      setTestNames(testsFromExcelArr)
+    })
+  }, [])
+
+  // console.log(testNames)
+
+  // console.log(cityNames)
 
   const handleCity = (city) => {
     setCity(city.value)
@@ -34,10 +76,10 @@ export default function Main() {
     setBookNowDisabled(city == "" ? true : false)
   }
 
-  const testNames = [...testsFromExcel.values()].map((test) => ({
-    value: test.name,
-    label: test.name,
-  }))
+  // const testNames = [...testsFromExcelMap.values()].map((test) => ({
+  //   value: test.name,
+  //   label: test.name,
+  // }))
 
   const handleClick = () => {
     const queryParams = {
@@ -60,21 +102,6 @@ export default function Main() {
   }
 
   // console.log(test)
-
-  // const cityNames = [
-  //   {value: "Ahd", label: "Ahd"},
-  //   {value: "New York", label: "New York"},
-  //   {value: "London", label: "London"},
-  //   {value: "Los Angeles", label: "Los Angeles"},
-  //   {value: "Chicago", label: "Chicago"},
-  //   {value: "Houston", label: "Houston"},
-  //   {value: "Philadelphia", label: "Philadelphia"},
-  //   {value: "Phoenix", label: "Phoenix"},
-  //   {value: "San Antonio", label: "San Antonio"},
-  //   {value: "San Diego", label: "San Diego"},
-  //   {value: "Dallas", label: "Dallas"},
-  //   {value: "San Jose", label: "San Jose"},
-  // ]
 
   const selctStyles = {
     control: (baseStyles) => ({
