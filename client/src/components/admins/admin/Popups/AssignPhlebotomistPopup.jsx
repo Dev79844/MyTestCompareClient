@@ -19,10 +19,6 @@ export default function AssignPlebotomistPopup(props) {
     setForm({...form, [name]: value})
   }
 
-  const handleAssign = () => {
-    
-  }
-
   return (
     <div className="px-12 py-8">
       <Icon
@@ -45,7 +41,7 @@ export default function AssignPlebotomistPopup(props) {
         </div>
       </div>
       <div className="flex justify-center mt-6">
-        <button className="border-[1px] border-secondary px-8 py-1 rounded-lg text-2xl font-semibold" onClick={() => handleAssign()}>
+        <button className="border-[1px] border-secondary px-8 py-1 rounded-lg text-2xl font-semibold">
           Assign
         </button>
       </div>

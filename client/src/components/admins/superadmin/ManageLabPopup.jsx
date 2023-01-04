@@ -36,7 +36,7 @@ export default function ManageLabPopup(props) {
   const handleSave = () => {
     axios
       .patch(
-        `${process.env.VITE_APP_URI}/api/v1/admin/lab/${selectedLab._id}`,
+        `${import.meta.env.VITE_APP_URI}/api/v1/admin/lab/${selectedLab._id}`,
         {
           discount: labData.discount,
           comission: labData.comission,

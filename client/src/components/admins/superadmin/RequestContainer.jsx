@@ -21,7 +21,7 @@ export default function RequestContainer(props) {
     if (type == "clientData") {
       axios
         .patch(
-          `${process.env.VITE_APP_URI}/api/v1/admin/booking/accept`,
+          `${import.meta.env.VITE_APP_URI}/api/v1/admin/booking/accept`,
           {
             bookingId: item._id,
           },

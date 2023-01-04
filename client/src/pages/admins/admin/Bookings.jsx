@@ -70,7 +70,7 @@ export default function Bookings() {
   React.useEffect(() => {
     const getBookings = async () => {
       const booking = await axios.get(
-        "http://localhost:3000/api/v1/manage/booking",
+        `${import.meta.env.VITE_APP_URI}/api/v1/manage/booking`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("adminToken")}`,

@@ -7,7 +7,7 @@ export default function TopStrip() {
   const [loading, setLoading] = React.useState(true)
 
   axios
-    .get(`${process.env.REACT_APP_URI}/api/v1/manage/lab`, {
+    .get(`${import.meta.env.REACT_APP_URI}/api/v1/manage/lab`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("adminToken")}`,
       },
