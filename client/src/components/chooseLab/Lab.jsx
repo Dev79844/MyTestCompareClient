@@ -26,7 +26,7 @@ export default function Lab() {
   }, [])
 
   const getLabs = async () => {
-    const data = await axios.get(`${process.env.REACT_APP_URI}/api/v1/getLabs`, {
+    const data = await axios.get(`${process.env.VITE_APP_URI}/api/v1/getLabs`, {
       params: {
         city: city,
         tests: tests,

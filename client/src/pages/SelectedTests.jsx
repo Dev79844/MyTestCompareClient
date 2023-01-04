@@ -39,7 +39,7 @@ export default function SelectedTests() {
     const getTestDeatils = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_URI}/api/v1/lab/test`,
+          `${process.env.VITE_APP_URI}/api/v1/lab/test`,
           {
             params: {
               name: lab,
@@ -197,7 +197,7 @@ export default function SelectedTests() {
     } else {
       // Make Post Request to backend
       axios
-        .post(`${process.env.REACT_APP_URI}/api/v1/booking`, patientbookingData, {
+        .post(`${process.env.VITE_APP_URI}/api/v1/booking`, patientbookingData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

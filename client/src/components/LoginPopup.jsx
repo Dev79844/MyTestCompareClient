@@ -24,7 +24,7 @@ export default function LoginPopup(props) {
     JSON.stringify(phone)
     setOtpButtonDisabled(true)
     const otp = await axios.post(
-      `${process.env.REACT_APP_URI}/api/v1/user/generate-otp`,
+      `${process.env.VITE_APP_URI}/api/v1/user/generate-otp`,
       {
         phone,
       }
@@ -63,7 +63,7 @@ export default function LoginPopup(props) {
 
     if (origin === "booking") {
       axios
-        .post(`${process.env.REACT_APP_URI}/api/v1/booking`, postreqData, {
+        .post(`${process.env.VITE_APP_URI}/api/v1/booking`, postreqData, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

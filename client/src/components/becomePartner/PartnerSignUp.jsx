@@ -24,7 +24,7 @@ export default function PartnerSignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const data = await axios.post(
-      `${process.env.REACT_APP_URI}/api/v1/lab`,
+      `${process.env.VITE_APP_URI}/api/v1/lab`,
       formDetails
     )
     setFormDetails({
