@@ -1,7 +1,7 @@
 import React from "react"
 import SuperAdminSidebar from "../../../components/admins/superadmin/SuperAdminSidebar"
 import RequestContainer from "../../../components/admins/superadmin/RequestContainer"
-import pendingLabRequests from "../../../data/pendingLabRequests"
+// import pendingLabRequests from "../../../data/pendingLabRequests"
 import axios from "axios"
 
 export default function AcceptClientBooking() {
