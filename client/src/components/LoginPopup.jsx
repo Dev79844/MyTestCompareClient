@@ -9,7 +9,7 @@ export default function LoginPopup(props) {
     props
   const navigate = useNavigate()
 
-  console.log(type)
+  // console.log(type)
 
   const [phone, setPhone] = React.useState("+91")
   const [otp, setOtp] = React.useState("")

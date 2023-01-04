@@ -165,13 +165,13 @@ const ChooseLab = () => {
             <div className="">
               <div className="grid grid-cols-chooseLab4 mx-3 mt-4">
                 <h1 className="font-bold text-lg ">Lab Name</h1>
-                {/* <h1 className="font-bold text-lg justify-self-center text-center">
+                <h1 className="font-bold text-lg justify-self-center text-center">
                   Processing Time
                 </h1>
-                <h1 className="font-bold text-lg justify-self-center">
+                {/* <h1 className="font-bold text-lg justify-self-center">
                   Distance
-                </h1>
-                */}
+                </h1> */}
+
                 <h1 className="font-bold text-lg justify-self-center">Price</h1>
               </div>
               <Lab />
