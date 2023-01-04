@@ -5,7 +5,7 @@ import {Link} from "react-router-dom"
 export default function SuperAdminSidebar(props) {
   localStorage.setItem(
     "superAdminToken",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjA0MjJjYjgxMzcxZWEyNmU3OGVkOSIsImlhdCI6MTY3MjQ5NTY2MCwiZXhwIjoxNjcyNTgyMDYwfQ.PPNsgiCAqgOGf7cyU9GmvD1oejCP7ght8STEjjC3V4E"
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjA0MjJjYjgxMzcxZWEyNmU3OGVkOSIsImlhdCI6MTY3MjgwNDQwMiwiZXhwIjoxNjcyODkwODAyfQ.7wVYOt5RxtUYmfaAdwxEzX1xVr4tuLzOV_1AimvWBMM"
   )
 
   const sidebarItems = [
