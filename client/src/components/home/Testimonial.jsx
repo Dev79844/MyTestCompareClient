@@ -45,7 +45,7 @@ export default function Testimonial() {
             fill="currentColor"
           />
         </svg>
-        <div className="flex ml-[70px] mt-3 mb-5 items-center gap-3">
+        <div className="flex mt-12 mb-3 lg:mt-3 lg:mb-5 items-center justify-center lg:justify-start gap-3 lg:ml-[70px]">
           <div>
             <Icon icon="carbon:user-avatar-filled" className="text-3xl" />
           </div>

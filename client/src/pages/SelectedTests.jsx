@@ -103,7 +103,8 @@ export default function SelectedTests() {
   // const discount = response.labDetails && response.labDetails.discount
   const discount = response.labData && response.labData.discount
   const discountPrice = (totalMrp * discount) / 100
-  const finalPrice = totalMrp - discountPrice
+  const homeCollectionCharge = response.labData.homeCharge
+  const finalPrice = totalMrp - discountPrice + homeCollectionCharge
 
   // For Calendar
   const [visible, setVisible] = React.useState(true)
@@ -480,6 +481,14 @@ export default function SelectedTests() {
                         </h1>
                         <h1 className="font-medium text-xl">
                           ₹ {discountPrice}
+                        </h1>
+                      </div>
+                      <div className="flex gap-1 justify-between">
+                        <h1 className="font-medium text-lg">
+                          Home Collection Charge:
+                        </h1>
+                        <h1 className="font-medium text-lg">
+                          ₹ {homeCollectionCharge}
                         </h1>
                       </div>
                       {/* <div className="flex gap-1 justify-between">

@@ -11,16 +11,17 @@ export default function ManageLabPopup(props) {
   // console.log(selectedLab)
 
   const paymentCycleOptions = [
-    {value: "weekly", label: "Weekly"},
-    {value: "monthly", label: "Monthly"},
-    {value: "quarterly", label: "Quarterly"},
-    {value: "half-yearly", label: "Half-yearly"},
-    {value: "yearly", label: "Yearly"},
+    {value: "Weekly", label: "Weekly"},
+    {value: "Monthly", label: "Monthly"},
+    {value: "Quarterly", label: "Quarterly"},
+    {value: "Half-yearly", label: "Half-yearly"},
+    {value: "Yearly", label: "Yearly"},
   ]
 
   const [labData, setLabData] = React.useState({
     discount: "",
     comission: "",
+    homeCharge: "",
   })
 
   const handleLabData = (e) => {
@@ -32,6 +33,14 @@ export default function ManageLabPopup(props) {
     }
   }
 
+  const [paymentCycle, setPaymentCycle] = React.useState("")
+
+  const handlePaymentCycleChange = (paymentCycle) => {
+    setPaymentCycle(paymentCycle.value)
+  }
+
+  // console.log(paymentCycle)
+
   const handleSave = () => {
     axios
       .patch(
@@ -39,11 +48,12 @@ export default function ManageLabPopup(props) {
         {
           discount: labData.discount,
           comission: labData.comission,
+          homeCharge: labData.homeCharge,
+          paymentCycle: paymentCycle,
         },
         {
           headers: {
-            // Authorization: `Bearer ${localStorage.getItem("token")}`,
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWRmOGNmYjgxMzcxZWEyNjg5YmNlZiIsImlhdCI6MTY3MjM5NjUyMCwiZXhwIjoxNjcyNDgyOTIwfQ.OukbtIlti0A1be2ixtIebRdbXwPKsebyeW0mG72FuM4`,
+            Authorization: `Bearer ${localStorage.getItem("superAdminToken")}`,
           },
         }
       )
@@ -53,6 +63,7 @@ export default function ManageLabPopup(props) {
       })
       .catch((err) => {
         console.log(err)
+        // console.log(err.request)
       })
     // console.log(selectedLab._id)
     // console.log(labData)
@@ -113,15 +124,19 @@ export default function ManageLabPopup(props) {
           <input
             type="text"
             className="border-[1px] border-secondary ml-4"
-            name="cartCharge"
-            // onChange={handleLabData}
-            // value={labData.comission}
+            name="homeCharge"
+            onChange={handleLabData}
+            value={labData.homeCharge}
             // defaultValue={selectedLab.comission}
           />
         </div>
         <div className="flex gap-5">
           <h2 className="text-2xl font-semibold w-48">Payment Cycle:</h2>
-          <Select options={paymentCycleOptions} className="w-[30%]" />
+          <Select
+            options={paymentCycleOptions}
+            className="w-[30%]"
+            onChange={handlePaymentCycleChange}
+          />
           {/* <div className="flex items-center gap-1 cursor-pointer">
             <h2 className="text-2xl">Monthly</h2>
             <Icon icon={"mdi:chevron-down"} className="text-3xl" />
