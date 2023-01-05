@@ -154,8 +154,9 @@ export default function SelectedTests() {
 
   const patientbookingData = {
     patient: patientData,
-    appointmentAt: `${returnAppointmentDate()} , ${appoint} `,
-    labId: response.labDetails && response.labDetails.labId,
+    // appointmentAt: `${returnAppointmentDate()} , ${appoint} `,
+    appointmentAt: `${returnAppointmentDate()}`,
+    labId: response.labData && response.labData._id,
     testIds: testArr && testArr.map((item) => item._id),
   }
 
@@ -164,7 +165,7 @@ export default function SelectedTests() {
     appointmentAt: `${returnAppointmentDate()} , ${appoint} `,
     totalCharge: finalPrice,
     tests: testArr && testArr.map((item) => item.name),
-    lab: response.labDetails && response.labDetails,
+    lab: response.labData && response.labData,
   }
 
   // For Booking
@@ -196,6 +197,9 @@ export default function SelectedTests() {
       alert("Please select a time slot")
       return
     } else {
+      // console.log(response.labData)
+      // console.log(patientbookingData)
+
       // Make Post Request to backend
       axios
         .post(
@@ -218,9 +222,11 @@ export default function SelectedTests() {
         .catch((err) => {
           if (err.response.status === 401) {
             alert("Session Expired. Please Login Again")
+            // localStorage.removeItem("token")
             setModalIsOpen(true)
           }
           console.log(err)
+          console.log(err.config)
         })
       // console.log("Booking Confirmed")
       // console.log(bookingConfiremedData)
