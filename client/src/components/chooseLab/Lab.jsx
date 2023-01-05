@@ -20,18 +20,22 @@ export default function Lab() {
   const {city, tests} = queryParams
 
   const [labArr, setLabArr] = React.useState([])
+  const [labFound, setLabFound] = React.useState(false)
 
   React.useEffect(() => {
     getLabs()
   }, [])
 
   const getLabs = async () => {
-    const data = await axios.get(`${import.meta.env.VITE_APP_URI}/api/v1/getLabs`, {
-      params: {
-        city: city,
-        tests: tests,
-      },
-    })
+    const data = await axios.get(
+      `${import.meta.env.VITE_APP_URI}/api/v1/getLabs`,
+      {
+        params: {
+          city: city,
+          tests: tests,
+        },
+      }
+    )
     // console.log(data.data.data.labs[0].tests)
     setLabArr(data.data.data.labs)
   }
@@ -39,29 +43,32 @@ export default function Lab() {
   // console.log(labArr)
 
   let maxProcessingTime
-  labArr &&
+  let processingTimeA
+  if (labArr.length === 0 && !labFound) {
+    return (
+      <div className="flex flex-col items-center justify-center h-[80vh]">
+        <p className="text-2xl font-bold">No Labs Found</p>
+        <p className="text-lg font-medium text-gray-500">
+          Please try again with different tests
+        </p>
+      </div>
+    )
+  } else {
     labArr.forEach((lab) => {
       const processingTimeArr = []
       lab.tests.forEach((test) => {
-        let processingTime = test.processingTime
+        processingTimeA = test.processingTime
         const subString = "hours"
-        processingTime = processingTime.replace(subString, "")
-        processingTime = processingTime.trim()
-        processingTimeArr.push(processingTime)
+        processingTimeA = processingTimeA.replace(subString, "")
+        processingTimeA = processingTimeA.trim()
+        processingTimeArr.push(processingTimeA)
       })
       maxProcessingTime = Math.max(...processingTimeArr)
     })
+  }
+  console.log(labArr)
 
   const labs = labArr.map((lab, index) => {
-    // const processingTimeArr = []
-    // lab.tests.forEach((test) => {
-    //   let processingTime = test.processingTime
-    //   const subString = "hours"
-    //   processingTime = processingTime.replace(subString, "")
-    //   processingTime = processingTime.trim()
-    //   processingTimeArr.push(processingTime)
-    // })
-    // const maxProcessingTime = Math.max(...processingTimeArr)
     return (
       <div
         key={lab._id}
@@ -153,16 +160,6 @@ export default function Lab() {
   })
 
   const largeLabs = labArr.map((lab, index) => {
-    // const processingTimeArr = []
-    // lab.tests.forEach((test) => {
-    //   let processingTime = test.processingTime
-    //   const subString = "hours"
-    //   processingTime = processingTime.replace(subString, "")
-    //   processingTime = processingTime.trim()
-    //   processingTimeArr.push(processingTime)
-    // })
-    // const maxProcessingTime = Math.max(...processingTimeArr)
-
     return (
       <div
         key={lab._id}
@@ -227,8 +224,17 @@ export default function Lab() {
 
   return (
     <div>
-      <div className="lg:hidden">{labs}</div>
-      <div className="hidden lg:block">{largeLabs}</div>
+      {labArr.length === 0 ? (
+        <div className="flex flex-col items-center justify-center">
+          <h1 className="text-2xl font-bold">No Labs Found</h1>
+          <p className="text-lg">Please try again later</p>
+        </div>
+      ) : (
+        <div>
+          <div className="lg:hidden">{labs}</div>
+          <div className="hidden lg:block">{largeLabs}</div>
+        </div>
+      )}
     </div>
   )
 }
