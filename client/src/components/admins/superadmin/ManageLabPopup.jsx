@@ -120,7 +120,9 @@ export default function ManageLabPopup(props) {
           />
         </div>
         <div className="flex gap-5">
-          <h2 className="text-2xl font-semibold w-44">Cart Charge:</h2>
+          <h2 className="text-2xl font-semibold w-44">
+            Home Collection Charge:
+          </h2>
           <input
             type="text"
             className="border-[1px] border-secondary ml-4"
