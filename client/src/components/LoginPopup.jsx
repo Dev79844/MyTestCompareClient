@@ -42,7 +42,7 @@ export default function LoginPopup(props) {
     // console.log(phone, otp)
     try {
       const {data} = await axios.post(
-        `${import.meta.env.REACT_APP_URI}/api/v1/user/login`,
+        `${import.meta.env.VITE_APP_URI}/api/v1/user/login`,
         {
           phone,
           otp,
@@ -53,15 +53,32 @@ export default function LoginPopup(props) {
       if (type === "admin") {
         localStorage.setItem("adminToken", data.data.token)
         navigate("/adminProfile")
-      } else if (type === "user") {
+      } else if (type === "user" && origin === "login") {
         localStorage.setItem("token", data.data.token)
         navigate("/")
+      } else if (type === "user" && origin === "booking") {
+        localStorage.setItem("token", data.data.token)
+        console.log(token)
+        axios
+          .post(`${import.meta.env.VITE_APP_URI}/api/v1/booking`, postreqData, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          })
+          .then((response) => {
+            console.log(response.data)
+            navigate(whereToNavigate, {
+              state: {
+                data: bookingConfiremedData,
+              },
+            })
+          })
       }
     } catch (error) {
       console.log(error)
     }
 
-    if (origin === "booking") {
+    if (origin === "booking" && localStorage.getItem("token") !== null) {
       axios
         .post(`${import.meta.env.VITE_APP_URI}/api/v1/booking`, postreqData, {
           headers: {
@@ -79,7 +96,7 @@ export default function LoginPopup(props) {
     }
   }
 
-  // console.log(localStorage.getItem("token"))
+  console.log(localStorage.getItem("token"))
 
   return (
     <div className="font-Roboto lg:grid lg:grid-cols-2">

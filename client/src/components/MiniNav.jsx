@@ -70,7 +70,12 @@ export default function MiniNav() {
       )}
 
       <ReactModal isOpen={modalIsOpen} style={customStyles} ariaHideApp={false}>
-        <LoginPopup closeModal={closeModal} whereToNavigate="/" type="user" />
+        <LoginPopup
+          closeModal={closeModal}
+          whereToNavigate="/"
+          type="user"
+          origin="login"
+        />
       </ReactModal>
     </div>
   )
