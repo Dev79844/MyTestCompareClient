@@ -18,10 +18,10 @@ export default function Footer() {
       name: "Home",
       link: "/",
     },
-    {
-      name: "Subscribe",
-      link: "/subscribe",
-    },
+    // {
+    //   name: "Subscribe",
+    //   link: "/subscribe",
+    // },
     {
       name: "Become Partner",
       link: "/becomePartner",

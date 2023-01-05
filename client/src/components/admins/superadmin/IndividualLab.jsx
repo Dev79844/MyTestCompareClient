@@ -47,13 +47,14 @@ export default function IndividulaLab() {
       .get(`${import.meta.env.VITE_APP_URI}/api/v1/admin/lab/`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("superAdminToken")}`,
-          // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYWRmOGNmYjgxMzcxZWEyNjg5YmNlZiIsImlhdCI6MTY3MjM5NjUyMCwiZXhwIjoxNjcyNDgyOTIwfQ.OukbtIlti0A1be2ixtIebRdbXwPKsebyeW0mG72FuM4`,
         },
       })
       .then((res) => {
         setAllLab(res.data.data.labs)
       })
   }, [modalClosed])
+
+  // console.log(allLab)
 
   const allLabs = allLab.map((lab, index) => (
     <div
@@ -70,7 +71,7 @@ export default function IndividulaLab() {
         {"comission" in lab ? `${lab.comission} %` : "N/A"}
       </h2>
       <h2 className="justify-self-center">
-        {lab.discount in lab ? `${lab.paymentCycle} ` : "N/A"}
+        {"paymentCycle" in lab ? `${lab.paymentCycle} ` : "N/A"}
       </h2>
       <div
         className="flex items-center gap-2 justify-self-center cursor-pointer"
