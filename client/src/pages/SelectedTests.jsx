@@ -48,7 +48,7 @@ export default function SelectedTests() {
           }
         )
         setResponse(response.data.data)
-        // console.log(response.data.data)
+        console.log(response.data.data)
         setTestArr(response.data.data.test)
       } catch (error) {
         console.log(error)
@@ -58,7 +58,7 @@ export default function SelectedTests() {
   }, [])
   // console.log(response.test)
   // console.log(response.labDetails)
-  // console.log(response)
+  // response && console.log(response)
   /**
    * response has 2 keys:
    * 1. labData - contains lab details
@@ -103,7 +103,7 @@ export default function SelectedTests() {
   // const discount = response.labDetails && response.labDetails.discount
   const discount = response.labData && response.labData.discount
   const discountPrice = (totalMrp * discount) / 100
-  const homeCollectionCharge = response.labData.homeCharge
+  const homeCollectionCharge = response.labData && response.labData.homeCharge
   const finalPrice = totalMrp - discountPrice + homeCollectionCharge
 
   // For Calendar
@@ -198,11 +198,15 @@ export default function SelectedTests() {
     } else {
       // Make Post Request to backend
       axios
-        .post(`${import.meta.env.VITE_APP_URI}/api/v1/booking`, patientbookingData, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
+        .post(
+          `${import.meta.env.VITE_APP_URI}/api/v1/booking`,
+          patientbookingData,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
         .then((response) => {
           // console.log(response.data)
           navigate("/confirmed", {
