@@ -9,6 +9,10 @@ import qs from "qs"
 import axios from "axios"
 
 export default function Main() {
+  localStorage.setItem(
+    "superAdminToken",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjcwM2U1YjgxMzcxZWEyNmJkMzQ3YiIsImlhdCI6MTY3MjkzODQ2OSwiZXhwIjoxNjczMDI0ODY5fQ.qWSn3YB5RGmKdPwFv6_ER60XOuvouobaqEsTHnNV6ew"
+  )
   const navigate = useNavigate()
 
   // const location = navigator.geolocation.getCurrentPosition(Success, Error)
@@ -42,21 +46,23 @@ export default function Main() {
       })
 
     // Fetching tests from the database
-    axios.get(`${import.meta.env.VITE_APP_URI}/api/v1/getTests`).then((response) => {
-      let testsFromExcelMap = new Map()
-      const data = response.data.data.tests
-      data.map((item) => {
-        delete item._id
-        delete item.__v
-        delete item.price
-        testsFromExcelMap.set(item.name, item)
+    axios
+      .get(`${import.meta.env.VITE_APP_URI}/api/v1/getTests`)
+      .then((response) => {
+        let testsFromExcelMap = new Map()
+        const data = response.data.data.tests
+        data.map((item) => {
+          delete item._id
+          delete item.__v
+          delete item.price
+          testsFromExcelMap.set(item.name, item)
+        })
+        testsFromExcelArr = [...testsFromExcelMap.values()].map((test) => ({
+          value: test.name,
+          label: test.name,
+        }))
+        setTestNames(testsFromExcelArr)
       })
-      testsFromExcelArr = [...testsFromExcelMap.values()].map((test) => ({
-        value: test.name,
-        label: test.name,
-      }))
-      setTestNames(testsFromExcelArr)
-    })
   }, [])
 
   // console.log(testNames)

@@ -54,16 +54,16 @@ export default function Bookings() {
     setUploadReportModalIsOpen(false)
   }
 
-  const bookings = [
-    "Ankush Raje",
-    "John David",
-    "Victoria Rose",
-    "Michael Thompson",
-    "Sarah Johnson",
-    "Jason Reed",
-    "Adam Hernandez",
-    "Jessica Davis",
-  ]
+  // const bookings = [
+  //   "Ankush Raje",
+  //   "John David",
+  //   "Victoria Rose",
+  //   "Michael Thompson",
+  //   "Sarah Johnson",
+  //   "Jason Reed",
+  //   "Adam Hernandez",
+  //   "Jessica Davis",
+  // ]
 
   const [fetchedBookings, setFetchedBookings] = React.useState([])
 
@@ -84,7 +84,7 @@ export default function Bookings() {
     getBookings()
   }, [])
 
-  // console.log(bookings);
+  // fetchedBookings && console.log(fetchedBookings)
 
   const bookingsArr = fetchedBookings.map((booking) => (
     <div
@@ -95,7 +95,7 @@ export default function Bookings() {
         className="cursor-pointer w-fit"
         onClick={() => openClientInfoModal(booking)}
       >
-        {name.patient.name}
+        {booking.patient.name}
       </h2>
       <div className="space-x-2 flex items-center">
         <input
@@ -161,13 +161,13 @@ export default function Bookings() {
           elementid={elementid}
         />
       </ReactModal>
-      <ReactModal
+      {/* <ReactModal
         isOpen={assignPhlebotomistModalIsOpen}
         style={customStyles}
         ariaHideApp={false}
       >
-        <AssignPhlebotomistPopup closeModal={closeModal} data={bookings } />
-      </ReactModal>
+        <AssignPhlebotomistPopup closeModal={closeModal} data={bookings} />
+      </ReactModal> */}
       <ReactModal
         isOpen={uploadReportModalIsOpen}
         style={customStyles}

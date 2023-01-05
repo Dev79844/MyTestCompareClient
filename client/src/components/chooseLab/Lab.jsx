@@ -53,8 +53,9 @@ export default function Lab() {
         processingTimeArr.push(processingTimeA)
       })
       maxProcessingTime = Math.max(...processingTimeArr)
+      // console.log(processingTimeArr)
     })
-    console.log(labArr)
+    // console.log(maxProcessingTime)
 
     const labs = labArr.map((lab, index) => {
       return (

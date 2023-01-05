@@ -48,7 +48,7 @@ export default function RequestContainer(props) {
     if (type == "labRequest") {
       axios
         .patch(
-          `${process.env.VITE_APP_URI}/api/v1/admin/lab/${item._id}`,
+          `${import.meta.env.VITE_APP_URI}/api/v1/admin/lab/${item._id}`,
           {
             verified: true,
           },
