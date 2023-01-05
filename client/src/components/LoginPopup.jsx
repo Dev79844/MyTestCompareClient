@@ -78,22 +78,22 @@ export default function LoginPopup(props) {
       console.log(error)
     }
 
-    if (origin === "booking" && localStorage.getItem("token") !== null) {
-      axios
-        .post(`${import.meta.env.VITE_APP_URI}/api/v1/booking`, postreqData, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        })
-        .then((response) => {
-          console.log(response.data)
-          navigate(whereToNavigate, {
-            state: {
-              data: bookingConfiremedData,
-            },
-          })
-        })
-    }
+    // if (origin === "booking" && localStorage.getItem("token") !== null) {
+    //   axios
+    //     .post(`${import.meta.env.VITE_APP_URI}/api/v1/booking`, postreqData, {
+    //       headers: {
+    //         Authorization: `Bearer ${localStorage.getItem("token")}`,
+    //       },
+    //     })
+    //     .then((response) => {
+    //       console.log(response.data)
+    //       navigate(whereToNavigate, {
+    //         state: {
+    //           data: bookingConfiremedData,
+    //         },
+    //       })
+    //     })
+    // }
   }
 
   console.log(localStorage.getItem("token"))
