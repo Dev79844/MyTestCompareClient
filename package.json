@@ -5,9 +5,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
+    "start": "vite build && node server.js",
     "dev": "vite",
-    "build": "npm i && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
