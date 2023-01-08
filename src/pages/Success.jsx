@@ -47,11 +47,11 @@ export default function Success() {
         >
           <h1 className="font-bold text-xl sm:text-3xl">Booking Status</h1>
           <div className="flex items-center">
-            <Link to="/trackOrder">
+            {/* <Link to="/trackOrder">
               <h1 className="font-medium text-lg lg:text-2xl">
                 Track your order
               </h1>
-            </Link>
+            </Link> */}
             <Icon
               icon="carbon:chevron-right"
               color="black"

@@ -25,6 +25,7 @@ import AnalyticsOverview from "./pages/admins/admin/AnalyticsOverview"
 import SupAdminAnalyticsOverview from "./pages/admins/superadmin/SupAdminAnalyticsOverview"
 import AnalyticsMonthly from "./pages/admins/admin/AnalyticsMonthly"
 import SupAdminAnalyticsMonthly from "./pages/admins/superadmin/SupAdminAnalyticsMonthly"
+import AdminLogin from "./pages/admins/superadmin/AdminLogin"
 
 const router = createBrowserRouter([
   {
@@ -119,6 +120,10 @@ const router = createBrowserRouter([
     path: "/superadminlabMonthlyAnalytics",
     element: <SupAdminAnalyticsMonthly />,
   },
+  {
+    path: "/adminLogin",
+    element: <AdminLogin />
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById("root")).render(

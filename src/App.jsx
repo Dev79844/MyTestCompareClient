@@ -22,6 +22,7 @@ import AnalyticsOverview from "./pages/admins/admin/AnalyticsOverview"
 import SupAdminAnalyticsOverview from "./pages/admins/superadmin/SupAdminAnalyticsOverview"
 import AnalyticsMonthly from "./pages/admins/admin/AnalyticsMonthly"
 import SupAdminAnalyticsMonthly from "./pages/admins/superadmin/SupAdminAnalyticsMonthly"
+import AdminLogin from "./pages/admins/superadmin/AdminLogin"
 
 function App() {
   return (
@@ -49,6 +50,7 @@ function App() {
         <Route path="/superadminlabAnalytics" element={<SupAdminAnalyticsOverview />} />
         <Route path="/labMonthlyAnalytics" element={<AnalyticsMonthly />} />
         <Route path="/superadminlabMonthlyAnalytics" element={<SupAdminAnalyticsMonthly />} />
+        <Route path="/adminLogin" element={<AdminLogin />} />
       </Routes>
     </div>
   )
