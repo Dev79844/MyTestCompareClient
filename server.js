@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import http from "http";
 import https from "https";
+import fs from "fs";
 dotenv.config();
 const port = process.env.PORT || 3000;
 
