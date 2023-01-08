@@ -13,7 +13,8 @@ export default function PartnerSignUp() {
     state: "",
     city: "",
     zipcode: "",
-    license_number: "",
+    certificate: "",
+    timings: ""
   })
 
   const handleChange = (e) => {
@@ -36,7 +37,8 @@ export default function PartnerSignUp() {
       state: "",
       city: "",
       zipcode: "",
-      license_number: "",
+      certificate: "",
+      timings: ""
     })
     if (data.status === 201) {
       alert("Your request has been submitted")
@@ -134,10 +136,20 @@ export default function PartnerSignUp() {
           <div>
             <input
               type="text"
-              placeholder="License Number"
+              placeholder="Certificate"
               className="bg-background px-3 py-1 text-lg lg:py-2 lg:px-5 rounded"
               name="license_number"
-              value={formDetails.license_number}
+              value={formDetails.certificate}
+              onChange={handleChange}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Timings(9AM-5PM)"
+              className="bg-background px-3 py-1 text-lg lg:py-2 lg:px-5 rounded"
+              name="license_number"
+              value={formDetails.timings}
               onChange={handleChange}
             />
           </div>
