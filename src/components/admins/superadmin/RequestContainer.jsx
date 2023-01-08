@@ -74,7 +74,7 @@ export default function RequestContainer(props) {
   const handleReject = (item) => {
     if (type === "clientData") {
       axios
-        .delete(`${process.env.VITE_APP_URI}/api/v1/admin/booking/reject`, {
+        .delete(`${import.meta.env.VITE_APP_URI}/api/v1/admin/booking/reject`, {
           data: {
             bookingId: item._id,
           },
@@ -95,7 +95,7 @@ export default function RequestContainer(props) {
     }
     if (type === "labRequest") {
       axios
-        .delete(`${process.env.VITE_APP_URI}/api/v1/admin/lab/${item._id}`, {
+        .delete(`${import.meta.env.VITE_APP_URI}/api/v1/admin/lab/${item._id}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("superAdminToken")}`,
           },

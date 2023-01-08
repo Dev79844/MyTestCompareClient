@@ -15,6 +15,9 @@ export default function PendingClientRequest() {
   // }
 
   const fetchPendingClientRequests = () => {
+
+    console.log(localStorage.getItem("superAdminToken"));
+
     axios
       .get(`${import.meta.env.VITE_APP_URI}/api/v1/admin/booking/pending-to-verify`, {
         headers: {

@@ -3,10 +3,12 @@ import React from "react"
 import {Link} from "react-router-dom"
 
 export default function SuperAdminSidebar(props) {
-  localStorage.setItem(
-    "superAdminToken",
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjcwM2U1YjgxMzcxZWEyNmJkMzQ3YiIsImlhdCI6MTY3MjkzODQ2OSwiZXhwIjoxNjczMDI0ODY5fQ.qWSn3YB5RGmKdPwFv6_ER60XOuvouobaqEsTHnNV6ew"
-  )
+  // localStorage.setItem(
+  //   "superAdminToken",
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjcwM2U1YjgxMzcxZWEyNmJkMzQ3YiIsImlhdCI6MTY3MjkzODQ2OSwiZXhwIjoxNjczMDI0ODY5fQ.qWSn3YB5RGmKdPwFv6_ER60XOuvouobaqEsTHnNV6ew"
+  // )
+
+  localStorage.getItem("superAdminToken")
 
   const sidebarItems = [
     {

@@ -23,16 +23,19 @@ export default function PartnerSignUp() {
       `${import.meta.env.VITE_APP_URI}/api/v1/adminlogin`,
       formDetails,
     )
-      console.log(data)
-    localStorage.setItem('superAdminToken', data.data.data.token)
+      console.log(data.data.data.token)
     // setFormDetails({
     //   email: "",
     //   password: ""
     // })
+    // console.log(localStorage.getItem('superAdminToken'))
     if (data.status === 200) {
-      navigate("/clientRequests")
+      navigate("/clientRequests", {
+        state: data.data
+      })
+      localStorage.setItem("superAdminToken", data.data.data.token)
     }
-    console.log(formDetails)
+    // console.log(formDetails)
   }
 
   return (
