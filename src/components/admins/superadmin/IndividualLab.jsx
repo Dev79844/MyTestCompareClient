@@ -59,7 +59,7 @@ export default function IndividulaLab() {
   const allLabs = allLab.map((lab, index) => (
     <div
       key={index}
-      className={`grid grid-cols-manageLabs text-xl  px-3 py-3
+      className={`grid grid-cols-manageLabs gap-x-4 text-xl  px-3 py-3
       ${index % 2 != 0 ? "bg-secondary-withOpacity" : "bg-transparent"}
       `}
     >
@@ -71,6 +71,12 @@ export default function IndividulaLab() {
         {"comission" in lab ? `${lab.comission} %` : "N/A"}
       </h2>
       <h2 className="justify-self-center">
+        {"minimumCharge" in lab ? `${lab.minimumCharge}` : "N/A"}
+      </h2>
+      <h2 className="justify-self-center">
+        {"homeCharge" in lab ? `${lab.homeCharge}` : "N/A"}
+      </h2>
+      <h2 className="justify-self-center">
         {"paymentCycle" in lab ? `${lab.paymentCycle} ` : "N/A"}
       </h2>
       <div
@@ -78,7 +84,7 @@ export default function IndividulaLab() {
         onClick={() => openManageLabModal(lab)}
       >
         <Icon icon={"ant-design:setting-outlined"} className="text-2xl" />
-        <h2>Manage</h2>
+        {/* <h2>Manage</h2> */}
       </div>
     </div>
   ))
