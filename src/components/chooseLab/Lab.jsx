@@ -68,14 +68,14 @@ export default function Lab() {
           <div>
             <p className="font-medium">{lab.name}</p>
             <div className="flex gap-[3rem] text-[0.85rem]">
-              {/* <div className="flex items-center gap-1">
-              <Icon icon={"mdi:badge-outline"} color={"#E97F0E"} />
-              {lab.certificate}
-            </div> */}
-              {/* <div className="flex items-center gap-1">
-              <Icon icon={"simple-line-icons:calender"} color={"#E97F0E"} />
-              <span className="font-bold">Timings:</span> {lab.timings}
-            </div> */}
+              <div className="flex items-center gap-1">
+                <Icon icon={"mdi:badge-outline"} color={"#E97F0E"} />
+                {lab.certificate}
+              </div>
+              <div className="flex items-center gap-1">
+                <Icon icon={"simple-line-icons:calender"} color={"#E97F0E"} />
+                <span className="font-bold">Timings:</span> {lab.timings}
+              </div>
             </div>
             <div className="flex items-center gap-1">
               <Icon
@@ -161,14 +161,14 @@ export default function Lab() {
           <div className="grid grid-cols-chooseLab2">
             <p className="font-medium col-span-2 text-xl">{lab.name}</p>
             <div className="flex gap-[3rem] text-[0.85rem] col-span-2 my-1">
-              {/* <div className="flex items-center gap-1">
-              <Icon icon={"mdi:badge-outline"} color={"#E97F0E"} />
-              {lab.basic.certificate}
-            </div> */}
-              {/* <div className="flex items-center gap-1">
-              <Icon icon={"simple-line-icons:calender"} color={"#E97F0E"} />
-              <span className="font-bold">Timings:</span> {lab.basic.timings}
-            </div> */}
+              <div className="flex items-center gap-1">
+                <Icon icon={"mdi:badge-outline"} color={"#E97F0E"} />
+                {lab.certificate}
+              </div>
+              <div className="flex items-center gap-1">
+                <Icon icon={"simple-line-icons:calender"} color={"#E97F0E"} />
+                <span className="font-bold">Timings:</span> {lab.timings}
+              </div>
             </div>
             <div className="flex items-center gap-1 col-span-2">
               <Icon

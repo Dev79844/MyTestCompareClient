@@ -22,6 +22,7 @@ export default function ManageLabPopup(props) {
     discount: "",
     comission: "",
     homeCharge: "",
+    minimumCharge: "",
   })
 
   const handleLabData = (e) => {
@@ -49,6 +50,7 @@ export default function ManageLabPopup(props) {
           discount: labData.discount,
           comission: labData.comission,
           homeCharge: labData.homeCharge,
+          minimumCharge: labData.minimumCharge,
           paymentCycle: paymentCycle,
         },
         {
@@ -82,23 +84,23 @@ export default function ManageLabPopup(props) {
       </h1>
       <div className="mt-5 space-y-4">
         <div className="flex gap-8">
-          <h2 className="text-2xl font-semibold w-[180px]">Name:</h2>
+          <h2 className="text-2xl font-semibold min-w-[18rem]">Name:</h2>
           <h2 className="text-2xl">{selectedLab.name}</h2>
         </div>
         <div className="flex gap-8">
-          <h2 className="text-2xl font-semibold w-[176px]">Mobile:</h2>
+          <h2 className="text-2xl font-semibold min-w-[18rem]">Mobile:</h2>
           <h2 className="text-2xl">{selectedLab.submitter.phone}</h2>
         </div>
         <div className="flex gap-8">
-          <h2 className="text-2xl font-semibold w-[180px]">Email:</h2>
+          <h2 className="text-2xl font-semibold min-w-[18rem]">Email:</h2>
           <h2 className="text-2xl">{selectedLab.submitter.email}</h2>
         </div>
         <div className="flex gap-8">
-          <h2 className="text-2xl font-semibold w-44">Address: </h2>
+          <h2 className="text-2xl font-semibold min-w-[18rem]">Address: </h2>
           <h2 className="text-2xl">{selectedLab.address.address}</h2>
         </div>
         <div className="flex gap-5">
-          <h2 className="text-2xl font-semibold w-44">Discount:</h2>
+          <h2 className="text-2xl font-semibold min-w-[18rem]">Discount:</h2>
           <input
             type="text"
             className="border-[1px] border-secondary ml-4"
@@ -109,7 +111,7 @@ export default function ManageLabPopup(props) {
           />
         </div>
         <div className="flex gap-5">
-          <h2 className="text-2xl font-semibold w-44">Comission:</h2>
+          <h2 className="text-2xl font-semibold min-w-[18rem]">Comission:</h2>
           <input
             type="text"
             className="border-[1px] border-secondary ml-4"
@@ -120,7 +122,7 @@ export default function ManageLabPopup(props) {
           />
         </div>
         <div className="flex gap-5">
-          <h2 className="text-2xl font-semibold w-44">
+          <h2 className="text-2xl font-semibold min-w-[18rem]">
             Home Collection Charge:
           </h2>
           <input
@@ -133,7 +135,22 @@ export default function ManageLabPopup(props) {
           />
         </div>
         <div className="flex gap-5">
-          <h2 className="text-2xl font-semibold w-48">Payment Cycle:</h2>
+          <h2 className="text-2xl font-semibold min-w-[18rem]">
+            Minimum Charge:
+          </h2>
+          <input
+            type="text"
+            className="border-[1px] border-secondary ml-4"
+            name="minimumCharge"
+            onChange={handleLabData}
+            value={labData.minimumCharge}
+            // defaultValue={selectedLab.comission}
+          />
+        </div>
+        <div className="flex gap-5">
+          <h2 className="text-2xl font-semibold min-w-[18rem]">
+            Payment Cycle:
+          </h2>
           <Select
             options={paymentCycleOptions}
             className="w-[30%]"

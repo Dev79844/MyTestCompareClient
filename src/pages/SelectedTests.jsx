@@ -98,13 +98,24 @@ export default function SelectedTests() {
   // document.body.style.overflow = modalIsOpen ? "hidden" : "auto"
 
   // For Total Price
+  let [finalPrice, setFinalPrice] = React.useState()
   const testprice = testArr && testArr.map((item) => item.price)
   const totalMrp = testprice && testprice.reduce((a, b) => a + b, 0)
   // const discount = response.labDetails && response.labDetails.discount
   const discount = response.labData && response.labData.discount
   const discountPrice = (totalMrp * discount) / 100
   const homeCollectionCharge = response.labData && response.labData.homeCharge
-  const finalPrice = totalMrp - discountPrice + homeCollectionCharge
+  const minimumCharge = response.labData && response.labData.minimumCharge
+  finalPrice = totalMrp - discountPrice
+
+  finalPrice < minimumCharge ? (finalPrice += minimumCharge) : finalPrice
+
+  const applyCoupon = () => {
+    const discount = 30
+    const discountPrice = (finalPrice * discount) / 100
+    finalPrice = finalPrice - discountPrice
+    setFinalPrice(finalPrice)
+  }
 
   // For Calendar
   const [visible, setVisible] = React.useState(true)
@@ -501,16 +512,19 @@ export default function SelectedTests() {
                           ₹ {homeCollectionCharge}
                         </h1>
                       </div>
-                      {/* <div className="flex gap-1 justify-between">
+                      <div className="flex gap-1 justify-between">
                         <input
                           type="text"
                           placeholder="Apply Coupon"
                           className="font-medium text-base border-[1px] rounded border-borderGray placeholder:font-light px-1"
                         />
-                        <button className="font-medium text-base bg-primary text-white px-2 rounded">
+                        <button
+                          className="font-medium text-base bg-primary text-white px-2 rounded"
+                          onClick={applyCoupon}
+                        >
                           Apply
                         </button>
-                      </div> */}
+                      </div>
                     </div>
                     {/* Discount div end */}
 
