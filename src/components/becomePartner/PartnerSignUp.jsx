@@ -1,10 +1,22 @@
 import {Icon} from "@iconify/react"
-import React from "react"
+import React, {useState, ChangeEvent} from "react"
 import "../../style.css"
 import axios from "axios"
 
 export default function PartnerSignUp() {
   const [isSubmitting, setIsSubmitting] = React.useState(false)
+
+  const [logo, setLogo] = React.useState(null)
+  const [labImages, setLabImages] = useState([])
+
+  const handleLogoUpload = (e) => {
+    setLogo(e.target.files[0])
+  }
+
+  const handleLabImagesUpload = (e) => {
+    setLabImages([...labImages, e.target.files[0]])
+    // setLabImages(e.target.files)
+  }
 
   const [formDetails, setFormDetails] = React.useState({
     submitter_name: "",
@@ -50,6 +62,11 @@ export default function PartnerSignUp() {
     } finally {
       setIsSubmitting(false)
     }
+
+    // const formData = new FormData()
+    // formData.append("labLogo", file)
+    // console.log(logo)
+    // console.log(labImages)
   }
 
   return (
@@ -169,7 +186,11 @@ export default function PartnerSignUp() {
               className="text-3xl"
             />
             <label className="text-base xs:text-xl w-[180px] xs:w-[210px] text-white border-[1px] font-bold border-black px-4 py-[2px] rounded text-center">
-              <input type="file" />
+              <input
+                type="file"
+                className="cursor-pointer"
+                onClick={handleLogoUpload}
+              />
               Upload Logo
             </label>
           </div>
@@ -180,7 +201,12 @@ export default function PartnerSignUp() {
               className="text-3xl"
             />
             <label className="text-base xs:text-xl w-[180px] xs:w-[210px] text-white border-[1px] font-bold border-black px-4 py-[2px] rounded">
-              <input type="file" />
+              <input
+                type="file"
+                className="cursor-pointer"
+                multiple="multiple"
+                onClick={handleLabImagesUpload}
+              />
               Upload Lab Images
             </label>
           </div>

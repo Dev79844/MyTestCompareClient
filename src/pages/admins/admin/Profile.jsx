@@ -74,11 +74,11 @@ export default function Profile() {
               </div>
               {/* Info Div */}
               <div className="w-4/5">
-                <div className="flex justify-end">
+                {/* <div className="flex justify-end">
                   <Icon icon="mdi:pencil-plus" className="text-3xl " />
-                </div>
+                </div> */}
                 <div className="mt-5 space-y-2">
-                  <div className="flex gap-12">
+                  {/* <div className="flex gap-12">
                     <h2 className="font-semibold">Dr's Name</h2>
                     <div>
                       <h3 className="font-light">Dr. Murari Thaker ( M.D.)</h3>
@@ -86,8 +86,8 @@ export default function Profile() {
                         Dr. Jasvant Singh ( Pharmisist)
                       </h3>
                     </div>
-                  </div>
-                  <div className="flex gap-10">
+                  </div> */}
+                  {/* <div className="flex gap-10">
                     <h2 className="font-semibold">Information</h2>
                     <p className="font-light">
                       Our Labs is an aggregator of medical diagnostic services.
@@ -96,7 +96,7 @@ export default function Profile() {
                       diagnostic centers in India with their price, discount,
                       address & contact numbers.
                     </p>
-                  </div>
+                  </div> */}
                   <div className="flex gap-16 ">
                     <h2 className="font-semibold">Timings</h2>
                     <div>

@@ -90,7 +90,7 @@ export default function Lab() {
             <div className="flex items-center gap-1">
               <Icon icon={"mdi:information-outline"} color={"#E97F0E"} />
               <p className="text-[0.85rem]">
-                Processing time: {`${maxProcessingTime} hours`}
+                Processing time: {`${maxProcessingTime} working hours`}
               </p>
             </div>
             {/* <div className="flex items-center gap-1">
@@ -181,7 +181,7 @@ export default function Lab() {
               </p>
             </div>
           </div>
-          <h1 className="justify-self-center self-center">{`${maxProcessingTime} hours`}</h1>
+          <h1 className="justify-self-center self-center">{`${maxProcessingTime} working hours`}</h1>
           {/* <h1 className="justify-self-center self-center">{lab.distance} km</h1> */}
           <h1 className="justify-self-center self-center text-xl">
             ₹

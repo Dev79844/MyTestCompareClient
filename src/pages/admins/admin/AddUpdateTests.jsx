@@ -4,6 +4,8 @@ import AdminSidebar from "../../../components/admins/admin/AdminSidebar"
 import TopStrip from "../../../components/admins/admin/TopStrip"
 
 export default function AddUpdateTests() {
+  const [isUploading, setIsUploading] = useState(false)
+
   const headers = new Headers()
   headers.append(
     "Authorization",
@@ -20,6 +22,7 @@ export default function AddUpdateTests() {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    setIsUploading(true)
 
     // Create a FormData object to store the file
     const formData = new FormData()
@@ -37,12 +40,15 @@ export default function AddUpdateTests() {
         }
         setFile(null)
         alert("File uploaded successfully")
-         setButtonDisabled(true)
+        setButtonDisabled(true)
 
         // return response.text()
       })
       .catch((error) => {
         console.error(error)
+      })
+      .finally(() => {
+        setIsUploading(false)
       })
   }
 
@@ -65,9 +71,13 @@ export default function AddUpdateTests() {
               <button
                 type="submit"
                 disabled={buttonDisabled}
-                className={`bg-primary text-white px-8 text-lg rounded py-[2px] ${buttonDisabled ? "cursor-not-allowed opacity-60" : "cursor-pointer opacity-100"} `}
+                className={`bg-primary text-white px-8 text-lg rounded py-[2px] ${
+                  buttonDisabled
+                    ? "cursor-not-allowed opacity-60"
+                    : "cursor-pointer opacity-100"
+                } `}
               >
-                Upload
+                {isUploading ? "Uploading..." : "Upload"}
               </button>
             </form>
           </div>

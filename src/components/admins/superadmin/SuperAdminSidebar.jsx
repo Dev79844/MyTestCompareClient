@@ -1,14 +1,16 @@
 import {Icon} from "@iconify/react"
 import React from "react"
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 
 export default function SuperAdminSidebar(props) {
-  // localStorage.setItem(
-  //   "superAdminToken",
-  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjcwM2U1YjgxMzcxZWEyNmJkMzQ3YiIsImlhdCI6MTY3MjkzODQ2OSwiZXhwIjoxNjczMDI0ODY5fQ.qWSn3YB5RGmKdPwFv6_ER60XOuvouobaqEsTHnNV6ew"
-  // )
+  // localStorage.getItem("superAdminToken")
 
-  localStorage.getItem("superAdminToken")
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    localStorage.removeItem("superAdminToken")
+    navigate("/adminLogin")
+  }
 
   const sidebarItems = [
     {
@@ -88,7 +90,10 @@ export default function SuperAdminSidebar(props) {
         <div className="px-3 mt-4 space-y-4">{sidebarItemsList}</div>
 
         <div className="mt-4 px-3">
-          <button className="bg-primary text-white font-medium px-5 py-1 rounded w-3/5 text-2xl lg:w-4/5">
+          <button
+            className="bg-primary text-white font-medium px-5 py-1 rounded w-3/5 text-2xl lg:w-4/5"
+            onClick={handleLogout}
+          >
             Log Out
           </button>
         </div>
