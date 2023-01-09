@@ -4,6 +4,8 @@ import "../../style.css"
 import axios from "axios"
 
 export default function PartnerSignUp() {
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
+
   const [formDetails, setFormDetails] = React.useState({
     submitter_name: "",
     submitter_email: "",
@@ -14,7 +16,7 @@ export default function PartnerSignUp() {
     city: "",
     zipcode: "",
     certificate: "",
-    timings: ""
+    timings: "",
   })
 
   const handleChange = (e) => {
@@ -24,24 +26,29 @@ export default function PartnerSignUp() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const data = await axios.post(
-      `${import.meta.env.VITE_APP_URI}/api/v1/lab`,
-      formDetails
-    )
-    setFormDetails({
-      submitter_name: "",
-      submitter_email: "",
-      submitter_phone: "+91",
-      name: "",
-      address: "",
-      state: "",
-      city: "",
-      zipcode: "",
-      certificate: "",
-      timings: ""
-    })
-    if (data.status === 201) {
+    setIsSubmitting(true)
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_APP_URI}/api/v1/lab`,
+        formDetails
+      )
+      setFormDetails({
+        submitter_name: "",
+        submitter_email: "",
+        submitter_phone: "+91",
+        name: "",
+        address: "",
+        state: "",
+        city: "",
+        zipcode: "",
+        certificate: "",
+        timings: "",
+      })
       alert("Your request has been submitted")
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setIsSubmitting(false)
     }
   }
 
@@ -138,7 +145,7 @@ export default function PartnerSignUp() {
               type="text"
               placeholder="Certificate"
               className="bg-background px-3 py-1 text-lg lg:py-2 lg:px-5 rounded"
-              name="license_number"
+              name="certificate"
               value={formDetails.certificate}
               onChange={handleChange}
             />
@@ -148,7 +155,7 @@ export default function PartnerSignUp() {
               type="text"
               placeholder="Timings(9AM-5PM)"
               className="bg-background px-3 py-1 text-lg lg:py-2 lg:px-5 rounded"
-              name="license_number"
+              name="timings"
               value={formDetails.timings}
               onChange={handleChange}
             />
@@ -183,7 +190,7 @@ export default function PartnerSignUp() {
             className="bg-secondary text-white font-bold text-xl px-8 rounded py-1 lg:px-12"
             onClick={handleSubmit}
           >
-            Submit
+            {isSubmitting ? "Submitting" : "Submit"}
           </button>
         </div>
       </div>

@@ -15,12 +15,24 @@ export default function ManageLabs() {
             <div className="mt-5">
               <div
                 className="font-medium text-lg grid grid-cols-manageLabs relative after:absolute after:bg-borderGray after:w-full after:h-[1px] after:bottom-0 after:left-0
-                          py-3"
+                          py-3 gap-x-4"
               >
                 <h2 className="ml-3">Lab Name</h2>
-                <h2 className="justify-self-center">Discount (%)</h2>
-                <h2 className="justify-self-center">Comission (%)</h2>
-                <h2 className="justify-self-center">Payment Cycle</h2>
+                <h2 className="justify-self-center text-center">
+                  Discount (%)
+                </h2>
+                <h2 className="justify-self-center text-center">
+                  Comission (%)
+                </h2>
+                <h2 className="justify-self-center text-center">
+                  Minimum Charge
+                </h2>
+                <h2 className="justify-self-center text-center">
+                  Collection Charge
+                </h2>
+                <h2 className="justify-self-center text-center">
+                  Payment Cycle
+                </h2>
               </div>
               <IndividualLab />
             </div>

@@ -39,7 +39,7 @@ module.exports = {
         chooseLab5: "40% 15% 15% 15% 15%",
         selectedLab2: "2fr 1fr",
         labPaymentReminder: "1.2fr 0.8fr 1fr 1fr 1fr",
-        manageLabs: "1.5fr 1fr 1fr 1fr 1fr",
+        manageLabs: "1.5fr 1fr 1fr 1fr 1fr 1fr 0.5fr",
         sidebarSetGrid: "1fr 3fr",
         clientBookings: "2fr 1.2fr 1fr 2fr",
       },
