@@ -58,7 +58,7 @@ export default function LoginPopup(props) {
         navigate("/")
       } else if (type === "user" && origin === "booking") {
         localStorage.setItem("token", data.data.token)
-        console.log(token)
+        console.log(localStorage.getItem("token"))
         axios
           .post(`${import.meta.env.VITE_APP_URI}/api/v1/booking`, postreqData, {
             headers: {
@@ -96,7 +96,7 @@ export default function LoginPopup(props) {
     // }
   }
 
-  console.log(localStorage.getItem("token"))
+  // console.log(localStorage.getItem("token"))
 
   return (
     <div className="font-Roboto lg:grid lg:grid-cols-2">

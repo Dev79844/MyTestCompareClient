@@ -48,7 +48,7 @@ export default function SelectedTests() {
           }
         )
         setResponse(response.data.data)
-        console.log(response.data.data)
+        // console.log(response.data.data)
         setTestArr(response.data.data.test)
       } catch (error) {
         console.log(error)
@@ -108,14 +108,18 @@ export default function SelectedTests() {
   const minimumCharge = response.labData && response.labData.minimumCharge
   finalPrice = totalMrp - discountPrice
 
-  finalPrice < minimumCharge ? (finalPrice += minimumCharge) : finalPrice
+  finalPrice < minimumCharge ? (finalPrice += homeCollectionCharge) : finalPrice
 
   const applyCoupon = () => {
     const discount = 30
     const discountPrice = (finalPrice * discount) / 100
-    finalPrice = finalPrice - discountPrice
-    setFinalPrice(finalPrice)
+    let newFinalPrice = finalPrice - discountPrice
+    // console.log("after aplying discount" + newFinalPrice)
+    // setFinalPrice(newFinalPrice)
+    setFinalPrice((prevPrice) => prevPrice - discountPrice)
+    // console.log("clicked")
   }
+  console.log(finalPrice)
 
   // For Calendar
   const [visible, setVisible] = React.useState(true)
@@ -428,7 +432,7 @@ export default function SelectedTests() {
                           color={"#E97F0E"}
                           className="text-lg"
                         />
-                        <h3>Certified by NABL</h3>
+                        <h3>Certified by {response.labData.certificate} </h3>
                       </div>
                       {/* <div className="flex gap-1 items-center">
                     <Icon
@@ -504,14 +508,17 @@ export default function SelectedTests() {
                           ₹ {discountPrice}
                         </h1>
                       </div>
-                      <div className="flex gap-1 justify-between">
-                        <h1 className="font-medium text-lg">
-                          Home Collection Charge:
-                        </h1>
-                        <h1 className="font-medium text-lg">
-                          ₹ {homeCollectionCharge}
-                        </h1>
-                      </div>
+                      {finalPrice < minimumCharge ? (
+                        <div className="flex gap-1 justify-between">
+                          <h1 className="font-medium text-lg">
+                            Home Collection Charge:
+                          </h1>
+                          <h1 className="font-medium text-lg">
+                            ₹ {homeCollectionCharge}
+                          </h1>
+                        </div>
+                      ) : null}
+
                       <div className="flex gap-1 justify-between">
                         <input
                           type="text"
