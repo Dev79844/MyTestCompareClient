@@ -14,9 +14,11 @@ export default function PartnerSignUp() {
   }
 
   const handleLabImagesUpload = (e) => {
-    setLabImages([...labImages, e.target.files[0]])
-    // setLabImages(e.target.files)
+    // setLabImages([...labImages, e.target.files[0]])
+    setLabImages(e.target.files)
   }
+  console.log(labImages)
+  console.log(logo)
 
   const [formDetails, setFormDetails] = React.useState({
     submitter_name: "",
@@ -205,7 +207,7 @@ export default function PartnerSignUp() {
                 type="file"
                 className="cursor-pointer"
                 multiple="multiple"
-                onClick={handleLabImagesUpload}
+                onChange={handleLabImagesUpload}
               />
               Upload Lab Images
             </label>
