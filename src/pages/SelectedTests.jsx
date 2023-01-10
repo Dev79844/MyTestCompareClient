@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import {Icon} from "@iconify/react"
 
 import MiniNav from "../components/MiniNav"
@@ -98,7 +98,6 @@ export default function SelectedTests() {
   // document.body.style.overflow = modalIsOpen ? "hidden" : "auto"
 
   // For Total Price
-  let [finalPrice, setFinalPrice] = React.useState()
   const testprice = testArr && testArr.map((item) => item.price)
   const totalMrp = testprice && testprice.reduce((a, b) => a + b, 0)
   // const discount = response.labDetails && response.labDetails.discount
@@ -106,9 +105,26 @@ export default function SelectedTests() {
   const discountPrice = (totalMrp * discount) / 100
   const homeCollectionCharge = response.labData && response.labData.homeCharge
   const minimumCharge = response.labData && response.labData.minimumCharge
-  finalPrice = totalMrp - discountPrice
+  // let [finalPrice, setFinalPrice] = React.useState(
+  //   response.labData && totalMrp - discount
+  // )
+  // finalPrice = totalMrp - discountPrice
+  // console.log(totalMrp - discountPrice)
 
-  finalPrice < minimumCharge ? (finalPrice += homeCollectionCharge) : finalPrice
+  let [finalPrice, setFinalPrice] = React.useState(0)
+  useEffect(() => {
+    if (testArr && response.labData) {
+      let price = testArr.map((item) => item.price).reduce((a, b) => a + b, 0)
+      let discountPrice = (price * response.labData.discount) / 100
+      setFinalPrice(price - discountPrice)
+    }
+  }, [testArr, response.labData])
+
+  console.log(finalPrice)
+
+  finalPrice < minimumCharge
+    ? setFinalPrice((currentState) => (currentState += homeCollectionCharge))
+    : finalPrice
 
   const applyCoupon = () => {
     const discount = 30
@@ -116,8 +132,8 @@ export default function SelectedTests() {
     let newFinalPrice = finalPrice - discountPrice
     // console.log("after aplying discount" + newFinalPrice)
     // setFinalPrice(newFinalPrice)
-    setFinalPrice((prevPrice) => prevPrice - discountPrice)
-    // console.log("clicked")
+    setFinalPrice(newFinalPrice)
+    console.log("clicked")
   }
   console.log(finalPrice)
 
