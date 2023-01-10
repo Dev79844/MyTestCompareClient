@@ -48,7 +48,18 @@ export default function Lab() {
           processingTimeA.includes("hr") ||
           processingTimeA.includes("hour")
         ) {
-          const subString = "hours" || "hrs" || "hr" || "hour"
+          // const subString = "hours" || "hrs" || "hr" || "hour"
+          let subString
+          if (processingTimeA.includes("hours")) {
+            subString = "hours"
+          } else if (processingTimeA.includes("hrs")) {
+            subString = "hrs"
+          } else if (processingTimeA.includes("hr")) {
+            subString = "hr"
+          } else if (processingTimeA.includes("hour")) {
+            subString = "hour"
+          }
+
           processingTimeA = processingTimeA.replace(subString, "")
           processingTimeA = processingTimeA.trim()
           processingTimeArr.push(processingTimeA)
