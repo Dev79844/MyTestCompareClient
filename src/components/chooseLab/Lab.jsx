@@ -7,12 +7,6 @@ import {Link, useLocation, useNavigate} from "react-router-dom"
 import qs from "qs"
 
 export default function Lab() {
-  /**
-   * @todo
-   * * 1. Show lab certificate
-   * * 2. Show lab timings
-   */
-
   const navigate = useNavigate()
   const {search} = useLocation()
 
@@ -47,10 +41,35 @@ export default function Lab() {
       const processingTimeArr = []
       lab.tests.forEach((test) => {
         processingTimeA = test.processingTime
-        const subString = "hours"
-        processingTimeA = processingTimeA.replace(subString, "")
-        processingTimeA = processingTimeA.trim()
-        processingTimeArr.push(processingTimeA)
+
+        if (
+          processingTimeA.includes("hours") ||
+          processingTimeA.includes("hrs") ||
+          processingTimeA.includes("hr") ||
+          processingTimeA.includes("hour")
+        ) {
+          const subString = "hours" || "hrs" || "hr" || "hour"
+          processingTimeA = processingTimeA.replace(subString, "")
+          processingTimeA = processingTimeA.trim()
+          processingTimeArr.push(processingTimeA)
+        } else if (processingTimeA.includes("days")) {
+          const subString = "days"
+          processingTimeA = processingTimeA.replace(subString, "")
+          processingTimeA = processingTimeA.trim()
+          processingTimeA = processingTimeA * 24
+          processingTimeArr.push(processingTimeA)
+        } else if (processingTimeA.includes("weeks")) {
+          const subString = "weeks"
+          processingTimeA = processingTimeA.replace(subString, "")
+          processingTimeA = processingTimeA.trim()
+          processingTimeA = processingTimeA * 24 * 7
+          processingTimeArr.push(processingTimeA)
+        }
+
+        // const subString = "hours"
+        // processingTimeA = processingTimeA.replace(subString, "")
+        // processingTimeA = processingTimeA.trim()
+        // processingTimeArr.push(processingTimeA)
       })
       maxProcessingTime = Math.max(...processingTimeArr)
       // console.log(processingTimeArr)
