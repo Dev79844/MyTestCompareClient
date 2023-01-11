@@ -17,8 +17,8 @@ export default function PartnerSignUp() {
     // setLabImages([...labImages, e.target.files[0]])
     setLabImages(e.target.files)
   }
-  console.log(labImages)
-  console.log(logo)
+  // console.log(labImages)
+  // console.log(logo)
 
   const [formDetails, setFormDetails] = React.useState({
     submitter_name: "",
@@ -41,11 +41,27 @@ export default function PartnerSignUp() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
+    const formData = new FormData()
+    formData.append("submitter_name", formDetails.submitter_name)
+    formData.append("submitter_email", formDetails.submitter_email)
+    formData.append("submitter_phone", formDetails.submitter_phone)
+    formData.append("name", formDetails.name)
+    formData.append("address", formDetails.address)
+    formData.append("state", formDetails.state)
+    formData.append("city", formDetails.city)
+    formData.append("zipcode", formDetails.zipcode)
+    formData.append("certificate", formDetails.certificate)
+    formData.append("timings", formDetails.timings)
+    formData.append("logo", logo)
+    for (let i = 0; i < labImages.length; i++) {
+      formData.append("images", labImages[i])
+    }
     try {
-      await axios.post(
-        `${import.meta.env.VITE_APP_URI}/api/v1/lab`,
-        formDetails
-      )
+      await axios.post(`${import.meta.env.VITE_APP_URI}/api/v1/lab`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
       setFormDetails({
         submitter_name: "",
         submitter_email: "",
@@ -65,10 +81,10 @@ export default function PartnerSignUp() {
       setIsSubmitting(false)
     }
 
-    // const formData = new FormData()
-    // formData.append("labLogo", file)
-    // console.log(logo)
-    // console.log(labImages)
+    console.log(formData)
+
+    console.log(logo)
+    console.log(labImages)
   }
 
   return (
@@ -192,6 +208,7 @@ export default function PartnerSignUp() {
                 type="file"
                 className="cursor-pointer"
                 onClick={handleLogoUpload}
+                name="logo"
               />
               Upload Logo
             </label>
@@ -208,6 +225,7 @@ export default function PartnerSignUp() {
                 className="cursor-pointer"
                 multiple="multiple"
                 onChange={handleLabImagesUpload}
+                name="images"
               />
               Upload Lab Images
             </label>

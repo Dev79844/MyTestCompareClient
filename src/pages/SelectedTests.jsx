@@ -102,7 +102,7 @@ export default function SelectedTests() {
   const totalMrp = testprice && testprice.reduce((a, b) => a + b, 0)
   // const discount = response.labDetails && response.labDetails.discount
   const discount = response.labData && response.labData.discount
-  const discountPrice = (totalMrp * discount) / 100
+  const discountPrice = Math.floor((totalMrp * discount) / 100)
   const homeCollectionCharge = response.labData && response.labData.homeCharge
   const minimumCharge = response.labData && response.labData.minimumCharge
   // let [finalPrice, setFinalPrice] = React.useState(
@@ -115,7 +115,7 @@ export default function SelectedTests() {
   useEffect(() => {
     if (testArr && response.labData) {
       let price = testArr.map((item) => item.price).reduce((a, b) => a + b, 0)
-      let discountPrice = (price * response.labData.discount) / 100
+      let discountPrice = Math.floor((price * response.labData.discount) / 100)
       setFinalPrice(price - discountPrice)
     }
   }, [testArr, response.labData])
@@ -128,7 +128,7 @@ export default function SelectedTests() {
 
   const applyCoupon = () => {
     const discount = 30
-    const discountPrice = (finalPrice * discount) / 100
+    const discountPrice = Math.floor((finalPrice * discount) / 100)
     let newFinalPrice = finalPrice - discountPrice
     // console.log("after aplying discount" + newFinalPrice)
     // setFinalPrice(newFinalPrice)
@@ -539,10 +539,10 @@ export default function SelectedTests() {
                         <input
                           type="text"
                           placeholder="Apply Coupon"
-                          className="font-medium text-base border-[1px] rounded border-borderGray placeholder:font-light px-1"
+                          className="font-medium text-xl border-[1px] rounded border-borderGray placeholder:font-light px-1"
                         />
                         <button
-                          className="font-medium text-base bg-primary text-white px-2 rounded"
+                          className="font-medium text-xl bg-primary text-white py-1 px-6 rounded"
                           onClick={applyCoupon}
                         >
                           Apply
@@ -563,10 +563,15 @@ export default function SelectedTests() {
                   {/* <Link to="/booking"> */}
                   <div className="flex justify-center mx-3 my-4">
                     <button
-                      className="bg-secondary text-white font-medium text-xl px-2 rounded-lg py-1 w-full"
+                      className="bg-secondary text-white flex items-center justify-center gap-1 group font-medium text-2xl px-2 rounded-lg py-2 w-full"
                       onClick={handleSubmit}
                     >
                       Continue
+                      <Icon
+                        icon="material-symbols:arrow-right-alt"
+                        color="white"
+                        className="text-[33px] ml-2 group-hover:translate-x-1 transition-all duration-300 ease-in-out"
+                      />
                     </button>
                     <ReactModal
                       isOpen={modalIsOpen}

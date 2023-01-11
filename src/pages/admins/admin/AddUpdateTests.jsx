@@ -49,6 +49,7 @@ export default function AddUpdateTests() {
       })
       .finally(() => {
         setIsUploading(false)
+        console.log(file)
       })
   }
 
