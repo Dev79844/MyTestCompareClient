@@ -105,7 +105,7 @@ export default function Footer() {
       <div className="mt-4">
         <h2 className="font-bold text-xl text-center">Follow Us on</h2>
         <div className="flex gap-3 mt-2">
-          <Icon icon="mdi:instagram" color="white" className="text-4xl" />
+          <a href="https://www.instagram.com/mytestcompare/" target={"_blank"} className = "cursor-pointer"><Icon icon="mdi:instagram" color="white" className="text-4xl" /></a>
           <Icon icon="mdi:twitter" color="white" className="text-4xl" />
           <Icon icon="mdi:linkedin" color="white" className="text-4xl" />
         </div>
