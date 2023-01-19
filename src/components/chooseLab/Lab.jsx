@@ -29,8 +29,8 @@ export default function Lab() {
         },
       }
     )
-    // console.log(data.data.data.labs[0].tests)
-    setLabArr(data.data.data.labs)
+    console.log(data.data.data.labs)
+    // setLabArr(data.data.data.labs)
   }
 
   console.log(labArr.length)
