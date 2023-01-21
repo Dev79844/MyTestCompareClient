@@ -6,6 +6,12 @@ import https from "https";
 import fs from "fs";
 import path from "path";
 dotenv.config();
+
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 const PORT = process.env.PORT || 5000;
 
 const app = express();
