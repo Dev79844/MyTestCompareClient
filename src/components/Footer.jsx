@@ -30,8 +30,8 @@ export default function Footer() {
       name: "Lab Login",
     },
     {
-      name: "Contact Us",
-      link: "/contact",
+      name: "Super Admin login",
+      link: "/adminLogin",
     },
   ]
 
