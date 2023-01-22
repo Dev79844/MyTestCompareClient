@@ -34,6 +34,7 @@ export default function Lab() {
     )
     console.log(data.data.data.labs)
     setLabArr(data.data.data.labs)
+    setLoading(false)
   }
 
   if (loading) {

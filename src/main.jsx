@@ -33,6 +33,10 @@ const router = createBrowserRouter([
     element: <HomePage />,
   },
   {
+    path: "/adminLogin",
+    element: <AdminLogin />
+  },
+  {
     path: "/chooseLab",
     element: <ChooseLab />,
   },
@@ -120,10 +124,6 @@ const router = createBrowserRouter([
     path: "/superadminlabMonthlyAnalytics",
     element: <SupAdminAnalyticsMonthly />,
   },
-  {
-    path: "/adminLogin",
-    element: <AdminLogin />
-  }
 ])
 
 ReactDOM.createRoot(document.getElementById("root")).render(
