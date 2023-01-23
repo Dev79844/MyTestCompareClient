@@ -18,8 +18,7 @@ import axios from "axios"
 
 export default function SelectedTests() {
   /**
-   // TODO: Fetch all test data from backend (sample type, special instructions, processing time, parameters covered)
-   // TODO: Fetch Lab Certificate from backend (if any)
+   // TODO: Fetch special instructions from backend
    */
 
   const navigate = useNavigate()
@@ -68,6 +67,18 @@ export default function SelectedTests() {
   const removeTest = (item) => {
     const filteredArr = testArr.filter((test) => test.name !== item.name)
     setTestArr(filteredArr)
+    if (filteredArr.length === 0) {
+      navigate("/")
+    } else {
+      const queryParams = qs.stringify({
+        tests: filteredArr.map((test) => test.name),
+        lab: lab,
+      })
+      navigate({
+        pathname: "/afterLab",
+        search: `?${queryParams}`,
+      })
+    }
   }
 
   // console.log(testArr && testArr)
@@ -100,42 +111,47 @@ export default function SelectedTests() {
   // For Total Price
   const testprice = testArr && testArr.map((item) => item.price)
   const totalMrp = testprice && testprice.reduce((a, b) => a + b, 0)
-  // const discount = response.labDetails && response.labDetails.discount
   const discount = response.labData && response.labData.discount
   const discountPrice = Math.floor((totalMrp * discount) / 100)
   const homeCollectionCharge = response.labData && response.labData.homeCharge
   const minimumCharge = response.labData && response.labData.minimumCharge
-  // let [finalPrice, setFinalPrice] = React.useState(
-  //   response.labData && totalMrp - discount
-  // )
-  // finalPrice = totalMrp - discountPrice
-  // console.log(totalMrp - discountPrice)
 
   let [finalPrice, setFinalPrice] = React.useState(0)
   useEffect(() => {
-    if (testArr && response.labData) {
+    // console.log("effect called")
+    // console.log(testArr, response.labData)
+    if (testArr.length != 0 && response.labData) {
+      // console.log("inside if")
       let price = testArr.map((item) => item.price).reduce((a, b) => a + b, 0)
       let discountPrice = Math.floor((price * response.labData.discount) / 100)
       setFinalPrice(price - discountPrice)
     }
+    if (testArr.length == 0) {
+      setFinalPrice(0)
+    }
   }, [testArr, response.labData])
 
-  console.log(finalPrice)
+  // console.log(finalPrice)
 
-  finalPrice < minimumCharge
+  finalPrice < minimumCharge && finalPrice != 0 && testArr.length != 0
     ? setFinalPrice((currentState) => (currentState += homeCollectionCharge))
     : finalPrice
 
+  // console.log(finalPrice)
+
+  const [inputReadonly, setInputReadonly] = React.useState(false)
+  const [couponApplied, setCouponApplied] = React.useState(false)
   const applyCoupon = () => {
     const discount = 30
     const discountPrice = Math.floor((finalPrice * discount) / 100)
     let newFinalPrice = finalPrice - discountPrice
     // console.log("after aplying discount" + newFinalPrice)
-    // setFinalPrice(newFinalPrice)
     setFinalPrice(newFinalPrice)
-    console.log("clicked")
+    setInputReadonly(true)
+    setCouponApplied(true)
+    // console.log("clicked")
   }
-  console.log(finalPrice)
+  // console.log(finalPrice)
 
   // For Calendar
   const [visible, setVisible] = React.useState(true)
@@ -285,6 +301,19 @@ export default function SelectedTests() {
       </button>
     )
   })
+
+  // Apply Discount Coupon
+  const [coupon, setCoupon] = React.useState("")
+  const [applyBtnDisabled, setApplyBtnDisabled] = React.useState(true)
+
+  const handleCouponChange = (e) => {
+    setCoupon(e.target.value)
+    if (e.target.value != "30MTC") {
+      setApplyBtnDisabled(true)
+    } else {
+      setApplyBtnDisabled(false)
+    }
+  }
 
   return (
     <div className="font-Roboto bg-background">
@@ -524,7 +553,7 @@ export default function SelectedTests() {
                           ₹ {discountPrice}
                         </h1>
                       </div>
-                      {finalPrice < minimumCharge ? (
+                      {finalPrice < minimumCharge && testArr.length != 0 ? (
                         <div className="flex gap-1 justify-between">
                           <h1 className="font-medium text-lg">
                             Home Collection Charge:
@@ -535,17 +564,25 @@ export default function SelectedTests() {
                         </div>
                       ) : null}
 
-                      <div className="flex gap-1 justify-between">
+                      <div className="flex flex-col gap-2 xs:flex-row xs:gap-1 xs:justify-between">
                         <input
                           type="text"
                           placeholder="Apply Coupon"
                           className="font-medium text-xl border-[1px] rounded border-borderGray placeholder:font-light px-1"
+                          value={coupon}
+                          onChange={handleCouponChange}
+                          readOnly={inputReadonly}
                         />
                         <button
-                          className="font-medium text-xl bg-primary text-white py-1 px-6 rounded"
+                          className={`font-medium text-xl bg-primary text-white py-1 px-6 rounded ${
+                            applyBtnDisabled
+                              ? "opacity-50 cursor-not-allowed"
+                              : "opacity-100 cursor-pointer"
+                          } `}
+                          disabled={applyBtnDisabled}
                           onClick={applyCoupon}
                         >
-                          Apply
+                          {couponApplied ? "Applied" : "Apply"}
                         </button>
                       </div>
                     </div>
